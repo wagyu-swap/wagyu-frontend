@@ -9,12 +9,12 @@ export const localiseTradingVolume = (value: number, decimals = 0) => {
 }
 
 export const useCompetitionCakeRewards = (userCakeReward: ReactText) => {
-  const cakeAsBigNumber = new BigNumber(userCakeReward as string)
-  const cakeBalance = getBalanceNumber(cakeAsBigNumber)
-  const cakePriceBusd = usePriceWagyuBusd()
+  const wagyuAsBigNumber = new BigNumber(userCakeReward as string)
+  const wagyuBalance = getBalanceNumber(wagyuAsBigNumber)
+  const wagyuPriceBusd = usePriceWagyuBusd()
   return {
-    cakeReward: cakeBalance,
-    dollarValueOfCakeReward: cakePriceBusd.gt(0) ? cakeBalance * cakePriceBusd.toNumber() : null,
+    cakeReward: wagyuBalance,
+    dollarValueOfCakeReward: wagyuPriceBusd.gt(0) ? wagyuBalance * wagyuPriceBusd.toNumber() : null,
   }
 }
 

@@ -25,8 +25,8 @@ const WagyuHarvestBalance = () => {
     }
     return accum + earningNumber.div(DEFAULT_TOKEN_DECIMAL).toNumber()
   }, 0)
-  const cakePriceBusd = usePriceWagyuBusd()
-  const earningsBusd = new BigNumber(earningsSum).multipliedBy(cakePriceBusd).toNumber()
+  const wagyuPriceUsd = usePriceWagyuBusd()
+  const earningsBusd = new BigNumber(earningsSum).multipliedBy(wagyuPriceUsd).toNumber()
 
   if (!account) {
     return (
@@ -39,7 +39,7 @@ const WagyuHarvestBalance = () => {
   return (
     <Block>
       <CardValue value={earningsSum} lineHeight="1.5" />
-      {cakePriceBusd.gt(0) && <CardBusdValue value={earningsBusd} />}
+      {wagyuPriceUsd.gt(0) && <CardBusdValue value={earningsBusd} />}
     </Block>
   )
 }

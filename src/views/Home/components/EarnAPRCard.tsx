@@ -32,7 +32,7 @@ const EarnAPRCard = () => {
   const [isFetchingFarmData, setIsFetchingFarmData] = useState(true)
   const { t } = useTranslation()
   const { data: farmsLP } = useFarms()
-  const cakePrice = usePriceWagyuBusd()
+  const wagyuPrice = usePriceWagyuBusd()
   const dispatch = useAppDispatch()
 
   // Fetch farm data once to get the max APR
@@ -49,12 +49,12 @@ const EarnAPRCard = () => {
   }, [dispatch, setIsFetchingFarmData])
 
   const highestApr = useMemo(() => {
-    if (cakePrice.gt(0)) {
+    if (wagyuPrice.gt(0)) {
       const aprs = farmsLP.map((farm) => {
         // Filter inactive farms, because their theoretical APR is super high. In practice, it's 0.
         if (farm.pid !== 0 && farm.multiplier !== '0X' && farm.lpTotalInQuoteToken && farm.quoteToken.busdPrice) {
           const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(farm.quoteToken.busdPrice)
-          return getFarmApr(new BigNumber(farm.poolWeight), cakePrice, totalLiquidity)
+          return getFarmApr(new BigNumber(farm.poolWeight), wagyuPrice, totalLiquidity)
         }
         return null
       })
@@ -63,7 +63,7 @@ const EarnAPRCard = () => {
       return maxApr?.toLocaleString('en-US', { maximumFractionDigits: 2 })
     }
     return null
-  }, [cakePrice, farmsLP])
+  }, [wagyuPrice, farmsLP])
 
   const aprText = highestApr || '-'
   const earnAprText = t('Earn up to %highestApr% APR in Farms', { highestApr: aprText })

@@ -45,9 +45,9 @@ const VaultStakeModal: React.FC<VaultStakeModalProps> = ({ pool, stakingMax, isR
   const [stakeAmount, setStakeAmount] = useState('')
   const [percent, setPercent] = useState(0)
   const { hasUnstakingFee } = useWithdrawalFeeTimer(parseInt(lastDepositedTime, 10), userShares)
-  const cakePriceBusd = usePriceWagyuBusd()
+  const wagyuPriceBusd = usePriceWagyuBusd()
   const usdValueStaked =
-    cakePriceBusd.gt(0) && stakeAmount ? formatNumber(new BigNumber(stakeAmount).times(cakePriceBusd).toNumber()) : ''
+    wagyuPriceBusd.gt(0) && stakeAmount ? formatNumber(new BigNumber(stakeAmount).times(wagyuPriceBusd).toNumber()) : ''
 
   const handleStakeInputChange = (input: string) => {
     if (input) {
@@ -175,7 +175,7 @@ const VaultStakeModal: React.FC<VaultStakeModalProps> = ({ pool, stakingMax, isR
       <BalanceInput
         value={stakeAmount}
         onUserInput={handleStakeInputChange}
-        currencyValue={cakePriceBusd.gt(0) && `~${usdValueStaked || 0} USD`}
+        currencyValue={wagyuPriceBusd.gt(0) && `~${usdValueStaked || 0} USD`}
       />
       <Text mt="8px" ml="auto" color="textSubtle" fontSize="12px" mb="8px">
         {t('Balance: %balance%', { balance: getFullDisplayBalance(stakingMax, stakingToken.decimals) })}

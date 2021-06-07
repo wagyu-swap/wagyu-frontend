@@ -12,9 +12,9 @@ import CardBusdValue from './CardBusdValue'
 
 const WagyuWalletBalance = () => {
   const { t } = useTranslation()
-  const { balance: cakeBalance } = useTokenBalance(getCakeAddress())
-  const cakePriceBusd = usePriceWagyuBusd()
-  const busdBalance = new BigNumber(getBalanceNumber(cakeBalance)).multipliedBy(cakePriceBusd).toNumber()
+  const { balance: wagyuBalance } = useTokenBalance(getCakeAddress())
+  const wagyuPriceBusd = usePriceWagyuBusd()
+  const busdBalance = new BigNumber(getBalanceNumber(wagyuBalance)).multipliedBy(wagyuPriceBusd).toNumber()
   const { account } = useWeb3React()
 
   if (!account) {
@@ -27,8 +27,8 @@ const WagyuWalletBalance = () => {
 
   return (
     <>
-      <CardValue value={getBalanceNumber(cakeBalance)} decimals={4} fontSize="24px" lineHeight="36px" />
-      {cakePriceBusd.gt(0) ? <CardBusdValue value={busdBalance} /> : <br />}
+      <CardValue value={getBalanceNumber(wagyuBalance)} decimals={4} fontSize="24px" lineHeight="36px" />
+      {wagyuPriceBusd.gt(0) ? <CardBusdValue value={busdBalance} /> : <br />}
     </>
   )
 }
