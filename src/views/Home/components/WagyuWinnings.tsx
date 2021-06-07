@@ -17,7 +17,7 @@ interface CakeWinningsProps {
   claimAmount: BigNumber
 }
 
-const CakeWinnings: React.FC<CakeWinningsProps> = ({ claimAmount }) => {
+const WagyuWinnings: React.FC<CakeWinningsProps> = ({ claimAmount }) => {
   const { t } = useTranslation()
   const { account } = useWeb3React()
   const cakeAmount = getBalanceNumber(claimAmount)
@@ -40,4 +40,4 @@ const CakeWinnings: React.FC<CakeWinningsProps> = ({ claimAmount }) => {
   )
 }
 
-export default CakeWinnings
+export default WagyuWinnings

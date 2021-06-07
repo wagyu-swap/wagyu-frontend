@@ -14,7 +14,7 @@ const Block = styled.div`
   margin-bottom: 24px;
 `
 
-const CakeHarvestBalance = () => {
+const WagyuHarvestBalance = () => {
   const { t } = useTranslation()
   const { account } = useWeb3React()
   const allEarnings = useAllEarnings()
@@ -44,4 +44,4 @@ const CakeHarvestBalance = () => {
   )
 }
 
-export default CakeHarvestBalance
+export default WagyuHarvestBalance

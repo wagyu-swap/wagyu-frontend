@@ -817,5 +817,15 @@
   "Starts in": "Starts in",
   "Total amount of %symbol% staked in this pool": "Total amount of %symbol% staked in this pool",
   "These pools are no longer distributing rewards. Please unstake your tokens.": "These pools are no longer distributing rewards. Please unstake your tokens.",
-  "Max. stake per user": "Max. stake per user"
+  "Max. stake per user": "Max. stake per user",
+  "WagyuSwap": "WagyuSwap",
+  "We are ready!": "We are ready!",
+  "The #1 AMM and yield farm on Velas Chain.": "The #1 AMM and yield farm on Velas Chain.",
+  "Wagyu Stats": "Wagyu Stats",
+  "Total Wagyu Supply": "Total Wagyu Supply",
+  "Total Wagyu Burned": "Total Wagyu Burned",
+  "New Wagyu/block": "New Wagyu/block",
+  "WAGYU to Harvest": "WAGYU to Harvest",
+  "WAGYU in Wallet": "WAGYU in Wallet",
+  "WAGYU to Collect": "WAGYU to Collect"
 }
