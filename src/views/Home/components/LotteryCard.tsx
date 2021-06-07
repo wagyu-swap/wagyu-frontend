@@ -18,7 +18,7 @@ import CakeWinnings from './CakeWinnings'
 import LotteryJackpot from './LotteryJackpot'
 
 const StyledLotteryCard = styled(Card)`
-  background-image: url('/images/ticket-bg.svg');
+  background-image: url('/images/lotterycard-wagyu-icon-lg.svg');
   background-repeat: no-repeat;
   background-position: top right;
   min-height: 376px;
@@ -97,9 +97,9 @@ const LotteryCard = () => {
         <Heading scale="xl" mb="24px">
           {t('Your Lottery Winnings')}
         </Heading>
-        <CardImage src="/images/ticket.svg" alt="cake logo" width={64} height={64} />
+        <CardImage src="/images/lotterycard-wagyu-icon.svg" alt="cake logo" width={64} height={64} />
         <Block>
-          <Label>{t('CAKE to Collect')}:</Label>
+          <Label>{t('WAGYU to Collect')}:</Label>
           <CakeWinnings claimAmount={claimAmount} />
         </Block>
         <Block>
