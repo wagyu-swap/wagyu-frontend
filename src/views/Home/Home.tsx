@@ -25,7 +25,7 @@ const Hero = styled.div`
   text-align: center;
 
   ${({ theme }) => theme.mediaQueries.lg} {
-    background-image: url('/images/header/header-pan-icon-left.svg'), url('/images/header/header-pan-icon-right.svg');
+    background-image: url('/images/pan-wagyu-bg2.svg'), url('/images/pan-wagyu-bg.svg');
     background-position: left center, right center;
     height: 165px;
     padding-top: 0;

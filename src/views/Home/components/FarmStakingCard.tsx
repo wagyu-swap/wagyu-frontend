@@ -11,7 +11,7 @@ import CakeHarvestBalance from './CakeHarvestBalance'
 import CakeWalletBalance from './CakeWalletBalance'
 
 const StyledFarmStakingCard = styled(Card)`
-  background-image: url('/images/farmcard-wagyu-icon-lg.svg');
+  background-image: url('/images/wagyu-bg.svg');
   background-repeat: no-repeat;
   background-position: top right;
   min-height: 376px;
@@ -62,7 +62,7 @@ const FarmedStakingCard = () => {
         <Heading scale="xl" mb="24px">
           {t('Farms & Staking')}
         </Heading>
-        <CardImage src="/images/farmcard-wagyu-icon.svg" alt="wagyu logo" width={64} height={64} />
+        <CardImage src="/images/wagyu.svg" alt="wagyu logo" width={64} height={64} />
         <Block>
           <Label>{t('WAGYU to Harvest')}:</Label>
           <CakeHarvestBalance />
