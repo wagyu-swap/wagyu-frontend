@@ -330,9 +330,9 @@ export const usePriceBnbBusd = (): BigNumber => {
   return new BigNumber(bnbBusdFarm.quoteToken.busdPrice)
 }
 
-export const usePriceCakeBusd = (): BigNumber => {
-  const cakeBnbFarm = useFarmFromPid(251)
-  return new BigNumber(cakeBnbFarm.token.busdPrice)
+export const usePriceWagyuBusd = (): BigNumber => {
+  const wagyuBnbFarm = useFarmFromPid(251)
+  return new BigNumber(wagyuBnbFarm.token.busdPrice)
 }
 
 // Block

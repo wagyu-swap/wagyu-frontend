@@ -4,7 +4,7 @@ import { useWeb3React } from '@web3-react/core'
 import BigNumber from 'bignumber.js'
 import { useTranslation } from 'contexts/Localization'
 import useAllEarnings from 'hooks/useAllEarnings'
-import { usePriceCakeBusd } from 'state/hooks'
+import { usePriceWagyuBusd } from 'state/hooks'
 import styled from 'styled-components'
 import { DEFAULT_TOKEN_DECIMAL } from 'config'
 import CardValue from './CardValue'
@@ -25,8 +25,8 @@ const WagyuHarvestBalance = () => {
     }
     return accum + earningNumber.div(DEFAULT_TOKEN_DECIMAL).toNumber()
   }, 0)
-  const cakePriceBusd = usePriceCakeBusd()
-  const earningsBusd = new BigNumber(earningsSum).multipliedBy(cakePriceBusd).toNumber()
+  const wagyuPriceUsd = usePriceWagyuBusd()
+  const earningsBusd = new BigNumber(earningsSum).multipliedBy(wagyuPriceUsd).toNumber()
 
   if (!account) {
     return (
@@ -39,7 +39,7 @@ const WagyuHarvestBalance = () => {
   return (
     <Block>
       <CardValue value={earningsSum} lineHeight="1.5" />
-      {cakePriceBusd.gt(0) && <CardBusdValue value={earningsBusd} />}
+      {wagyuPriceUsd.gt(0) && <CardBusdValue value={earningsBusd} />}
     </Block>
   )
 }

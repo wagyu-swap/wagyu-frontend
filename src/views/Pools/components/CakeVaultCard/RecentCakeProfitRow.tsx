@@ -2,7 +2,7 @@ import React from 'react'
 import { Flex, Text } from '@wagyu-swap-libs/uikit'
 import { useWeb3React } from '@web3-react/core'
 import { useTranslation } from 'contexts/Localization'
-import { useCakeVault, usePriceCakeBusd } from 'state/hooks'
+import { useCakeVault, usePriceWagyuBusd } from 'state/hooks'
 import { getCakeVaultEarnings } from 'views/Pools/helpers'
 import RecentCakeProfitBalance from './RecentCakeProfitBalance'
 
@@ -13,13 +13,13 @@ const RecentCakeProfitCountdownRow = () => {
     pricePerFullShare,
     userData: { cakeAtLastUserAction, userShares, lastUserActionTime },
   } = useCakeVault()
-  const cakePriceBusd = usePriceCakeBusd()
+  const wagyuPriceBusd = usePriceWagyuBusd()
   const { hasAutoEarnings, autoCakeToDisplay, autoUsdToDisplay } = getCakeVaultEarnings(
     account,
     cakeAtLastUserAction,
     userShares,
     pricePerFullShare,
-    cakePriceBusd.toNumber(),
+    wagyuPriceBusd.toNumber(),
   )
 
   const lastActionInMs = lastUserActionTime && parseInt(lastUserActionTime) * 1000
