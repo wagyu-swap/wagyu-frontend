@@ -6,7 +6,7 @@ import { FarmWithStakedValue } from 'views/Farms/components/FarmCard/FarmCard'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { useAppDispatch } from 'state'
 import { fetchFarmUserDataAsync } from 'state/farms'
-import { usePriceCakeBusd } from 'state/hooks'
+import { usePriceWagyuBusd } from 'state/hooks'
 import { useHarvest } from 'hooks/useHarvest'
 import { useTranslation } from 'contexts/Localization'
 import { useCountUp } from 'react-countup'
@@ -19,7 +19,7 @@ interface HarvestActionProps extends FarmWithStakedValue {
 
 const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({ pid, userData, userDataReady }) => {
   const earningsBigNumber = new BigNumber(userData.earnings)
-  const cakePrice = usePriceCakeBusd()
+  const cakePrice = usePriceWagyuBusd()
   let earnings = 0
   let earningsBusd = 0
   let displayBalance = userDataReady ? earnings.toLocaleString() : <Skeleton width={60} />

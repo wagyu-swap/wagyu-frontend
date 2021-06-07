@@ -6,7 +6,7 @@ import { Image, Heading, RowType, Toggle, Text } from '@wagyu-swap-libs/uikit'
 import styled from 'styled-components'
 import FlexLayout from 'components/layout/Flex'
 import Page from 'components/layout/Page'
-import { useFarms, usePollFarmsData, usePriceCakeBusd } from 'state/hooks'
+import { useFarms, usePollFarmsData, usePriceWagyuBusd } from 'state/hooks'
 import usePersistState from 'hooks/usePersistState'
 import { Farm } from 'state/types'
 import { useTranslation } from 'contexts/Localization'
@@ -104,7 +104,7 @@ const Farms: React.FC = () => {
   const { pathname } = useLocation()
   const { t } = useTranslation()
   const { data: farmsLP, userDataLoaded } = useFarms()
-  const cakePrice = usePriceCakeBusd()
+  const cakePrice = usePriceWagyuBusd()
   const [query, setQuery] = useState('')
   const [viewMode, setViewMode] = usePersistState(ViewMode.TABLE, 'pancake_farm_view')
   const { account } = useWeb3React()

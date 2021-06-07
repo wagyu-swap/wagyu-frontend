@@ -5,7 +5,7 @@ import useTokenBalance from 'hooks/useTokenBalance'
 import { useTranslation } from 'contexts/Localization'
 import { getCakeAddress } from 'utils/addressHelpers'
 import { getBalanceNumber } from 'utils/formatBalance'
-import { usePriceCakeBusd } from 'state/hooks'
+import { usePriceWagyuBusd } from 'state/hooks'
 import { BigNumber } from 'bignumber.js'
 import CardValue from './CardValue'
 import CardBusdValue from './CardBusdValue'
@@ -13,7 +13,7 @@ import CardBusdValue from './CardBusdValue'
 const WagyuWalletBalance = () => {
   const { t } = useTranslation()
   const { balance: cakeBalance } = useTokenBalance(getCakeAddress())
-  const cakePriceBusd = usePriceCakeBusd()
+  const cakePriceBusd = usePriceWagyuBusd()
   const busdBalance = new BigNumber(getBalanceNumber(cakeBalance)).multipliedBy(cakePriceBusd).toNumber()
   const { account } = useWeb3React()
 

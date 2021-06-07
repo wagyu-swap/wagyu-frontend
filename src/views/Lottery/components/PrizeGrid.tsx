@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useTranslation } from 'contexts/Localization'
 import { Heading, Text } from '@wagyu-swap-libs/uikit'
 import { BigNumber } from 'bignumber.js'
-import { usePriceCakeBusd } from 'state/hooks'
+import { usePriceWagyuBusd } from 'state/hooks'
 import CardBusdValue from '../../Home/components/CardBusdValue'
 
 export interface PrizeGridProps {
@@ -48,7 +48,7 @@ const PrizeGrid: React.FC<PrizeGridProps> = ({
   const twoMatchesAmount = +((lotteryPrizeAmount / 100) * 10).toFixed(0)
   const burnAmount = +((lotteryPrizeAmount / 100) * 20).toFixed(0)
   const { t } = useTranslation()
-  const cakeBusdPrice = usePriceCakeBusd()
+  const cakeBusdPrice = usePriceWagyuBusd()
 
   const getCakeBusdValue = (amount: number) => {
     return new BigNumber(amount).multipliedBy(cakeBusdPrice).toNumber()

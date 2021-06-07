@@ -6,7 +6,7 @@ import { useWeb3React } from '@web3-react/core'
 import { BASE_EXCHANGE_URL } from 'config'
 import { useAppDispatch } from 'state'
 import { BIG_TEN } from 'utils/bigNumber'
-import { useCakeVault, usePriceCakeBusd } from 'state/hooks'
+import { useCakeVault, usePriceWagyuBusd } from 'state/hooks'
 import { useCakeVaultContract } from 'hooks/useContract'
 import useTheme from 'hooks/useTheme'
 import useWithdrawalFeeTimer from 'hooks/cakeVault/useWithdrawalFeeTimer'
@@ -45,7 +45,7 @@ const VaultStakeModal: React.FC<VaultStakeModalProps> = ({ pool, stakingMax, isR
   const [stakeAmount, setStakeAmount] = useState('')
   const [percent, setPercent] = useState(0)
   const { hasUnstakingFee } = useWithdrawalFeeTimer(parseInt(lastDepositedTime, 10), userShares)
-  const cakePriceBusd = usePriceCakeBusd()
+  const cakePriceBusd = usePriceWagyuBusd()
   const usdValueStaked =
     cakePriceBusd.gt(0) && stakeAmount ? formatNumber(new BigNumber(stakeAmount).times(cakePriceBusd).toNumber()) : ''
 

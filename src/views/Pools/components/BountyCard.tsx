@@ -16,7 +16,7 @@ import {
 } from '@wagyu-swap-libs/uikit'
 import { useTranslation } from 'contexts/Localization'
 import { getBalanceNumber } from 'utils/formatBalance'
-import { useCakeVault, usePriceCakeBusd } from 'state/hooks'
+import { useCakeVault, usePriceWagyuBusd } from 'state/hooks'
 import Balance from 'components/Balance'
 import BountyModal from './BountyModal'
 
@@ -35,7 +35,7 @@ const BountyCard = () => {
     totalPendingCakeHarvest,
     fees: { callFee },
   } = useCakeVault()
-  const cakePriceBusd = usePriceCakeBusd()
+  const cakePriceBusd = usePriceWagyuBusd()
 
   const estimatedDollarBountyReward = useMemo(() => {
     return new BigNumber(estimatedCakeBountyReward).multipliedBy(cakePriceBusd)
