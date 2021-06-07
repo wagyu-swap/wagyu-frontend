@@ -14,7 +14,7 @@ import { useApproval } from 'hooks/useApproval'
 import PurchaseWarningModal from 'views/Lottery/components/TicketCard/PurchaseWarningModal'
 import BuyTicketModal from 'views/Lottery/components/TicketCard/BuyTicketModal'
 import UnlockButton from 'components/UnlockButton'
-import CakeWinnings from './CakeWinnings'
+import WagyuWinnings from './WagyuWinnings'
 import LotteryJackpot from './LotteryJackpot'
 
 const StyledLotteryCard = styled(Card)`
@@ -100,7 +100,7 @@ const LotteryCard = () => {
         <CardImage src="/images/wagyu-ticket.svg" alt="cake logo" width={64} height={64} />
         <Block>
           <Label>{t('WAGYU to Collect')}:</Label>
-          <CakeWinnings claimAmount={claimAmount} />
+          <WagyuWinnings claimAmount={claimAmount} />
         </Block>
         <Block>
           <Label>{t('Total jackpot this round')}:</Label>

@@ -10,7 +10,7 @@ import { BigNumber } from 'bignumber.js'
 import CardValue from './CardValue'
 import CardBusdValue from './CardBusdValue'
 
-const CakeWalletBalance = () => {
+const WagyuWalletBalance = () => {
   const { t } = useTranslation()
   const { balance: cakeBalance } = useTokenBalance(getCakeAddress())
   const cakePriceBusd = usePriceCakeBusd()
@@ -33,4 +33,4 @@ const CakeWalletBalance = () => {
   )
 }
 
-export default CakeWalletBalance
+export default WagyuWalletBalance

@@ -7,8 +7,8 @@ import { useTranslation } from 'contexts/Localization'
 import useFarmsWithBalance from 'hooks/useFarmsWithBalance'
 import { useMasterchef } from 'hooks/useContract'
 import UnlockButton from 'components/UnlockButton'
-import CakeHarvestBalance from './CakeHarvestBalance'
-import CakeWalletBalance from './CakeWalletBalance'
+import WagyuHarvestBalance from './WagyuHarvestBalance'
+import WagyuWalletBalance from './WagyuWalletBalance'
 
 const StyledFarmStakingCard = styled(Card)`
   background-image: url('/images/wagyu-bg.svg');
@@ -65,11 +65,11 @@ const FarmedStakingCard = () => {
         <CardImage src="/images/wagyu.svg" alt="wagyu logo" width={64} height={64} />
         <Block>
           <Label>{t('WAGYU to Harvest')}:</Label>
-          <CakeHarvestBalance />
+          <WagyuHarvestBalance />
         </Block>
         <Block>
           <Label>{t('WAGYU in Wallet')}:</Label>
-          <CakeWalletBalance />
+          <WagyuWalletBalance />
         </Block>
         <Actions>
           {account ? (

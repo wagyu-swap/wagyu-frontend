@@ -7,7 +7,7 @@ import { useTranslation } from 'contexts/Localization'
 import { getCakeAddress } from 'utils/addressHelpers'
 import CardValue from './CardValue'
 
-const StyledCakeStats = styled(Card)`
+const StyledWagyuStats = styled(Card)`
   margin-left: auto;
   margin-right: auto;
 `
@@ -20,14 +20,14 @@ const Row = styled.div`
   margin-bottom: 8px;
 `
 
-const CakeStats = () => {
+const WagyuStats = () => {
   const { t } = useTranslation()
   const totalSupply = useTotalSupply()
   const burnedBalance = getBalanceNumber(useBurnedBalance(getCakeAddress()))
   const cakeSupply = totalSupply ? getBalanceNumber(totalSupply) - burnedBalance : 0
 
   return (
-    <StyledCakeStats>
+    <StyledWagyuStats>
       <CardBody>
         <Heading scale="xl" mb="24px">
           {t('Wagyu Stats')}
@@ -45,8 +45,8 @@ const CakeStats = () => {
           <CardValue fontSize="14px" decimals={0} value={20} />
         </Row>
       </CardBody>
-    </StyledCakeStats>
+    </StyledWagyuStats>
   )
 }
 
-export default CakeStats
+export default WagyuStats
