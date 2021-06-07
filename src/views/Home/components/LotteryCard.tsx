@@ -97,7 +97,7 @@ const LotteryCard = () => {
         <Heading scale="xl" mb="24px">
           {t('Your Lottery Winnings')}
         </Heading>
-        <CardImage src="/images/wagyu-ticket.svg" alt="cake logo" width={64} height={64} />
+        <CardImage src="/images/wagyu-ticket.svg" alt="wagyu logo" width={64} height={64} />
         <Block>
           <Label>{t('WAGYU to Collect')}:</Label>
           <WagyuWinnings claimAmount={claimAmount} />
