@@ -22,7 +22,7 @@ const Background = styled.div`
     height: 165px;
     padding-top: 0;
     margin-bottom: 32px; 
-    box-shadow: rgb(31 43 70 / 40%) 0px 0px 0px 3000px inset;
+    box-shadow: rgb(31 43 70 / 10%) 0px 0px 0px 3000px inset;
   }
 `
 
