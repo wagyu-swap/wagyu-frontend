@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Heading, Text, BaseLayout } from '@wagyu-swap-libs/uikit'
+import { BaseLayout, Heading, Text } from '@wagyu-swap-libs/uikit'
 import { useTranslation } from 'contexts/Localization'
 import Page from 'components/layout/Page'
 import FarmStakingCard from 'views/Home/components/FarmStakingCard'
@@ -10,6 +10,21 @@ import TotalValueLockedCard from 'views/Home/components/TotalValueLockedCard'
 import EarnAPRCard from 'views/Home/components/EarnAPRCard'
 import EarnAssetCard from 'views/Home/components/EarnAssetCard'
 import WinCard from 'views/Home/components/WinCard'
+import Container from 'components/layout/Container'
+
+const Background = styled.div`
+  ${({ theme }) => theme.mediaQueries.lg} {
+    background-image: url('/images/background.svg');
+    background-width: 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 165px;
+    padding-top: 0;
+    margin-bottom: 32px; 
+    box-shadow: rgb(31 43 70 / 10%) 0px 0px 0px 3000px inset;
+  }
+`
 
 const Hero = styled.div`
   align-items: center;
@@ -29,7 +44,19 @@ const Hero = styled.div`
     background-position: left center, right center;
     height: 165px;
     padding-top: 0;
+    padding-left: 24px;
+    padding-right: 24px;
+    text-shadow: 0px 7px 5px black;
   }
+`
+const HeaderContainer = styled(Container)`
+  padding-left: 50px;
+  padding-right: 50px;
+`
+
+const MainContainer = styled(Container)`
+  padding-left: 24px;
+  padding-right: 24px;
 `
 
 const Cards = styled(BaseLayout)`
@@ -88,29 +115,33 @@ const Home: React.FC = () => {
   const { t } = useTranslation()
 
   return (
-    <Page>
-      <Hero>
-        <Heading as="h1" scale="xl" mb="24px" color="secondary">
-          {t('WagyuSwap')}
-        </Heading>
-        <Text>{t('The #1 AMM and yield farm on Velas Chain.')}</Text>
-      </Hero>
-      <div>
-        <Cards>
-          <FarmStakingCard />
-          <LotteryCard />
-        </Cards>
-        <CTACards>
-          <EarnAPRCard />
-          <EarnAssetCard />
-          <WinCard />
-        </CTACards>
-        <Cards>
-          <CakeStats />
-          <TotalValueLockedCard />
-        </Cards>
-      </div>
-    </Page>
+      <Page>
+        <Background>
+          <HeaderContainer>
+            <Hero>
+              <Heading as="h1" scale="xl" mb="24px" color="secondary">
+                {t('WagyuSwap')}
+              </Heading>
+              <Text>{t('The #1 AMM and yield farm on Velas Chain.')}</Text>
+            </Hero>
+          </HeaderContainer>
+        </Background>
+        <MainContainer>
+          <Cards>
+            <FarmStakingCard />
+            <LotteryCard />
+          </Cards>
+          <CTACards>
+            <EarnAPRCard />
+            <EarnAssetCard />
+            <WinCard />
+          </CTACards>
+          <Cards>
+            <CakeStats />
+            <TotalValueLockedCard />
+          </Cards>
+        </MainContainer>
+      </Page>
   )
 }
 
