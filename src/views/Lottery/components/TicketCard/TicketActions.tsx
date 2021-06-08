@@ -42,7 +42,7 @@ const TicketCard: React.FC = () => {
             {t('View your tickets')}
           </Button>
           <Button width="100%" disabled={requestedApproval} onClick={handleApprove}>
-            {t('Approve CAKE')}
+            {t('Approve WAGYU')}
           </Button>
         </>
       )
