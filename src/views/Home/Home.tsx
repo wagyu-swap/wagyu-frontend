@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Heading, Text, BaseLayout } from '@wagyu-swap-libs/uikit'
+import { BaseLayout, Heading, Text } from '@wagyu-swap-libs/uikit'
 import { useTranslation } from 'contexts/Localization'
 import Page from 'components/layout/Page'
 import FarmStakingCard from 'views/Home/components/FarmStakingCard'
@@ -13,7 +13,6 @@ import WinCard from 'views/Home/components/WinCard'
 import Container from 'components/layout/Container'
 
 const Background = styled.div`
-  
   ${({ theme }) => theme.mediaQueries.lg} {
     background-image: url('/images/background.svg');
     background-width: 100%;
