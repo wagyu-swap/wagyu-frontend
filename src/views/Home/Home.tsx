@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { BaseLayout, Heading, Text } from '@wagyu-swap-libs/uikit'
+import { BaseLayout, Heading, Image, Text } from '@wagyu-swap-libs/uikit'
 import { useTranslation } from 'contexts/Localization'
 import Page from 'components/layout/Page'
 import FarmStakingCard from 'views/Home/components/FarmStakingCard'
@@ -10,53 +10,42 @@ import TotalValueLockedCard from 'views/Home/components/TotalValueLockedCard'
 import EarnAPRCard from 'views/Home/components/EarnAPRCard'
 import EarnAssetCard from 'views/Home/components/EarnAssetCard'
 import WinCard from 'views/Home/components/WinCard'
-import Container from 'components/layout/Container'
-
-const Background = styled.div`
-  ${({ theme }) => theme.mediaQueries.lg} {
-    background-image: url('/images/background.svg');
-    background-width: 100%;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 165px;
-    padding-top: 0;
-    margin-bottom: 32px; 
-    box-shadow: rgb(31 43 70 / 10%) 0px 0px 0px 3000px inset;
-  }
-`
 
 const Hero = styled.div`
   align-items: center;
-  background-image: url('/images/pan-bg-mobile.svg');
-  background-repeat: no-repeat;
-  background-position: top center;
   display: flex;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
   margin: auto;
   margin-bottom: 32px;
   padding-top: 116px;
   text-align: center;
-
+  
   ${({ theme }) => theme.mediaQueries.lg} {
-    background-image: url('/images/pan-wagyu-bg2.svg'), url('/images/pan-wagyu-bg.svg');
-    background-position: left center, right center;
+    display: flex;
+    flex-direction: row;    
+    background-image: url('/images/background.svg');
+    background-position: center top;
+    background-repeat: no-repeat;
     height: 165px;
     padding-top: 0;
     padding-left: 24px;
     padding-right: 24px;
     text-shadow: 0px 7px 5px black;
   }
-`
-const HeaderContainer = styled(Container)`
-  padding-left: 50px;
-  padding-right: 50px;
-`
-
-const MainContainer = styled(Container)`
-  padding-left: 24px;
-  padding-right: 24px;
+  ${({ theme }) => theme.mediaQueries.xl} {
+    display: flex;
+    flex-direction: row;    
+    background-image: url('/images/background.svg');
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 165px;
+    padding-top: 0;
+    padding-left: 24px;
+    padding-right: 24px;
+    text-shadow: 0px 7px 5px black;
+  }
 `
 
 const Cards = styled(BaseLayout)`
@@ -110,23 +99,28 @@ const CTACards = styled(BaseLayout)`
     }
   }
 `
+const StyledImage = styled(Image)`
+  margin-left: auto;
+  margin-right: auto;
+`
 
 const Home: React.FC = () => {
   const { t } = useTranslation()
 
   return (
+    <>
+      <Hero>
+        <StyledImage src="/images/pan-wagyu-bg2.svg" alt="Wagyu" width={160} height={120} />
+        <div>
+          <Heading as="h1" scale="xl" mb="24px" color="secondary">
+            {t('WagyuSwap')}
+          </Heading>
+          <Text>{t('The #1 AMM and yield farm on Velas Chain.')}</Text>
+        </div>
+        <StyledImage src="/images/pan-wagyu-bg.svg" alt="Wagyu" width={160} height={120} />
+      </Hero>
       <Page>
-        <Background>
-          <HeaderContainer>
-            <Hero>
-              <Heading as="h1" scale="xl" mb="24px" color="secondary">
-                {t('WagyuSwap')}
-              </Heading>
-              <Text>{t('The #1 AMM and yield farm on Velas Chain.')}</Text>
-            </Hero>
-          </HeaderContainer>
-        </Background>
-        <MainContainer>
+        <div>
           <Cards>
             <FarmStakingCard />
             <LotteryCard />
@@ -140,8 +134,9 @@ const Home: React.FC = () => {
             <CakeStats />
             <TotalValueLockedCard />
           </Cards>
-        </MainContainer>
+        </div>
       </Page>
+    </>
   )
 }
 
