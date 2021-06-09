@@ -12,13 +12,16 @@ import EarnAssetCard from 'views/Home/components/EarnAssetCard'
 import WinCard from 'views/Home/components/WinCard'
 
 const Hero = styled.div`
+  background-image: url('/images/background.svg');
+  background-position: center top;
+  background-repeat: no-repeat;
   align-items: center;
   display: flex;
   justify-content: center;
   flex-direction: row;
   margin: auto;
   margin-bottom: 32px;
-  padding-top: 116px;
+  padding-top: 16px;
   text-align: center;
   
   ${({ theme }) => theme.mediaQueries.lg} {
@@ -102,6 +105,13 @@ const CTACards = styled(BaseLayout)`
 const StyledImage = styled(Image)`
   margin-left: auto;
   margin-right: auto;
+  display: none;
+  ${({ theme }) => theme.mediaQueries.md} {
+    display: block;
+  }
+  ${({ theme }) => theme.mediaQueries.lg} {
+    display: block;
+  }
 `
 
 const Home: React.FC = () => {
