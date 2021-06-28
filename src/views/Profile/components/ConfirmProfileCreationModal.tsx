@@ -3,7 +3,7 @@ import { Modal, Flex, Text } from '@wagyu-swap-libs/uikit'
 import { useAppDispatch } from 'state'
 import BigNumber from 'bignumber.js'
 import { useTranslation } from 'contexts/Localization'
-import { useCake, useProfile } from 'hooks/useContract'
+import { useWagyu, useProfile } from 'hooks/useContract'
 import useApproveConfirmTransaction from 'hooks/useApproveConfirmTransaction'
 import { fetchProfile } from 'state/profile'
 import useToast from 'hooks/useToast'
@@ -16,7 +16,7 @@ interface Props {
   selectedNft: State['selectedNft']
   account: string
   teamId: number
-  minimumCakeRequired: BigNumber
+  minimumWagyuRequired: BigNumber
   allowance: BigNumber
   onDismiss?: () => void
 }
@@ -25,7 +25,7 @@ const ConfirmProfileCreationModal: React.FC<Props> = ({
   account,
   teamId,
   selectedNft,
-  minimumCakeRequired,
+  minimumWagyuRequired,
   allowance,
   onDismiss,
 }) => {
@@ -33,21 +33,21 @@ const ConfirmProfileCreationModal: React.FC<Props> = ({
   const profileContract = useProfile()
   const dispatch = useAppDispatch()
   const { toastSuccess } = useToast()
-  const cakeContract = useCake()
+  const wagyuContract = useWagyu()
 
   const { isApproving, isApproved, isConfirmed, isConfirming, handleApprove, handleConfirm } =
     useApproveConfirmTransaction({
       onRequiresApproval: async () => {
         try {
-          const response = await cakeContract.methods.allowance(account, profileContract.options.address).call()
+          const response = await wagyuContract.methods.allowance(account, profileContract.options.address).call()
           const currentAllowance = new BigNumber(response)
-          return currentAllowance.gte(minimumCakeRequired)
+          return currentAllowance.gte(minimumWagyuRequired)
         } catch (error) {
           return false
         }
       },
       onApprove: () => {
-        return cakeContract.methods.approve(profileContract.options.address, allowance.toJSON()).send({ from: account })
+        return wagyuContract.methods.approve(profileContract.options.address, allowance.toJSON()).send({ from: account })
       },
       onConfirm: () => {
         return profileContract.methods
@@ -68,7 +68,7 @@ const ConfirmProfileCreationModal: React.FC<Props> = ({
       </Text>
       <Flex justifyContent="space-between" mb="16px">
         <Text>{t('Cost')}</Text>
-        <Text>{t('%num% CAKE', { num: REGISTER_COST })}</Text>
+        <Text>{t('%num% WAGYU', { num: REGISTER_COST })}</Text>
       </Flex>
       <ApproveConfirmButtons
         isApproveDisabled={isConfirmed || isConfirming || isApproved}

@@ -6,7 +6,7 @@ import useGetLotteryHasDrawn from 'hooks/useGetLotteryHasDrawn'
 import { useLotteryAllowance } from 'hooks/useAllowance'
 import useTickets from 'hooks/useTickets'
 import useTokenBalance from 'hooks/useTokenBalance'
-import { getCakeAddress } from 'utils/addressHelpers'
+import { getWagyuAddress } from 'utils/addressHelpers'
 import { useApproval } from 'hooks/useApproval'
 import BuyTicketModal from './BuyTicketModal'
 import MyTicketsModal from './UserTicketsModal'
@@ -26,12 +26,12 @@ const TicketCard: React.FC = () => {
   const { t } = useTranslation()
   const allowance = useLotteryAllowance()
   const lotteryHasDrawn = useGetLotteryHasDrawn()
-  const { balance: cakeBalance } = useTokenBalance(getCakeAddress())
+  const { balance: wagyuBalance } = useTokenBalance(getWagyuAddress())
   const tickets = useTickets()
   const ticketsLength = tickets.length
   const [onPresentMyTickets] = useModal(<MyTicketsModal myTicketNumbers={tickets} from="buy" />)
   const [onPresentApprove] = useModal(<PurchaseWarningModal />)
-  const [onPresentBuy] = useModal(<BuyTicketModal max={cakeBalance} />)
+  const [onPresentBuy] = useModal(<BuyTicketModal max={wagyuBalance} />)
   const { handleApprove, requestedApproval } = useApproval(onPresentApprove)
 
   const renderLotteryTicketButtons = () => {

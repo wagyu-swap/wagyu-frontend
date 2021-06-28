@@ -4,7 +4,7 @@ import BigNumber from 'bignumber.js'
 import { Button, useModal, IconButton, AddIcon, MinusIcon, Skeleton, useTooltip, Flex, Text } from '@wagyu-swap-libs/uikit'
 import UnlockButton from 'components/UnlockButton'
 import { useWeb3React } from '@web3-react/core'
-import { useCakeVault } from 'state/hooks'
+import { useWagyuVault } from 'state/hooks'
 import { Pool } from 'state/types'
 import Balance from 'components/Balance'
 import { useTranslation } from 'contexts/Localization'
@@ -14,11 +14,11 @@ import { PoolCategory } from 'config/constants/types'
 import { BIG_ZERO } from 'utils/bigNumber'
 import { getAddress } from 'utils/addressHelpers'
 import { useERC20 } from 'hooks/useContract'
-import { convertSharesToCake } from 'views/Pools/helpers'
+import { convertSharesToWagyu } from 'views/Pools/helpers'
 import { ActionContainer, ActionTitles, ActionContent } from './styles'
 import NotEnoughTokensModal from '../../PoolCard/Modals/NotEnoughTokensModal'
 import StakeModal from '../../PoolCard/Modals/StakeModal'
-import VaultStakeModal from '../../CakeVaultCard/VaultStakeModal'
+import VaultStakeModal from '../../WagyuVaultCard/VaultStakeModal'
 
 const IconButtonWrapper = styled.div`
   display: flex;
@@ -74,12 +74,12 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({ pool, userDataLoa
   const {
     userData: { userShares },
     pricePerFullShare,
-  } = useCakeVault()
+  } = useWagyuVault()
 
-  const { cakeAsBigNumber, cakeAsNumberBalance } = convertSharesToCake(userShares, pricePerFullShare)
+  const { wagyuAsBigNumber, wagyuAsNumberBalance } = convertSharesToWagyu(userShares, pricePerFullShare)
   const hasSharesStaked = userShares && userShares.gt(0)
   const isVaultWithShares = isAutoVault && hasSharesStaked
-  const stakedAutoDollarValue = getBalanceNumber(cakeAsBigNumber.multipliedBy(stakingTokenPrice), stakingToken.decimals)
+  const stakedAutoDollarValue = getBalanceNumber(wagyuAsBigNumber.multipliedBy(stakingTokenPrice), stakingToken.decimals)
 
   const needsApproval = isAutoVault ? !isVaultApproved : !allowance.gt(0) && !isBnbPool
 
@@ -106,7 +106,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({ pool, userDataLoa
     />,
   )
 
-  const [onPresentVaultUnstake] = useModal(<VaultStakeModal stakingMax={cakeAsBigNumber} pool={pool} isRemovingStake />)
+  const [onPresentVaultUnstake] = useModal(<VaultStakeModal stakingMax={wagyuAsBigNumber} pool={pool} isRemovingStake />)
 
   const onStake = () => {
     if (isAutoVault) {
@@ -197,7 +197,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({ pool, userDataLoa
               bold
               fontSize="20px"
               decimals={5}
-              value={isAutoVault ? cakeAsNumberBalance : stakedTokenBalance}
+              value={isAutoVault ? wagyuAsNumberBalance : stakedTokenBalance}
             />
             <Balance
               fontSize="12px"

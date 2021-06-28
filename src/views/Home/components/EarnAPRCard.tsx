@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom'
 import BigNumber from 'bignumber.js'
 import { useTranslation } from 'contexts/Localization'
 import { useAppDispatch } from 'state'
-import { useFarms, usePriceWagyuBusd } from 'state/hooks'
+import { useFarms, usePriceWagyuVusdt } from 'state/hooks'
 import { fetchFarmsPublicDataAsync, nonArchivedFarms } from 'state/farms'
 import { getFarmApr } from 'utils/apr'
 
@@ -32,7 +32,7 @@ const EarnAPRCard = () => {
   const [isFetchingFarmData, setIsFetchingFarmData] = useState(true)
   const { t } = useTranslation()
   const { data: farmsLP } = useFarms()
-  const wagyuPrice = usePriceWagyuBusd()
+  const wagyuPrice = usePriceWagyuVusdt()
   const dispatch = useAppDispatch()
 
   // Fetch farm data once to get the max APR
@@ -52,8 +52,8 @@ const EarnAPRCard = () => {
     if (wagyuPrice.gt(0)) {
       const aprs = farmsLP.map((farm) => {
         // Filter inactive farms, because their theoretical APR is super high. In practice, it's 0.
-        if (farm.pid !== 0 && farm.multiplier !== '0X' && farm.lpTotalInQuoteToken && farm.quoteToken.busdPrice) {
-          const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(farm.quoteToken.busdPrice)
+        if (farm.pid !== 0 && farm.multiplier !== '0X' && farm.lpTotalInQuoteToken && farm.quoteToken.vusdtPrice) {
+          const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(farm.quoteToken.vusdtPrice)
           return getFarmApr(new BigNumber(farm.poolWeight), wagyuPrice, totalLiquidity)
         }
         return null

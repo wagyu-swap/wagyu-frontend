@@ -16,7 +16,7 @@ import {
 import { useTranslation } from 'contexts/Localization'
 import { useTradingCompetitionContract } from 'hooks/useContract'
 import useToast from 'hooks/useToast'
-import { useCompetitionCakeRewards, getRewardGroupAchievements } from '../../helpers'
+import { useCompetitionWagyuRewards, getRewardGroupAchievements } from '../../helpers'
 import { CompetitionProps } from '../../types'
 import NftBunnies from '../../pngs/syrup-nft.png'
 
@@ -36,8 +36,8 @@ const ClaimModal: React.FC<CompetitionProps> = ({ onDismiss, onClaimSuccess, use
   const { toastSuccess, toastError } = useToast()
   const { t } = useTranslation()
 
-  const { userRewardGroup, userCakeRewards, userPointReward, canClaimNFT } = userTradingInformation
-  const { cakeReward } = useCompetitionCakeRewards(userCakeRewards)
+  const { userRewardGroup, userWagyuRewards, userPointReward, canClaimNFT } = userTradingInformation
+  const { wagyuReward } = useCompetitionWagyuRewards(userWagyuRewards)
   const { champion, teamPlayer } = getRewardGroupAchievements(userRewardGroup)
 
   const handleClaimClick = () => {
@@ -73,9 +73,9 @@ const ClaimModal: React.FC<CompetitionProps> = ({ onDismiss, onClaimSuccess, use
             +{userPointReward} {t('Points')}
           </Text>
         </Flex>
-        {/* cake */}
+        {/* wagyu */}
         <Heading mt="16px" scale="md" mb={canClaimNFT ? '16px' : '0px'}>
-          {cakeReward.toFixed(2)} CAKE
+          {wagyuReward.toFixed(2)} WAGYU
         </Heading>
         {/* NFT */}
         {canClaimNFT ? (

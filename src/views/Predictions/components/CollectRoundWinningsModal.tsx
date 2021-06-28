@@ -19,7 +19,7 @@ import {
 import { useWeb3React } from '@web3-react/core'
 import { getBscScanTransactionUrl } from 'utils/bscscan'
 import { useAppDispatch } from 'state'
-import { usePriceBnbBusd } from 'state/hooks'
+import { usePriceVlxVusdt } from 'state/hooks'
 import { markBetAsCollected } from 'state/predictions'
 import { useTranslation } from 'contexts/Localization'
 import useToast from 'hooks/useToast'
@@ -57,7 +57,7 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
   const { t } = useTranslation()
   const { toastSuccess, toastError } = useToast()
   const predictionsContract = usePredictionsContract()
-  const bnbBusdPrice = usePriceBnbBusd()
+  const bnbBusdPrice = usePriceVlxVusdt()
   const dispatch = useAppDispatch()
 
   const handleClick = () => {

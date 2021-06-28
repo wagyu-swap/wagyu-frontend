@@ -82,8 +82,8 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, wagyuPrice, account 
 
   const [showExpandableSection, setShowExpandableSection] = useState(false)
 
-  // We assume the token name is coin pair + lp e.g. CAKE-BNB LP, LINK-BNB LP,
-  // NAR-CAKE LP. The images should be cake-bnb.svg, link-bnb.svg, nar-cake.svg
+  // We assume the token name is coin pair + lp e.g. WAGYU-BNB LP, LINK-BNB LP,
+  // NAR-WAGYU LP. The images should be wagyu-vlx.svg, link-bnb.svg, nar-cake.svg
   const farmImage = farm.lpSymbol.split(' ')[0].toLocaleLowerCase()
 
   const totalValueFormatted =
@@ -91,8 +91,8 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, wagyuPrice, account 
       ? `$${farm.liquidity.toNumber().toLocaleString(undefined, { maximumFractionDigits: 0 })}`
       : ''
 
-  const lpLabel = farm.lpSymbol && farm.lpSymbol.toUpperCase().replace('PANCAKE', '')
-  const earnLabel = farm.dual ? farm.dual.earnLabel : 'CAKE'
+  const lpLabel = farm.lpSymbol && farm.lpSymbol.toUpperCase().replace('PANWAGYU', '')
+  const earnLabel = farm.dual ? farm.dual.earnLabel : 'WAGYU'
 
   const farmAPR = farm.apr && farm.apr.toLocaleString('en-US', { maximumFractionDigits: 2 })
 
@@ -102,7 +102,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, wagyuPrice, account 
   })
   const addLiquidityUrl = `${BASE_ADD_LIQUIDITY_URL}/${liquidityUrlPathParts}`
   const lpAddress = farm.lpAddresses[process.env.REACT_APP_CHAIN_ID]
-  const isPromotedFarm = farm.token.symbol === 'CAKE'
+  const isPromotedFarm = farm.token.symbol === 'WAGYU'
 
   return (
     <FCard isPromotedFarm={isPromotedFarm}>
@@ -143,7 +143,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, wagyuPrice, account 
         <DetailsSection
           removed={removed}
           bscScanAddress={getBscScanAddressUrl(farm.lpAddresses[process.env.REACT_APP_CHAIN_ID])}
-          infoAddress={`https://pancakeswap.info/pair/${lpAddress}`}
+          infoAddress={`https://wagyuswap.info/pair/${lpAddress}`}
           totalValueFormatted={totalValueFormatted}
           lpLabel={lpLabel}
           addLiquidityUrl={addLiquidityUrl}

@@ -8,7 +8,7 @@ import { useTotalRewards } from 'hooks/useTickets'
 import PastLotteryDataContext from 'contexts/PastLotteryDataContext'
 import ExpandableSectionButton from 'components/ExpandableSectionButton/ExpandableSectionButton'
 import { BigNumber } from 'bignumber.js'
-import { usePriceWagyuBusd } from 'state/hooks'
+import { usePriceWagyuVusdt } from 'state/hooks'
 import PrizeGrid from '../PrizeGrid'
 import CardBusdValue from '../../../Home/components/CardBusdValue'
 
@@ -56,8 +56,8 @@ const TotalPrizesCard = () => {
   const { account } = useWeb3React()
   const [showFooter, setShowFooter] = useState(false)
   const lotteryPrizeAmount = +getBalanceNumber(useTotalRewards()).toFixed(0)
-  const wagyuPrice = usePriceWagyuBusd()
-  const lotteryPrizeAmountBusd = new BigNumber(lotteryPrizeAmount).multipliedBy(wagyuPrice)
+  const wagyuPrice = usePriceWagyuVusdt()
+  const lotteryPrizeAmountVusdt = new BigNumber(lotteryPrizeAmount).multipliedBy(wagyuPrice)
   const lotteryPrizeWithCommaSeparators = lotteryPrizeAmount.toLocaleString()
   const { currentLotteryNumber } = useContext(PastLotteryDataContext)
 
@@ -83,8 +83,8 @@ const TotalPrizesCard = () => {
               <Text fontSize="14px" color="textSubtle">
                 {t('Total Pot:')}
               </Text>
-              <Heading scale="lg">{lotteryPrizeWithCommaSeparators} CAKE</Heading>
-              {wagyuPrice.gt(0) && <CardBusdValue value={lotteryPrizeAmountBusd.toNumber()} />}
+              <Heading scale="lg">{lotteryPrizeWithCommaSeparators} WAGYU</Heading>
+              {wagyuPrice.gt(0) && <CardBusdValue value={lotteryPrizeAmountVusdt.toNumber()} />}
             </PrizeCountWrapper>
           </Left>
           <Right>

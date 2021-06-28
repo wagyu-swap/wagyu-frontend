@@ -21,7 +21,7 @@ import { useWeb3React } from '@web3-react/core'
 import useToast from 'hooks/useToast'
 import useWeb3 from 'hooks/useWeb3'
 import { useTranslation } from 'contexts/Localization'
-import useHasCakeBalance from 'hooks/useHasCakeBalance'
+import useHasWagyuBalance from 'hooks/useHasWagyuBalance'
 import { DEFAULT_TOKEN_DECIMAL } from 'config'
 import debounce from 'lodash/debounce'
 import ConfirmProfileCreationModal from '../components/ConfirmProfileCreationModal'
@@ -35,7 +35,7 @@ enum ExistingUserState {
 }
 
 const profileApiUrl = process.env.REACT_APP_API_PROFILE
-const minimumCakeToRegister = new BigNumber(REGISTER_COST).multipliedBy(DEFAULT_TOKEN_DECIMAL)
+const minimumWagyuToRegister = new BigNumber(REGISTER_COST).multipliedBy(DEFAULT_TOKEN_DECIMAL)
 
 const InputWrap = styled.div`
   position: relative;
@@ -59,7 +59,7 @@ const Indicator = styled(Flex)`
 
 const UserName: React.FC = () => {
   const [isAcknowledged, setIsAcknowledged] = useState(false)
-  const { teamId, selectedNft, userName, actions, minimumCakeRequired, allowance } = useProfileCreation()
+  const { teamId, selectedNft, userName, actions, minimumWagyuRequired, allowance } = useProfileCreation()
   const { t } = useTranslation()
   const { account, library } = useWeb3React()
   const { toastError } = useToast()
@@ -68,14 +68,14 @@ const UserName: React.FC = () => {
   const [isValid, setIsValid] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState('')
-  const hasMinimumCakeRequired = useHasCakeBalance(minimumCakeToRegister)
+  const hasMinimumWagyuRequired = useHasWagyuBalance(minimumWagyuToRegister)
   const [onPresentConfirmProfileCreation] = useModal(
     <ConfirmProfileCreationModal
       userName={userName}
       selectedNft={selectedNft}
       account={account}
       teamId={teamId}
-      minimumCakeRequired={minimumCakeRequired}
+      minimumWagyuRequired={minimumWagyuRequired}
       allowance={allowance}
     />,
     false,
@@ -237,9 +237,9 @@ const UserName: React.FC = () => {
       <Button onClick={onPresentConfirmProfileCreation} disabled={!isValid || !isUserCreated}>
         {t('Complete Profile')}
       </Button>
-      {!hasMinimumCakeRequired && (
+      {!hasMinimumWagyuRequired && (
         <Text color="failure" mt="16px">
-          {t('A minimum of %num% CAKE is required', { num: REGISTER_COST })}
+          {t('A minimum of %num% Wagyu is required', { num: REGISTER_COST })}
         </Text>
       )}
     </>

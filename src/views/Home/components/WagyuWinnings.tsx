@@ -1,6 +1,6 @@
 import React from 'react'
 import { getBalanceNumber } from 'utils/formatBalance'
-import { usePriceWagyuBusd } from 'state/hooks'
+import { usePriceWagyuVusdt } from 'state/hooks'
 import { Text } from '@wagyu-swap-libs/uikit'
 import { useWeb3React } from '@web3-react/core'
 import { BigNumber } from 'bignumber.js'
@@ -13,16 +13,16 @@ const Block = styled.div`
   margin-bottom: 24px;
 `
 
-interface CakeWinningsProps {
+interface WagyuWinningsProps {
   claimAmount: BigNumber
 }
 
-const WagyuWinnings: React.FC<CakeWinningsProps> = ({ claimAmount }) => {
+const WagyuWinnings: React.FC<WagyuWinningsProps> = ({ claimAmount }) => {
   const { t } = useTranslation()
   const { account } = useWeb3React()
   const wagyuAmount = getBalanceNumber(claimAmount)
-  const wagyuPriceBusd = usePriceWagyuBusd()
-  const claimAmountBusd = new BigNumber(wagyuAmount).multipliedBy(wagyuPriceBusd).toNumber()
+  const wagyuPriceVusdt = usePriceWagyuVusdt()
+  const claimAmountBusd = new BigNumber(wagyuAmount).multipliedBy(wagyuPriceVusdt).toNumber()
 
   if (!account) {
     return (
@@ -35,7 +35,7 @@ const WagyuWinnings: React.FC<CakeWinningsProps> = ({ claimAmount }) => {
   return (
     <Block>
       <CardValue value={wagyuAmount} lineHeight="1.5" />
-      {wagyuPriceBusd.gt(0) && <CardBusdValue value={claimAmountBusd} decimals={2} />}
+      {wagyuPriceVusdt.gt(0) && <CardBusdValue value={claimAmountBusd} decimals={2} />}
     </Block>
   )
 }

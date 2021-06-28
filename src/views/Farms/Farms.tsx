@@ -2,11 +2,11 @@ import React, { useEffect, useCallback, useState, useMemo, useRef } from 'react'
 import { Route, useRouteMatch, useLocation } from 'react-router-dom'
 import BigNumber from 'bignumber.js'
 import { useWeb3React } from '@web3-react/core'
-import { Image, Heading, RowType, Toggle, Text } from '@wagyu-swap-libs/uikit'
+import { Heading, RowType, Toggle, Text } from '@wagyu-swap-libs/uikit'
 import styled from 'styled-components'
 import FlexLayout from 'components/layout/Flex'
 import Page from 'components/layout/Page'
-import { useFarms, usePollFarmsData, usePriceWagyuBusd } from 'state/hooks'
+import { useFarms, usePollFarmsData, usePriceWagyuVusdt } from 'state/hooks'
 import usePersistState from 'hooks/usePersistState'
 import { Farm } from 'state/types'
 import { useTranslation } from 'contexts/Localization'
@@ -92,11 +92,11 @@ const ViewControls = styled.div`
   }
 `
 
-const StyledImage = styled(Image)`
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 58px;
-`
+// const StyledImage = styled(Image)`
+//   margin-left: auto;
+//   margin-right: auto;
+//   margin-top: 58px;
+// `
 const NUMBER_OF_FARMS_VISIBLE = 12
 
 const Farms: React.FC = () => {
@@ -104,9 +104,9 @@ const Farms: React.FC = () => {
   const { pathname } = useLocation()
   const { t } = useTranslation()
   const { data: farmsLP, userDataLoaded } = useFarms()
-  const wagyuPrice = usePriceWagyuBusd()
+  const wagyuPrice = usePriceWagyuVusdt()
   const [query, setQuery] = useState('')
-  const [viewMode, setViewMode] = usePersistState(ViewMode.TABLE, 'pancake_farm_view')
+  const [viewMode, setViewMode] = usePersistState(ViewMode.TABLE, 'wagyu_farm_view')
   const { account } = useWeb3React()
   const [sortOption, setSortOption] = useState('hot')
 
@@ -144,10 +144,10 @@ const Farms: React.FC = () => {
   const farmsList = useCallback(
     (farmsToDisplay: Farm[]): FarmWithStakedValue[] => {
       let farmsToDisplayWithAPR: FarmWithStakedValue[] = farmsToDisplay.map((farm) => {
-        if (!farm.lpTotalInQuoteToken || !farm.quoteToken.busdPrice) {
+        if (!farm.lpTotalInQuoteToken || !farm.quoteToken.vusdtPrice) {
           return farm
         }
-        const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(farm.quoteToken.busdPrice)
+        const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(farm.quoteToken.vusdtPrice)
         const apr = isActive ? getFarmApr(new BigNumber(farm.poolWeight), wagyuPrice, totalLiquidity) : 0
 
         return { ...farm, apr, liquidity: totalLiquidity }
@@ -248,7 +248,7 @@ const Farms: React.FC = () => {
     const { token, quoteToken } = farm
     const tokenAddress = token.address
     const quoteTokenAddress = quoteToken.address
-    const lpLabel = farm.lpSymbol && farm.lpSymbol.split(' ')[0].toUpperCase().replace('PANCAKE', '')
+    const lpLabel = farm.lpSymbol && farm.lpSymbol.split(' ')[0].toUpperCase().replace('WAGYU', '')
 
     const row: RowProps = {
       apr: {
@@ -395,7 +395,6 @@ const Farms: React.FC = () => {
         </ControlContainer>
         {renderContent()}
         <div ref={loadMoreRef} />
-        <StyledImage src="/images/3dpan.png" alt="Wagyu illustration" width={120} height={103} />
       </Page>
     </>
   )

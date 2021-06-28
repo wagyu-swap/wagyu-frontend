@@ -5,7 +5,7 @@ import { useTranslation } from 'contexts/Localization'
 import Page from 'components/layout/Page'
 import FarmStakingCard from 'views/Home/components/FarmStakingCard'
 import LotteryCard from 'views/Home/components/LotteryCard'
-import CakeStats from 'views/Home/components/WagyuStats'
+import WagyuStats from 'views/Home/components/WagyuStats'
 import TotalValueLockedCard from 'views/Home/components/TotalValueLockedCard'
 import EarnAPRCard from 'views/Home/components/EarnAPRCard'
 import EarnAssetCard from 'views/Home/components/EarnAssetCard'
@@ -120,14 +120,14 @@ const Home: React.FC = () => {
   return (
     <>
       <Hero>
-        <StyledImage src="/images/pan-wagyu-bg2.svg" alt="Wagyu" width={160} height={120} />
+        <StyledImage src="/images/left-wagyu.svg" alt="Wagyu" width={160} height={120} />
         <div>
           <Heading as="h1" scale="xl" mb="24px" color="secondary">
             {t('WagyuSwap')}
           </Heading>
           <Text>{t('The #1 AMM and yield farm on Velas Chain.')}</Text>
         </div>
-        <StyledImage src="/images/pan-wagyu-bg.svg" alt="Wagyu" width={160} height={120} />
+        <StyledImage src="/images/right-wagyu.svg" alt="Wagyu" width={160} height={120} />
       </Hero>
       <Page>
         <div>
@@ -141,7 +141,7 @@ const Home: React.FC = () => {
             <WinCard />
           </CTACards>
           <Cards>
-            <CakeStats />
+            <WagyuStats />
             <TotalValueLockedCard />
           </Cards>
         </div>

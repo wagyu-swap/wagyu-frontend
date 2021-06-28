@@ -263,7 +263,7 @@
     "name": "pancakeProfile",
     "outputs": [
       {
-        "internalType": "contract IPancakeProfile",
+        "internalType": "contract IWagyuProfile",
         "name": "",
         "type": "address"
       }

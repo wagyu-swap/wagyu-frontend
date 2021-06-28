@@ -9,7 +9,7 @@ import { fetchProfile } from 'state/profile'
 import { getAddressByType } from 'utils/collectibles'
 import useApproveConfirmTransaction from 'hooks/useApproveConfirmTransaction'
 import { useERC721, useProfile as useProfileContract } from 'hooks/useContract'
-import { getPancakeProfileAddress } from 'utils/addressHelpers'
+import { getWagyuProfileAddress } from 'utils/addressHelpers'
 import SelectionCard from '../SelectionCard'
 import ApproveConfirmButtons from '../ApproveConfirmButtons'
 
@@ -31,7 +31,7 @@ const ChangeProfilePicPage: React.FC<ChangeProfilePicPageProps> = ({ onDismiss }
   const { isApproving, isApproved, isConfirmed, isConfirming, handleApprove, handleConfirm } =
     useApproveConfirmTransaction({
       onApprove: () => {
-        return contract.methods.approve(getPancakeProfileAddress(), selectedNft.tokenId).send({ from: account })
+        return contract.methods.approve(getWagyuProfileAddress(), selectedNft.tokenId).send({ from: account })
       },
       onConfirm: () => {
         if (!profile.isActive) {
@@ -91,7 +91,7 @@ const ChangeProfilePicPage: React.FC<ChangeProfilePicPageProps> = ({ onDismiss }
             {t('Sorry! You don’t have any eligible Collectibles in your wallet to use!')}
           </Text>
           <Text as="p" color="textSubtle" mb="24px">
-            {t('Make sure you have a Pancake Collectible in your wallet and try again!')}
+            {t('Make sure you have a Wagyu Collectible in your wallet and try again!')}
           </Text>
         </>
       )}

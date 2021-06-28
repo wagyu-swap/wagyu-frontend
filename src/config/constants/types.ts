@@ -1,8 +1,8 @@
 import { TranslatableText } from 'state/types'
 
 export interface Address {
-  97?: string
-  56: string
+  111?: string
+  106: string
 }
 
 export interface Token {
@@ -10,7 +10,7 @@ export interface Token {
   address?: Address
   decimals?: number
   projectLink?: string
-  busdPrice?: string
+  vusdtPrice?: string
 }
 
 export enum PoolIds {
@@ -23,7 +23,7 @@ export type IfoStatus = 'idle' | 'coming_soon' | 'live' | 'finished'
 interface IfoPoolInfo {
   saleAmount: string
   raiseAmount: string
-  cakeToBurn: string
+  wagyuToBurn: string
   distributionRatio: number // Range [0-1]
 }
 
@@ -102,7 +102,7 @@ export type NftSource = {
 }
 
 export enum NftType {
-  PANCAKE = 'pancake',
+  WAGYU = 'wagyu',
   MIXIE = 'mixie',
 }
 

@@ -12,7 +12,7 @@ import {
 } from '@wagyu-swap-libs/uikit'
 import { useTranslation } from 'contexts/Localization'
 import { UserTradingInformationProps } from '../../types'
-import { useCompetitionCakeRewards, getRewardGroupAchievements } from '../../helpers'
+import { useCompetitionWagyuRewards, getRewardGroupAchievements } from '../../helpers'
 import { BoldTd, Td, StyledPrizeTable } from '../StyledPrizeTable'
 
 const StyledThead = styled.thead`
@@ -23,15 +23,15 @@ const UserPrizeGrid: React.FC<{ userTradingInformation?: UserTradingInformationP
   userTradingInformation,
 }) => {
   const { t } = useTranslation()
-  const { userRewardGroup, userCakeRewards, userPointReward, canClaimNFT } = userTradingInformation
-  const { cakeReward, dollarValueOfCakeReward } = useCompetitionCakeRewards(userCakeRewards)
+  const { userRewardGroup, userWagyuRewards, userPointReward, canClaimNFT } = userTradingInformation
+  const { wagyuReward, dollarValueOfWagyuReward } = useCompetitionWagyuRewards(userWagyuRewards)
   const { champion, teamPlayer } = getRewardGroupAchievements(userRewardGroup)
 
   return (
     <StyledPrizeTable>
       <StyledThead>
         <tr>
-          <th>{t('CAKE Prizes')}</th>
+          <th>{t('WAGYU Prizes')}</th>
           <th>{t('Achievements')}</th>
           <th>{t('NFT')}</th>
         </tr>
@@ -40,10 +40,10 @@ const UserPrizeGrid: React.FC<{ userTradingInformation?: UserTradingInformationP
         <tr>
           <BoldTd>
             <Flex flexDirection="column">
-              <Text bold>{cakeReward.toFixed(2)}</Text>
-              {dollarValueOfCakeReward ? (
+              <Text bold>{wagyuReward.toFixed(2)}</Text>
+              {dollarValueOfWagyuReward ? (
                 <Text fontSize="12px" color="textSubtle">
-                  ~{dollarValueOfCakeReward} USD
+                  ~{dollarValueOfWagyuReward} USD
                 </Text>
               ) : (
                 <Skeleton height={24} width={80} />

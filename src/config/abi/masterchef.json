@@ -352,7 +352,7 @@
         "type": "address"
       }
     ],
-    "name": "pendingCake",
+    "name": "pendingWagyu",
     "outputs": [
       {
         "internalType": "uint256",

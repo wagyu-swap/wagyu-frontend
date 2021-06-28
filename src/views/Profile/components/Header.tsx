@@ -2,14 +2,14 @@ import React from 'react'
 import { Button, Flex, Heading, useModal, Won } from '@wagyu-swap-libs/uikit'
 import { useProfile } from 'state/hooks'
 import { useTranslation } from 'contexts/Localization'
-import ClaimNftAndCakeModal, { useCanClaim } from './ClaimGiftModal'
+import ClaimNftAndWagyuModal, { useCanClaim } from './ClaimGiftModal'
 import HeaderWrapper from './HeaderWrapper'
 import EditProfileModal from './EditProfileModal'
 
 const ProfileHeader = () => {
   const { t } = useTranslation()
   const { canClaim, checkClaimStatus } = useCanClaim()
-  const [onPresentClaimGiftModal] = useModal(<ClaimNftAndCakeModal onSuccess={checkClaimStatus} />)
+  const [onPresentClaimGiftModal] = useModal(<ClaimNftAndWagyuModal onSuccess={checkClaimStatus} />)
   const [onEditProfileModal] = useModal(<EditProfileModal />, false)
   const { hasProfile } = useProfile()
 

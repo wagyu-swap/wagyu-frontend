@@ -18,12 +18,12 @@ const MigrationV2 = () => {
     >
       <Box ml="48px">
         <Text color="warning" bold>
-          You must complete migration if you want to keep earning from any PancakeSwap LP tokens and PancakeSwap farms.
+          You must complete migration if you want to keep earning from any WagyuSwap LP tokens and WagyuSwap farms.
         </Text>
         <Text color="white" mb="16px">
           All LPs will be migrated to a new, upgraded contract, over several hours starting from now.
         </Text>
-        <Button as="a" href="https://v1exchange.pancakeswap.finance/#/migrate">
+        <Button as="a" href="https://v1exchange.wagyuswap.finance/#/migrate">
           Migrate Now
         </Button>
       </Box>

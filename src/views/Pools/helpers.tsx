@@ -3,28 +3,28 @@ import { Pool } from 'state/types'
 import { getRoi, tokenEarnedPerThousandDollarsCompounding } from 'utils/compoundApyHelpers'
 import { getBalanceNumber, getFullDisplayBalance, getDecimalAmount } from 'utils/formatBalance'
 
-export const convertSharesToCake = (
+export const convertSharesToWagyu = (
   shares: BigNumber,
-  cakePerFullShare: BigNumber,
+  wagyuPerFullShare: BigNumber,
   decimals = 18,
   decimalsToRound = 3,
 ) => {
-  const sharePriceNumber = getBalanceNumber(cakePerFullShare, decimals)
-  const amountInCake = new BigNumber(shares.multipliedBy(sharePriceNumber))
-  const cakeAsNumberBalance = getBalanceNumber(amountInCake, decimals)
-  const cakeAsBigNumber = getDecimalAmount(new BigNumber(cakeAsNumberBalance), decimals)
-  const cakeAsDisplayBalance = getFullDisplayBalance(amountInCake, decimals, decimalsToRound)
-  return { cakeAsNumberBalance, cakeAsBigNumber, cakeAsDisplayBalance }
+  const sharePriceNumber = getBalanceNumber(wagyuPerFullShare, decimals)
+  const amountInWagyu = new BigNumber(shares.multipliedBy(sharePriceNumber))
+  const wagyuAsNumberBalance = getBalanceNumber(amountInWagyu, decimals)
+  const wagyuAsBigNumber = getDecimalAmount(new BigNumber(wagyuAsNumberBalance), decimals)
+  const wagyuAsDisplayBalance = getFullDisplayBalance(amountInWagyu, decimals, decimalsToRound)
+  return { wagyuAsNumberBalance, wagyuAsBigNumber, wagyuAsDisplayBalance }
 }
 
-export const convertCakeToShares = (
-  cake: BigNumber,
-  cakePerFullShare: BigNumber,
+export const convertWagyuToShares = (
+  wagyu: BigNumber,
+  wagyuPerFullShare: BigNumber,
   decimals = 18,
   decimalsToRound = 3,
 ) => {
-  const sharePriceNumber = getBalanceNumber(cakePerFullShare, decimals)
-  const amountInShares = new BigNumber(cake.dividedBy(sharePriceNumber))
+  const sharePriceNumber = getBalanceNumber(wagyuPerFullShare, decimals)
+  const amountInShares = new BigNumber(wagyu.dividedBy(sharePriceNumber))
   const sharesAsNumberBalance = getBalanceNumber(amountInShares, decimals)
   const sharesAsBigNumber = getDecimalAmount(new BigNumber(sharesAsNumberBalance), decimals)
   const sharesAsDisplayBalance = getFullDisplayBalance(amountInShares, decimals, decimalsToRound)
@@ -62,22 +62,22 @@ export const getAprData = (pool: Pool, performanceFee: number) => {
   return { apr, isHighValueToken, roundingDecimals, compoundFrequency }
 }
 
-export const getCakeVaultEarnings = (
+export const getWagyuVaultEarnings = (
   account: string,
-  cakeAtLastUserAction: BigNumber,
+  wagyuAtLastUserAction: BigNumber,
   userShares: BigNumber,
   pricePerFullShare: BigNumber,
   earningTokenPrice: number,
 ) => {
   const hasAutoEarnings =
-    account && cakeAtLastUserAction && cakeAtLastUserAction.gt(0) && userShares && userShares.gt(0)
-  const { cakeAsBigNumber } = convertSharesToCake(userShares, pricePerFullShare)
-  const autoCakeProfit = cakeAsBigNumber.minus(cakeAtLastUserAction)
-  const autoCakeToDisplay = autoCakeProfit.gte(0) ? getBalanceNumber(autoCakeProfit, 18) : 0
+    account && wagyuAtLastUserAction && wagyuAtLastUserAction.gt(0) && userShares && userShares.gt(0)
+  const { wagyuAsBigNumber } = convertSharesToWagyu(userShares, pricePerFullShare)
+  const autoWagyuProfit = wagyuAsBigNumber.minus(wagyuAtLastUserAction)
+  const autoWagyuToDisplay = autoWagyuProfit.gte(0) ? getBalanceNumber(autoWagyuProfit, 18) : 0
 
-  const autoUsdProfit = autoCakeProfit.times(earningTokenPrice)
+  const autoUsdProfit = autoWagyuProfit.times(earningTokenPrice)
   const autoUsdToDisplay = autoUsdProfit.gte(0) ? getBalanceNumber(autoUsdProfit, 18) : 0
-  return { hasAutoEarnings, autoCakeToDisplay, autoUsdToDisplay }
+  return { hasAutoEarnings, autoWagyuToDisplay, autoUsdToDisplay }
 }
 
 export const getPoolBlockInfo = (pool: Pool, currentBlock: number) => {

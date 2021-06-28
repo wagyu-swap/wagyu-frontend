@@ -1,7 +1,7 @@
 import pools from 'config/constants/pools'
 import { getSouschefContract, getSouschefV2Contract } from 'utils/contractHelpers'
 
-// Pool 0 is special (cake pool)
+// Pool 0 is special (wagyu pool)
 // Pool 78 is a broken pool, not used, and break the tests
 const idsToRemove = [0, 78]
 const poolsToTest = pools.filter((pool) => !idsToRemove.includes(pool.sousId))

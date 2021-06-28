@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
 import { Heading, Card, CardBody, Button, useModal } from '@wagyu-swap-libs/uikit'
 import { useWeb3React } from '@web3-react/core'
-import { getCakeAddress } from 'utils/addressHelpers'
+import { getWagyuAddress } from 'utils/addressHelpers'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { useTranslation } from 'contexts/Localization'
 import useGetLotteryHasDrawn from 'hooks/useGetLotteryHasDrawn'
@@ -54,7 +54,7 @@ const LotteryCard = () => {
   const [onPresentApprove] = useModal(<PurchaseWarningModal />)
   const { claimAmount, setLastUpdated } = useTotalClaim()
   const { onMultiClaim } = useMultiClaimLottery()
-  const { balance: cakeBalance } = useTokenBalance(getCakeAddress())
+  const { balance: wagyuBalance } = useTokenBalance(getWagyuAddress())
   const { handleApprove, requestedApproval } = useApproval(onPresentApprove)
 
   const handleClaim = useCallback(async () => {
@@ -89,7 +89,7 @@ const LotteryCard = () => {
     )
   }
 
-  const [onPresentBuy] = useModal(<BuyTicketModal max={cakeBalance} />)
+  const [onPresentBuy] = useModal(<BuyTicketModal max={wagyuBalance} />)
 
   return (
     <StyledLotteryCard>

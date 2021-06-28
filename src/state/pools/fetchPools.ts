@@ -1,10 +1,10 @@
 import BigNumber from 'bignumber.js'
 import poolsConfig from 'config/constants/pools'
 import sousChefABI from 'config/abi/sousChef.json'
-import cakeABI from 'config/abi/cake.json'
+import wagyuABI from 'config/abi/wagyu.json'
 import wbnbABI from 'config/abi/weth.json'
 import multicall from 'utils/multicall'
-import { getAddress, getWbnbAddress } from 'utils/addressHelpers'
+import { getAddress, getWvlxAddress } from 'utils/addressHelpers'
 import { BIG_ZERO } from 'utils/bigNumber'
 import { getSouschefV2Contract } from 'utils/contractHelpers'
 
@@ -26,11 +26,11 @@ export const fetchPoolsBlockLimits = async () => {
   const starts = await multicall(sousChefABI, callsStartBlock)
   const ends = await multicall(sousChefABI, callsEndBlock)
 
-  return poolsWithEnd.map((cakePoolConfig, index) => {
+  return poolsWithEnd.map((wagyuPoolConfig, index) => {
     const startBlock = starts[index]
     const endBlock = ends[index]
     return {
-      sousId: cakePoolConfig.sousId,
+      sousId: wagyuPoolConfig.sousId,
       startBlock: new BigNumber(startBlock).toJSON(),
       endBlock: new BigNumber(endBlock).toJSON(),
     }
@@ -51,13 +51,13 @@ export const fetchPoolsTotalStaking = async () => {
 
   const callsBnbPools = bnbPool.map((poolConfig) => {
     return {
-      address: getWbnbAddress(),
+      address: getWvlxAddress(),
       name: 'balanceOf',
       params: [getAddress(poolConfig.contractAddress)],
     }
   })
 
-  const nonBnbPoolsTotalStaked = await multicall(cakeABI, callsNonBnbPools)
+  const nonBnbPoolsTotalStaked = await multicall(wagyuABI, callsNonBnbPools)
   const bnbPoolsTotalStaked = await multicall(wbnbABI, callsBnbPools)
 
   return [

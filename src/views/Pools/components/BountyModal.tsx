@@ -5,7 +5,7 @@ import { DEFAULT_GAS_LIMIT } from 'config'
 import styled from 'styled-components'
 import { Modal, Text, Flex, Button, HelpIcon, AutoRenewIcon, useTooltip } from '@wagyu-swap-libs/uikit'
 import { getBalanceNumber } from 'utils/formatBalance'
-import { useCakeVaultContract } from 'hooks/useContract'
+import { useWagyuVaultContract } from 'hooks/useContract'
 import useTheme from 'hooks/useTheme'
 import useToast from 'hooks/useToast'
 import { useTranslation } from 'contexts/Localization'
@@ -13,9 +13,9 @@ import UnlockButton from 'components/UnlockButton'
 import Balance from 'components/Balance'
 
 interface BountyModalProps {
-  cakeBountyToDisplay: number
+  wagyuBountyToDisplay: number
   dollarBountyToDisplay: number
-  totalPendingCakeHarvest: BigNumber
+  totalPendingWagyuHarvest: BigNumber
   callFee: number
   onDismiss?: () => void
   TooltipComponent: React.ElementType
@@ -29,9 +29,9 @@ const Divider = styled.div`
 `
 
 const BountyModal: React.FC<BountyModalProps> = ({
-  cakeBountyToDisplay,
+  wagyuBountyToDisplay,
   dollarBountyToDisplay,
-  totalPendingCakeHarvest,
+  totalPendingWagyuHarvest,
   callFee,
   onDismiss,
   TooltipComponent,
@@ -40,24 +40,24 @@ const BountyModal: React.FC<BountyModalProps> = ({
   const { account } = useWeb3React()
   const { theme } = useTheme()
   const { toastError, toastSuccess } = useToast()
-  const cakeVaultContract = useCakeVaultContract()
+  const wagyuVaultContract = useWagyuVaultContract()
   const [pendingTx, setPendingTx] = useState(false)
   const callFeeAsDecimal = callFee / 100
-  const totalYieldToDisplay = getBalanceNumber(totalPendingCakeHarvest, 18)
+  const totalYieldToDisplay = getBalanceNumber(totalPendingWagyuHarvest, 18)
   const { targetRef, tooltip, tooltipVisible } = useTooltip(<TooltipComponent />, {
     placement: 'bottom',
     tooltipPadding: { right: 15 },
   })
 
   const handleConfirmClick = async () => {
-    cakeVaultContract.methods
+    wagyuVaultContract.methods
       .harvest()
       .send({ from: account, gas: DEFAULT_GAS_LIMIT })
       .on('sending', () => {
         setPendingTx(true)
       })
       .on('receipt', () => {
-        toastSuccess(t('Bounty collected!'), t('CAKE bounty has been sent to your wallet.'))
+        toastSuccess(t('Bounty collected!'), t('WAGYU bounty has been sent to your wallet.'))
         setPendingTx(false)
         onDismiss()
       })
@@ -78,7 +78,7 @@ const BountyModal: React.FC<BountyModalProps> = ({
       <Flex alignItems="flex-start" justifyContent="space-between">
         <Text>{t('You’ll claim')}</Text>
         <Flex flexDirection="column">
-          <Balance bold value={cakeBountyToDisplay} decimals={7} unit=" CAKE" />
+          <Balance bold value={wagyuBountyToDisplay} decimals={7} unit=" WAGYU" />
           <Text fontSize="12px" color="textSubtle">
             <Balance
               fontSize="12px"
@@ -96,7 +96,7 @@ const BountyModal: React.FC<BountyModalProps> = ({
         <Text fontSize="14px" color="textSubtle">
           {t('Pool total pending yield')}
         </Text>
-        <Balance color="textSubtle" value={totalYieldToDisplay} unit=" CAKE" />
+        <Balance color="textSubtle" value={totalYieldToDisplay} unit=" WAGYU" />
       </Flex>
       <Flex alignItems="center" justifyContent="space-between" mb="24px">
         <Text fontSize="14px" color="textSubtle">

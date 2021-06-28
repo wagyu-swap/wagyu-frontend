@@ -1,12 +1,12 @@
 import BigNumber from 'bignumber.js'
-import { BLOCKS_PER_YEAR, CAKE_PER_YEAR } from 'config'
+import { BLOCKS_PER_YEAR, WAGYU_PER_YEAR } from 'config'
 
 /**
  * Get the APR value in %
  * @param stakingTokenPrice Token price in the same quote currency
  * @param rewardTokenPrice Token price in the same quote currency
  * @param totalStaked Total amount of stakingToken in the pool
- * @param tokenPerBlock Amount of new cake allocated to the pool for each new block
+ * @param tokenPerBlock Amount of new wagyu allocated to the pool for each new block
  * @returns Null if the APR is NaN or infinite.
  */
 export const getPoolApr = (
@@ -29,8 +29,8 @@ export const getPoolApr = (
  * @returns
  */
 export const getFarmApr = (poolWeight: BigNumber, wagyuPriceUsd: BigNumber, poolLiquidityUsd: BigNumber): number => {
-  const yearlyCakeRewardAllocation = CAKE_PER_YEAR.times(poolWeight)
-  const apr = yearlyCakeRewardAllocation.times(wagyuPriceUsd).div(poolLiquidityUsd).times(100)
+  const yearlyWagyuRewardAllocation = WAGYU_PER_YEAR.times(poolWeight)
+  const apr = yearlyWagyuRewardAllocation.times(wagyuPriceUsd).div(poolLiquidityUsd).times(100)
   return apr.isNaN() || !apr.isFinite() ? null : apr.toNumber()
 }
 

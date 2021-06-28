@@ -2,10 +2,10 @@ import { useMemo } from 'react'
 import useWeb3 from 'hooks/useWeb3'
 import {
   getBep20Contract,
-  getCakeContract,
+  getWagyuContract,
   getBunnyFactoryContract,
   getBunnySpecialContract,
-  getPancakeRabbitContract,
+  getWagyuRabbitContract,
   getProfileContract,
   getIfoV1Contract,
   getIfoV2Contract,
@@ -18,7 +18,7 @@ import {
   getTradingCompetitionContract,
   getEasterNftContract,
   getErc721Contract,
-  getCakeVaultContract,
+  getWagyuVaultContract,
   getPredictionsContract,
   getChainlinkOracleContract,
   getSouschefV2Contract,
@@ -52,9 +52,9 @@ export const useERC721 = (address: string) => {
   return useMemo(() => getErc721Contract(address, web3), [address, web3])
 }
 
-export const useCake = () => {
+export const useWagyu = () => {
   const web3 = useWeb3()
-  return useMemo(() => getCakeContract(web3), [web3])
+  return useMemo(() => getWagyuContract(web3), [web3])
 }
 
 export const useBunnyFactory = () => {
@@ -62,9 +62,9 @@ export const useBunnyFactory = () => {
   return useMemo(() => getBunnyFactoryContract(web3), [web3])
 }
 
-export const usePancakeRabbits = () => {
+export const useWagyuRabbits = () => {
   const web3 = useWeb3()
-  return useMemo(() => getPancakeRabbitContract(web3), [web3])
+  return useMemo(() => getWagyuRabbitContract(web3), [web3])
 }
 
 export const useProfile = () => {
@@ -127,9 +127,9 @@ export const useEasterNftContract = () => {
   return useMemo(() => getEasterNftContract(web3), [web3])
 }
 
-export const useCakeVaultContract = () => {
+export const useWagyuVaultContract = () => {
   const web3 = useWeb3()
-  return useMemo(() => getCakeVaultContract(web3), [web3])
+  return useMemo(() => getWagyuVaultContract(web3), [web3])
 }
 
 export const usePredictionsContract = () => {

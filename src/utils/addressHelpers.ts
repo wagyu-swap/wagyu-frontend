@@ -3,13 +3,16 @@ import tokens from 'config/constants/tokens'
 import { Address } from 'config/constants/types'
 
 export const getAddress = (address: Address): string => {
-  const mainNetChainId = 56
+  if (!address) {
+    return '';
+  }
+  const mainNetChainId = 106
   const chainId = process.env.REACT_APP_CHAIN_ID
   return address[chainId] ? address[chainId] : address[mainNetChainId]
 }
 
-export const getCakeAddress = () => {
-  return getAddress(tokens.cake.address)
+export const getWagyuAddress = () => {
+  return getAddress(tokens.wagyu.address)
 }
 export const getMasterChefAddress = () => {
   return getAddress(addresses.masterChef)
@@ -17,8 +20,8 @@ export const getMasterChefAddress = () => {
 export const getMulticallAddress = () => {
   return getAddress(addresses.multiCall)
 }
-export const getWbnbAddress = () => {
-  return getAddress(tokens.wbnb.address)
+export const getWvlxAddress = () => {
+  return getAddress(tokens.wvlx.address)
 }
 export const getLotteryAddress = () => {
   return getAddress(addresses.lottery)
@@ -29,11 +32,11 @@ export const getLotteryTicketAddress = () => {
 export const getLotteryV2Address = () => {
   return getAddress(addresses.lotteryV2)
 }
-export const getPancakeProfileAddress = () => {
-  return getAddress(addresses.pancakeProfile)
+export const getWagyuProfileAddress = () => {
+  return getAddress(addresses.wagyuProfile)
 }
-export const getPancakeRabbitsAddress = () => {
-  return getAddress(addresses.pancakeRabbits)
+export const getWagyuRabbitsAddress = () => {
+  return getAddress(addresses.wagyuRabbits)
 }
 export const getBunnyFactoryAddress = () => {
   return getAddress(addresses.bunnyFactory)
@@ -53,8 +56,8 @@ export const getTradingCompetitionAddress = () => {
 export const getEasterNftAddress = () => {
   return getAddress(addresses.easterNft)
 }
-export const getCakeVaultAddress = () => {
-  return getAddress(addresses.cakeVault)
+export const getWagyuVaultAddress = () => {
+  return getAddress(addresses.wagyuVault)
 }
 export const getPredictionsAddress = () => {
   return getAddress(addresses.predictions)

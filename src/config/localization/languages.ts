@@ -38,7 +38,7 @@ export const languages = {
   // 'es-ES': ESES,
   // 'fi-FI': FI,
   // 'fil-PH': FIL,
-  'fr-FR': FR,
+  // 'fr-FR': FR,
   // 'hi-IN': HI,
   // 'hu-HU': HU,
   // 'id-ID': ID,

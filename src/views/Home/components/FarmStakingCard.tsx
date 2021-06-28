@@ -80,7 +80,7 @@ const FarmedStakingCard = () => {
               width="100%"
             >
               {pendingTx
-                ? t('Collecting CAKE')
+                ? t('Collecting WAGYU')
                 : t('Harvest all (%count%)', {
                     count: balancesWithValue.length,
                   })}

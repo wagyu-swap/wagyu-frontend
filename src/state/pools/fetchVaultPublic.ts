@@ -1,35 +1,35 @@
 import BigNumber from 'bignumber.js'
-import { convertSharesToCake } from 'views/Pools/helpers'
-import { getCakeVaultContract } from 'utils/contractHelpers'
+import { convertSharesToWagyu } from 'views/Pools/helpers'
+import { getWagyuVaultContract } from 'utils/contractHelpers'
 import makeBatchRequest from 'utils/makeBatchRequest'
 
-const cakeVaultContract = getCakeVaultContract()
+const wagyuVaultContract = getWagyuVaultContract()
 
 export const fetchPublicVaultData = async () => {
   try {
-    const [sharePrice, shares, estimatedCakeBountyReward, totalPendingCakeHarvest] = await makeBatchRequest([
-      cakeVaultContract.methods.getPricePerFullShare().call,
-      cakeVaultContract.methods.totalShares().call,
-      cakeVaultContract.methods.calculateHarvestCakeRewards().call,
-      cakeVaultContract.methods.calculateTotalPendingCakeRewards().call,
+    const [sharePrice, shares, estimatedWagyuBountyReward, totalPendingWagyuHarvest] = await makeBatchRequest([
+      wagyuVaultContract.methods.getPricePerFullShare().call,
+      wagyuVaultContract.methods.totalShares().call,
+      wagyuVaultContract.methods.calculateHarvestWagyuRewards().call,
+      wagyuVaultContract.methods.calculateTotalPendingWagyuRewards().call,
     ])
     const totalSharesAsBigNumber = new BigNumber(shares as string)
     const sharePriceAsBigNumber = new BigNumber(sharePrice as string)
-    const totalCakeInVaultEstimate = convertSharesToCake(totalSharesAsBigNumber, sharePriceAsBigNumber)
+    const totalWagyuInVaultEstimate = convertSharesToWagyu(totalSharesAsBigNumber, sharePriceAsBigNumber)
     return {
       totalShares: totalSharesAsBigNumber.toJSON(),
       pricePerFullShare: sharePriceAsBigNumber.toJSON(),
-      totalCakeInVault: totalCakeInVaultEstimate.cakeAsBigNumber.toJSON(),
-      estimatedCakeBountyReward: new BigNumber(estimatedCakeBountyReward as string).toJSON(),
-      totalPendingCakeHarvest: new BigNumber(totalPendingCakeHarvest as string).toJSON(),
+      totalWagyuInVault: totalWagyuInVaultEstimate.wagyuAsBigNumber.toJSON(),
+      estimatedWagyuBountyReward: new BigNumber(estimatedWagyuBountyReward as string).toJSON(),
+      totalPendingWagyuHarvest: new BigNumber(totalPendingWagyuHarvest as string).toJSON(),
     }
   } catch (error) {
     return {
       totalShares: null,
       pricePerFullShare: null,
-      totalCakeInVault: null,
-      estimatedCakeBountyReward: null,
-      totalPendingCakeHarvest: null,
+      totalWagyuInVault: null,
+      estimatedWagyuBountyReward: null,
+      totalPendingWagyuHarvest: null,
     }
   }
 }
@@ -37,10 +37,10 @@ export const fetchPublicVaultData = async () => {
 export const fetchVaultFees = async () => {
   try {
     const [performanceFee, callFee, withdrawalFee, withdrawalFeePeriod] = await makeBatchRequest([
-      cakeVaultContract.methods.performanceFee().call,
-      cakeVaultContract.methods.callFee().call,
-      cakeVaultContract.methods.withdrawFee().call,
-      cakeVaultContract.methods.withdrawFeePeriod().call,
+      wagyuVaultContract.methods.performanceFee().call,
+      wagyuVaultContract.methods.callFee().call,
+      wagyuVaultContract.methods.withdrawFee().call,
+      wagyuVaultContract.methods.withdrawFeePeriod().call,
     ])
     return {
       performanceFee: parseInt(performanceFee as string, 10),

@@ -3,7 +3,7 @@ import { useWeb3React } from '@web3-react/core'
 import { Box, Flex, Heading, Text, PrizeIcon, BlockIcon } from '@wagyu-swap-libs/uikit'
 import { useAppDispatch } from 'state'
 import { useTranslation } from 'contexts/Localization'
-import { useBetCanClaim, usePriceBnbBusd } from 'state/hooks'
+import { useBetCanClaim, usePriceVlxVusdt } from 'state/hooks'
 import styled from 'styled-components'
 import { Bet, BetPosition } from 'state/types'
 import { fetchBet } from 'state/predictions'
@@ -31,7 +31,7 @@ const BetResult: React.FC<BetResultProps> = ({ bet, result }) => {
   const dispatch = useAppDispatch()
   const { account } = useWeb3React()
   const { isRefundable } = useIsRefundable(bet.round.epoch)
-  const bnbBusdPrice = usePriceBnbBusd()
+  const bnbBusdPrice = usePriceVlxVusdt()
   const canClaim = useBetCanClaim(account, bet.round.id)
 
   // Winners get the payout, otherwise the claim what they put it if it was canceled

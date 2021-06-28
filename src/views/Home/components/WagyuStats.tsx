@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { useTotalSupply, useBurnedBalance } from 'hooks/useTokenBalance'
 import { useTranslation } from 'contexts/Localization'
-import { getCakeAddress } from 'utils/addressHelpers'
+import { getWagyuAddress } from 'utils/addressHelpers'
 import CardValue from './CardValue'
 
 const StyledWagyuStats = styled(Card)`
@@ -23,8 +23,8 @@ const Row = styled.div`
 const WagyuStats = () => {
   const { t } = useTranslation()
   const totalSupply = useTotalSupply()
-  const burnedBalance = getBalanceNumber(useBurnedBalance(getCakeAddress()))
-  const cakeSupply = totalSupply ? getBalanceNumber(totalSupply) - burnedBalance : 0
+  const burnedBalance = getBalanceNumber(useBurnedBalance(getWagyuAddress()))
+  const wagyuSupply = totalSupply ? getBalanceNumber(totalSupply) - burnedBalance : 0
 
   return (
     <StyledWagyuStats>
@@ -34,7 +34,7 @@ const WagyuStats = () => {
         </Heading>
         <Row>
           <Text fontSize="14px">{t('Total Wagyu Supply')}</Text>
-          {cakeSupply && <CardValue fontSize="14px" value={cakeSupply} />}
+          {wagyuSupply && <CardValue fontSize="14px" value={wagyuSupply} />}
         </Row>
         <Row>
           <Text fontSize="14px">{t('Total Wagyu Burned')}</Text>

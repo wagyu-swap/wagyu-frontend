@@ -1,13 +1,13 @@
-import { usePriceWagyuBusd } from 'state/hooks'
+import { usePriceWagyuVusdt } from 'state/hooks'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { useTotalRewards } from './useTickets'
 
 const useLotteryTotalPrizesUsd = () => {
   const totalRewards = useTotalRewards()
-  const totalCake = getBalanceNumber(totalRewards)
-  const wagyuPriceBusd = usePriceWagyuBusd()
+  const totalWagyu = getBalanceNumber(totalRewards)
+  const wagyuPriceVusdt = usePriceWagyuVusdt()
 
-  return totalCake * wagyuPriceBusd.toNumber()
+  return totalWagyu * wagyuPriceVusdt.toNumber()
 }
 
 export default useLotteryTotalPrizesUsd

@@ -4,7 +4,7 @@ import { useWeb3React } from '@web3-react/core'
 import { Box, Flex, Heading, Text, Button, Link, OpenNewIcon } from '@wagyu-swap-libs/uikit'
 import { useTranslation } from 'contexts/Localization'
 import { getBscScanAddressUrl } from 'utils/bscscan'
-import { useGetCurrentEpoch, usePriceBnbBusd } from 'state/hooks'
+import { useGetCurrentEpoch, usePriceVlxVusdt } from 'state/hooks'
 import { Bet, BetPosition } from 'state/types'
 import { formatBnb, getMultiplier, getPayout } from 'views/Predictions/helpers'
 import { getRoundResult, Result } from 'state/predictions/helpers'
@@ -110,7 +110,7 @@ const PnlTab: React.FC<PnlTabProps> = ({ hasBetHistory, bets }) => {
   const { t } = useTranslation()
   const { account } = useWeb3React()
   const currentEpoch = useGetCurrentEpoch()
-  const bnbBusdPrice = usePriceBnbBusd()
+  const bnbBusdPrice = usePriceVlxVusdt()
 
   const summary = getPnlSummary(bets, currentEpoch)
   const netResultAmount = summary.won.payout - summary.lost.amount

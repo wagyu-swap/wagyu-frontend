@@ -14,10 +14,10 @@ import {
   useTooltip,
   Button,
 } from '@wagyu-swap-libs/uikit'
-import { BASE_BSC_SCAN_URL, BASE_URL } from 'config'
-import { useBlock, useCakeVault } from 'state/hooks'
+import { BASE_VELAS_SCAN_URL, BASE_URL } from 'config'
+import { useBlock, useWagyuVault } from 'state/hooks'
 import { Pool } from 'state/types'
-import { getAddress, getCakeVaultAddress } from 'utils/addressHelpers'
+import { getAddress, getWagyuVaultAddress } from 'utils/addressHelpers'
 import { registerToken } from 'utils/wallet'
 import Balance from 'components/Balance'
 import { getPoolBlockInfo } from 'views/Pools/helpers'
@@ -38,18 +38,18 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account }) => {
   const { t } = useTranslation()
   const { currentBlock } = useBlock()
   const {
-    totalCakeInVault,
+    totalWagyuInVault,
     fees: { performanceFee },
-  } = useCakeVault()
+  } = useWagyuVault()
 
   const { stakingToken, earningToken, totalStaked, contractAddress, sousId, isAutoVault } = pool
 
   const tokenAddress = earningToken.address ? getAddress(earningToken.address) : ''
   const poolContractAddress = getAddress(contractAddress)
-  const cakeVaultContractAddress = getCakeVaultAddress()
+  const wagyuVaultContractAddress = getWagyuVaultAddress()
   const imageSrc = `${BASE_URL}/images/tokens/${earningToken.symbol.toLowerCase()}.png`
   const isMetaMaskInScope = !!(window as WindowChain).ethereum?.isMetaMask
-  const isManualCakePool = sousId === 0
+  const isManualWagyuPool = sousId === 0
 
   const { shouldShowBlockCountdown, blocksUntilStart, blocksRemaining, hasPoolStarted, blocksToDisplay } =
     getPoolBlockInfo(pool, currentBlock)
@@ -61,11 +61,11 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account }) => {
 
   const getTotalStakedBalance = () => {
     if (isAutoVault) {
-      return getBalanceNumber(totalCakeInVault, stakingToken.decimals)
+      return getBalanceNumber(totalWagyuInVault, stakingToken.decimals)
     }
-    if (isManualCakePool) {
-      const manualCakeTotalMinusAutoVault = new BigNumber(totalStaked).minus(totalCakeInVault)
-      return getBalanceNumber(manualCakeTotalMinusAutoVault, stakingToken.decimals)
+    if (isManualWagyuPool) {
+      const manualWagyuTotalMinusAutoVault = new BigNumber(totalStaked).minus(totalWagyuInVault)
+      return getBalanceNumber(manualWagyuTotalMinusAutoVault, stakingToken.decimals)
     }
     return getBalanceNumber(totalStaked, stakingToken.decimals)
   }
@@ -126,7 +126,7 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account }) => {
           <LinkExternal
             bold={false}
             small
-            href={`${BASE_BSC_SCAN_URL}/address/${isAutoVault ? cakeVaultContractAddress : poolContractAddress}`}
+            href={`${BASE_VELAS_SCAN_URL}/address/${isAutoVault ? wagyuVaultContractAddress : poolContractAddress}`}
           >
             {t('View Contract')}
           </LinkExternal>

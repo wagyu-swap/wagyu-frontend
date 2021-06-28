@@ -54,7 +54,7 @@ t(key, data)
 If a Crowdin translation like this `You have %num% left in your wallet` - would look something like:
 
 ```
-t(`You have %num% left in your wallet`, { num: cakeBalance })
+t(`You have %num% left in your wallet`, { num: wagyuBalance })
 ```
 
 ## Issue reports

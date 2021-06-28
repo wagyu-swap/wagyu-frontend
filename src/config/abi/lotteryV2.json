@@ -402,7 +402,7 @@
     "name": "lotteries",
     "outputs": [
       {
-        "internalType": "enum PancakeSwapLottery.Status",
+        "internalType": "enum WagyuSwapLottery.Status",
         "name": "status",
         "type": "uint8"
       },

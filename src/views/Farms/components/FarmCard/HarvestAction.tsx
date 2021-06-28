@@ -7,7 +7,7 @@ import { fetchFarmUserDataAsync } from 'state/farms'
 import { useHarvest } from 'hooks/useHarvest'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { useWeb3React } from '@web3-react/core'
-import { usePriceWagyuBusd } from 'state/hooks'
+import { usePriceWagyuVusdt } from 'state/hooks'
 import CardBusdValue from '../../../Home/components/CardBusdValue'
 
 interface FarmCardActionsProps {
@@ -20,7 +20,7 @@ const HarvestAction: React.FC<FarmCardActionsProps> = ({ earnings, pid }) => {
   const { t } = useTranslation()
   const [pendingTx, setPendingTx] = useState(false)
   const { onReward } = useHarvest(pid)
-  const wagyuPrice = usePriceWagyuBusd()
+  const wagyuPrice = usePriceWagyuVusdt()
   const dispatch = useAppDispatch()
   const rawEarningsBalance = account ? getBalanceNumber(earnings) : 0
   const displayBalance = rawEarningsBalance.toLocaleString()

@@ -3,17 +3,17 @@ import { Nft, NftSource, NftType } from './types'
 export const IPFS_GATEWAY = 'https://gateway.pinata.cloud'
 
 export const nftSources: NftSource = {
-  [NftType.PANCAKE]: {
+  [NftType.WAGYU]: {
     address: {
-      56: '0xDf7952B35f24aCF7fC0487D01c8d5690a60DBa07',
-      97: '0x60935F36e4631F73f0f407e68642144e07aC7f5E',
+      106: '0xDf7952B35f24aCF7fC0487D01c8d5690a60DBa07',
+      111: '0x60935F36e4631F73f0f407e68642144e07aC7f5E',
     },
     identifierKey: 'image',
   },
   [NftType.MIXIE]: {
     address: {
-      56: '0xa251b5EAa9E67F2Bc8b33F33e20E91552Bf85566',
-      97: '',
+      106: '0xa251b5EAa9E67F2Bc8b33F33e20E91552Bf85566',
+      111: '',
     },
     identifierKey: 'image',
   },
@@ -22,7 +22,7 @@ export const nftSources: NftSource = {
 const Nfts: Nft[] = [
   {
     name: 'Mixie v1',
-    description: 'Stories were told, and songs were sung, about Chef Mixie’s pancakes and her big Syrup gun.',
+    description: 'Stories were told, and songs were sung, about Chef Mixie’s wagyues and her big Syrup gun.',
     images: {
       lg: 'mixie-1-lg.png',
       md: 'mixie-1-md.png',
@@ -36,7 +36,7 @@ const Nfts: Nft[] = [
   },
   {
     name: 'Mixie v2',
-    description: 'Stories were told, and songs were sung, about Chef Mixie’s pancakes and her big Syrup gun.',
+    description: 'Stories were told, and songs were sung, about Chef Mixie’s wagyues and her big Syrup gun.',
     images: {
       lg: 'mixie-2-lg.png',
       md: 'mixie-2-md.png',
@@ -50,7 +50,7 @@ const Nfts: Nft[] = [
   },
   {
     name: 'Mixie v3',
-    description: 'Stories were told, and songs were sung, about Chef Mixie’s pancakes and her big Syrup gun.',
+    description: 'Stories were told, and songs were sung, about Chef Mixie’s wagyues and her big Syrup gun.',
     images: {
       lg: 'mixie-3-lg.png',
       md: 'mixie-3-md.png',
@@ -77,21 +77,21 @@ const Nfts: Nft[] = [
     },
     sortOrder: 999,
     identifier: 'easter-champion-storm',
-    type: NftType.PANCAKE,
+    type: NftType.WAGYU,
     variationId: 15,
   },
   {
-    name: "Cakeston Easter '21",
+    name: "Wagyuston Easter '21",
     description: 'Melting Easter eggs and melting hearts!',
     images: {
-      lg: 'cakeston-easter-21-lg.png',
-      md: 'cakeston-easter-21-md.png',
-      sm: 'cakeston-easter-21-sm.png',
+      lg: 'wagyuston-easter-21-lg.png',
+      md: 'wagyuston-easter-21-md.png',
+      sm: 'wagyuston-easter-21-sm.png',
       ipfs: 'https://gateway.pinata.cloud/ipfs/QmZGqWaovULNEMKxBCGnGjh27JQkAyadS6AW4J4Lzf3XBp/easter-caker.png',
     },
     sortOrder: 999,
     identifier: 'easter-caker',
-    type: NftType.PANCAKE,
+    type: NftType.WAGYU,
     variationId: 15,
   },
   {
@@ -105,7 +105,7 @@ const Nfts: Nft[] = [
     },
     sortOrder: 999,
     identifier: 'easter-flipper',
-    type: NftType.PANCAKE,
+    type: NftType.WAGYU,
     variationId: 14,
   },
   {
@@ -119,7 +119,7 @@ const Nfts: Nft[] = [
     },
     sortOrder: 999,
     identifier: 'easter-storm',
-    type: NftType.PANCAKE,
+    type: NftType.WAGYU,
     variationId: 12,
   },
   {
@@ -137,7 +137,7 @@ const Nfts: Nft[] = [
     },
     sortOrder: 999,
     identifier: 'bullish',
-    type: NftType.PANCAKE,
+    type: NftType.WAGYU,
     variationId: 11,
   },
   {
@@ -151,12 +151,12 @@ const Nfts: Nft[] = [
     },
     sortOrder: 999,
     identifier: 'hiccup',
-    type: NftType.PANCAKE,
+    type: NftType.WAGYU,
     variationId: 10,
   },
   {
     name: 'Sleepy',
-    description: 'Aww, looks like eating pancakes all day is tough work. Sweet dreams!',
+    description: 'Aww, looks like eating wagyues all day is tough work. Sweet dreams!',
     images: {
       lg: 'sleepy-lg.png',
       md: 'sleepy-md.png',
@@ -166,12 +166,12 @@ const Nfts: Nft[] = [
     },
     sortOrder: 999,
     identifier: 'sleepy',
-    type: NftType.PANCAKE,
+    type: NftType.WAGYU,
     variationId: 5,
   },
   {
     name: 'Sunny',
-    description: 'Sunny is always cheerful when there are pancakes around. Smile!',
+    description: 'Sunny is always cheerful when there are wagyues around. Smile!',
     images: {
       lg: 'sunny-lg.png',
       md: 'sunny-md.png',
@@ -181,12 +181,12 @@ const Nfts: Nft[] = [
     },
     sortOrder: 999,
     identifier: 'sunny',
-    type: NftType.PANCAKE,
+    type: NftType.WAGYU,
     variationId: 9,
   },
   {
     name: 'Churro',
-    description: "Don't let that dopey smile deceive you... Churro's a master CAKE chef!",
+    description: "Don't let that dopey smile deceive you... Churro's a master WAGYU chef!",
     images: {
       lg: 'churro-lg.png',
       md: 'churro-md.png',
@@ -196,12 +196,12 @@ const Nfts: Nft[] = [
     },
     sortOrder: 999,
     identifier: 'churro',
-    type: NftType.PANCAKE,
+    type: NftType.WAGYU,
     variationId: 8,
   },
   {
     name: 'Dollop',
-    description: "Nommm... Oh hi, I'm just meditating on the meaning of CAKE.",
+    description: "Nommm... Oh hi, I'm just meditating on the meaning of WAGYU.",
     images: {
       lg: 'dollop-lg.png',
       md: 'dollop-md.png',
@@ -211,12 +211,12 @@ const Nfts: Nft[] = [
     },
     sortOrder: 999,
     identifier: 'dollop',
-    type: NftType.PANCAKE,
+    type: NftType.WAGYU,
     variationId: 6,
   },
   {
     name: 'Twinkle',
-    description: "Three guesses what's put that twinkle in those eyes! (Hint: it's CAKE)",
+    description: "Three guesses what's put that twinkle in those eyes! (Hint: it's WAGYU)",
     images: {
       lg: 'twinkle-lg.png',
       md: 'twinkle-md.png',
@@ -226,12 +226,12 @@ const Nfts: Nft[] = [
     },
     sortOrder: 999,
     identifier: 'twinkle',
-    type: NftType.PANCAKE,
+    type: NftType.WAGYU,
     variationId: 7,
   },
   {
     name: 'Swapsies',
-    description: 'These bunnies love nothing more than swapping pancakes. Especially on BSC.',
+    description: 'These bunnies love nothing more than swapping wagyues. Especially on BSC.',
     images: {
       lg: 'swapsies-lg.png',
       md: 'swapsies-md.png',
@@ -241,7 +241,7 @@ const Nfts: Nft[] = [
     },
     sortOrder: 999,
     identifier: 'swapsies',
-    type: NftType.PANCAKE,
+    type: NftType.WAGYU,
     variationId: 0,
   },
   {
@@ -256,12 +256,12 @@ const Nfts: Nft[] = [
     },
     sortOrder: 999,
     identifier: 'drizzle',
-    type: NftType.PANCAKE,
+    type: NftType.WAGYU,
     variationId: 1,
   },
   {
     name: 'Blueberries',
-    description: "These bunnies like their pancakes with blueberries. What's your favorite topping?",
+    description: "These bunnies like their wagyues with blueberries. What's your favorite topping?",
     images: {
       lg: 'blueberries-lg.png',
       md: 'blueberries-md.png',
@@ -271,12 +271,12 @@ const Nfts: Nft[] = [
     },
     sortOrder: 999,
     identifier: 'blueberries',
-    type: NftType.PANCAKE,
+    type: NftType.WAGYU,
     variationId: 2,
   },
   {
     name: 'Circular',
-    description: "Love makes the world go 'round... but so do pancakes. And these bunnies know it.",
+    description: "Love makes the world go 'round... but so do wagyues. And these bunnies know it.",
     images: {
       lg: 'circular-lg.png',
       md: 'circular-md.png',
@@ -286,12 +286,12 @@ const Nfts: Nft[] = [
     },
     sortOrder: 999,
     identifier: 'circular',
-    type: NftType.PANCAKE,
+    type: NftType.WAGYU,
     variationId: 3,
   },
   {
     name: 'Sparkle',
-    description: 'It’s sparkling syrup, pancakes, and even lottery tickets! This bunny really loves it.',
+    description: 'It’s sparkling syrup, wagyues, and even lottery tickets! This bunny really loves it.',
     images: {
       lg: 'sparkle-lg.png',
       md: 'sparkle-md.png',
@@ -301,7 +301,7 @@ const Nfts: Nft[] = [
     },
     sortOrder: 999,
     identifier: 'sparkle',
-    type: NftType.PANCAKE,
+    type: NftType.WAGYU,
     variationId: 4,
   },
 ]

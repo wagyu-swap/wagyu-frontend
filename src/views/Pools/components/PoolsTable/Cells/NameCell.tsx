@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import BigNumber from 'bignumber.js'
 import { Text, Image, useMatchBreakpoints } from '@wagyu-swap-libs/uikit'
 import { useTranslation } from 'contexts/Localization'
-import { useCakeVault } from 'state/hooks'
+import { useWagyuVault } from 'state/hooks'
 import { Pool } from 'state/types'
 import { BIG_ZERO } from 'utils/bigNumber'
 import BaseCell, { CellContent } from './BaseCell'
@@ -28,16 +28,16 @@ const NameCell: React.FC<NameCellProps> = ({ pool }) => {
   const { sousId, stakingToken, earningToken, userData, isFinished, isAutoVault } = pool
   const {
     userData: { userShares },
-  } = useCakeVault()
+  } = useWagyuVault()
   const hasVaultShares = userShares && userShares.gt(0)
 
   const stakingTokenSymbol = stakingToken.symbol
   const earningTokenSymbol = earningToken.symbol
-  const iconFile = `${earningTokenSymbol}-${stakingTokenSymbol}.svg`.toLocaleLowerCase()
+  let iconFile = `${earningTokenSymbol}-${stakingTokenSymbol}.svg`.toLocaleLowerCase()
 
   const stakedBalance = userData?.stakedBalance ? new BigNumber(userData.stakedBalance) : BIG_ZERO
   const isStaked = stakedBalance.gt(0)
-  const isManualCakePool = sousId === 0
+  const isManualWagyuPool = sousId === 0
 
   const showStakedTag = isAutoVault ? hasVaultShares : isStaked
 
@@ -46,11 +46,12 @@ const NameCell: React.FC<NameCellProps> = ({ pool }) => {
   const showSubtitle = sousId !== 0 || (sousId === 0 && !isXs && !isSm)
 
   if (isAutoVault) {
-    title = t('Auto CAKE')
+    title = t('Auto WAGYU')
     subtitle = t('Automatic restaking')
-  } else if (isManualCakePool) {
-    title = t('Manual CAKE')
-    subtitle = `${t('Earn')} CAKE ${t('Stake').toLocaleLowerCase()} CAKE`
+    iconFile = `${earningTokenSymbol}-${stakingTokenSymbol}vault.svg`.toLocaleLowerCase()
+  } else if (isManualWagyuPool) {
+    title = t('Manual WAGYU')
+    subtitle = `${t('Earn')} WAGYU ${t('Stake').toLocaleLowerCase()} WAGYU`
   }
 
   return (
