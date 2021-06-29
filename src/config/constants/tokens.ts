@@ -16,7 +16,7 @@ const tokens = {
     symbol: 'WAGYU',
     address: {
       106: '',
-      111: '0xb0922F3D63A55517468b6Eb4383f2CaD3Abf856D',
+      111: '0xe6873368B15b4fDFfB85b44C8FcDc0a525128EAc',
     },
     decimals: 18,
     projectLink: 'https://wagyuswap.finance/',
@@ -43,7 +43,7 @@ const tokens = {
     symbol: 'SAUCE',
     address: {
       106: '',
-      111: '0xBbF7618e93666d2FBD112ab0dd18656a070B26E5',
+      111: '0x0b381Ed25738E08A0CA2E061E43C577945f4452f',
     },
     decimals: 18,
     projectLink: 'https://wagyuswap.finance/',

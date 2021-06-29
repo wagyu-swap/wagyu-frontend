@@ -20,33 +20,40 @@ const farms: FarmConfig[] = [
     lpSymbol: 'WAGYU-VLX LP',
     lpAddresses: {
       106: '',
-      111: '0x1746FE6b71f1B603E06D16f437ed5412B9943371',
+      111: '0x579Bbafc6eD9280B297081126de039E1099417d6',
     },
     token: tokens.wagyu,
     quoteToken: tokens.wvlx,
-    multiplier: '6x'
   },
   {
     pid: 2,
     lpSymbol: 'WAGYU-VUSDT LP',
     lpAddresses: {
       106: '',
-      111: '0xfD376913e797997ca49FaC9E284a1F804A142BfA',
+      111: '0xd63Fdfa29bC2d44da1D81927a67091CB858a16c7',
     },
     token: tokens.wagyu,
     quoteToken: tokens.vusdt,
-    multiplier: '6x'
   },
   {
     pid: 3,
-    lpSymbol: 'VUSDT-VLX LP',
+    lpSymbol: 'VLX-VUSDT LP',
     lpAddresses: {
       106: '',
       111: '0x2103800f23FFAFf4b67Ba5601A7941196b8F8da4',
     },
-    token: tokens.vusdt,
-    quoteToken: tokens.wvlx,
-    multiplier: '3x'
+    token: tokens.wvlx,
+    quoteToken: tokens.vusdt,
+  },
+  {
+    pid: 4,
+    lpSymbol: 'WAGYU-VETHER LP',
+    lpAddresses: {
+      106: '',
+      111: '0x0415fAdaee404A4F302064f43662Ff4adEA70ab3',
+    },
+    token: tokens.wagyu,
+    quoteToken: tokens.vether,
   },
   // {
   //   pid: 2,

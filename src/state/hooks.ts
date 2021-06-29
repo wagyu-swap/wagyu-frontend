@@ -60,7 +60,7 @@ export const usePollCoreFarmData = () => {
   const web3 = getWeb3NoAccount()
 
   useEffect(() => {
-    dispatch(fetchFarmsPublicDataAsync([1, 2, 3]))
+    dispatch(fetchFarmsPublicDataAsync([1, 2, 3, 4]))
   }, [dispatch, fastRefresh, web3])
 }
 
