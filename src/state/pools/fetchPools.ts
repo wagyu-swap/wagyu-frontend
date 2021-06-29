@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js'
 import poolsConfig from 'config/constants/pools'
 import sousChefABI from 'config/abi/sousChef.json'
 import wagyuABI from 'config/abi/wagyu.json'
-import wbnbABI from 'config/abi/weth.json'
+import wvlxABI from 'config/abi/weth.json'
 import multicall from 'utils/multicall'
 import { getAddress, getWvlxAddress } from 'utils/addressHelpers'
 import { BIG_ZERO } from 'utils/bigNumber'
@@ -38,10 +38,10 @@ export const fetchPoolsBlockLimits = async () => {
 }
 
 export const fetchPoolsTotalStaking = async () => {
-  const nonBnbPools = poolsConfig.filter((p) => p.stakingToken.symbol !== 'BNB')
-  const bnbPool = poolsConfig.filter((p) => p.stakingToken.symbol === 'BNB')
+  const nonVlxPools = poolsConfig.filter((p) => p.stakingToken.symbol !== 'VLX')
+  const vlxPool = poolsConfig.filter((p) => p.stakingToken.symbol === 'VLX')
 
-  const callsNonBnbPools = nonBnbPools.map((poolConfig) => {
+  const callsNonVlxPools = nonVlxPools.map((poolConfig) => {
     return {
       address: getAddress(poolConfig.stakingToken.address),
       name: 'balanceOf',
@@ -49,7 +49,7 @@ export const fetchPoolsTotalStaking = async () => {
     }
   })
 
-  const callsBnbPools = bnbPool.map((poolConfig) => {
+  const callsVlxPools = vlxPool.map((poolConfig) => {
     return {
       address: getWvlxAddress(),
       name: 'balanceOf',
@@ -57,17 +57,17 @@ export const fetchPoolsTotalStaking = async () => {
     }
   })
 
-  const nonBnbPoolsTotalStaked = await multicall(wagyuABI, callsNonBnbPools)
-  const bnbPoolsTotalStaked = await multicall(wbnbABI, callsBnbPools)
+  const nonVlxPoolsTotalStaked = await multicall(wagyuABI, callsNonVlxPools)
+  const vlxPoolsTotalStaked = await multicall(wvlxABI, callsVlxPools)
 
   return [
-    ...nonBnbPools.map((p, index) => ({
+    ...nonVlxPools.map((p, index) => ({
       sousId: p.sousId,
-      totalStaked: new BigNumber(nonBnbPoolsTotalStaked[index]).toJSON(),
+      totalStaked: new BigNumber(nonVlxPoolsTotalStaked[index]).toJSON(),
     })),
-    ...bnbPool.map((p, index) => ({
+    ...vlxPool.map((p, index) => ({
       sousId: p.sousId,
-      totalStaked: new BigNumber(bnbPoolsTotalStaked[index]).toJSON(),
+      totalStaked: new BigNumber(vlxPoolsTotalStaked[index]).toJSON(),
     })),
   ]
 }
@@ -86,7 +86,7 @@ export const fetchPoolsStakingLimits = async (
   poolsWithStakingLimit: number[],
 ): Promise<{ [key: string]: BigNumber }> => {
   const validPools = poolsConfig
-    .filter((p) => p.stakingToken.symbol !== 'BNB' && !p.isFinished)
+    .filter((p) => p.stakingToken.symbol !== 'VLX' && !p.isFinished)
     .filter((p) => !poolsWithStakingLimit.includes(p.sousId))
 
   // Get the staking limit for each valid pool

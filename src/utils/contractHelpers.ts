@@ -43,7 +43,7 @@ import lotteryV2Abi from 'config/abi/lotteryV2.json'
 import masterChef from 'config/abi/masterchef.json'
 import sousChef from 'config/abi/sousChef.json'
 import sousChefV2 from 'config/abi/sousChefV2.json'
-import sousChefBnb from 'config/abi/sousChefBnb.json'
+import sousChefVlx from 'config/abi/sousChefVlx.json'
 import claimRefundAbi from 'config/abi/claimRefund.json'
 import tradingCompetitionAbi from 'config/abi/tradingCompetition.json'
 import easterNftAbi from 'config/abi/easterNft.json'
@@ -79,7 +79,7 @@ export const getIfoV2Contract = (address: string, web3?: Web3) => {
 }
 export const getSouschefContract = (id: number, web3?: Web3) => {
   const config = poolsConfig.find((pool) => pool.sousId === id)
-  const abi = config.poolCategory === PoolCategory.BINANCE ? sousChefBnb : sousChef
+  const abi = config.poolCategory === PoolCategory.BINANCE ? sousChefVlx : sousChef
   return getContract(abi, getAddress(config.contractAddress), web3)
 }
 export const getSouschefV2Contract = (id: number, web3?: Web3) => {

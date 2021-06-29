@@ -18,7 +18,7 @@ const useGetLotteryHasDrawn = () => {
         setLotteryHasDrawn(state)
       }
 
-      fetchLotteryStatus()
+      // fetchLotteryStatus()
     }
   }, [lotteryContract])
 

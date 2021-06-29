@@ -86,7 +86,7 @@ export const useBurnedBalance = (tokenAddress: string) => {
   return balance
 }
 
-export const useGetBnbBalance = () => {
+export const useGetVlxBalance = () => {
   const [balance, setBalance] = useState(BIG_ZERO)
   const { account } = useWeb3React()
   const { lastUpdated, setLastUpdated } = useLastUpdated()

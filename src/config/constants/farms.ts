@@ -9,62 +9,65 @@ const farms: FarmConfig[] = [
     pid: 0,
     lpSymbol: 'WAGYU',
     lpAddresses: {
-      111: '0x9C21123D94b93361a29B2C2EFB3d5CD8B17e0A9e',
-      106: '0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82',
+      106: '',
+      111: '0xb0922F3D63A55517468b6Eb4383f2CaD3Abf856D',
     },
     token: tokens.sauce,
     quoteToken: tokens.wvlx,
   },
   {
-    pid: 251,
+    pid: 1,
     lpSymbol: 'WAGYU-VLX LP',
     lpAddresses: {
-      111: '0x3ed8936cAFDF85cfDBa29Fbe5940A5b0524824F4',
-      106: '0x0eD7e52944161450477ee417DE9Cd3a859b14fD0',
+      106: '',
+      111: '0x1746FE6b71f1B603E06D16f437ed5412B9943371',
     },
     token: tokens.wagyu,
     quoteToken: tokens.wvlx,
-  },
-  {
-    pid: 252,
-    lpSymbol: 'VUSDT-VLX LP',
-    lpAddresses: {
-      111: '',
-      106: '0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16',
-    },
-    token: tokens.vusdt,
-    quoteToken: tokens.wvlx,
-  },
-  {
-    pid: 253,
-    lpSymbol: 'VETHER-VLX LP',
-    lpAddresses: {
-      111: '',
-      106: '0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16',
-    },
-    token: tokens.vether,
-    quoteToken: tokens.wvlx,
-  },
-  {
-    pid: 1,
-    lpSymbol: 'WAGYU-VUSDT LP',
-    lpAddresses: {
-      111: '',
-      106: '0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16',
-    },
-    token: tokens.wagyu,
-    quoteToken: tokens.vusdt,
+    multiplier: '6x'
   },
   {
     pid: 2,
-    lpSymbol: 'WAGYU-VETHER LP',
+    lpSymbol: 'WAGYU-VUSDT LP',
     lpAddresses: {
-      111: '',
-      106: '0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16',
+      106: '',
+      111: '0xfD376913e797997ca49FaC9E284a1F804A142BfA',
     },
     token: tokens.wagyu,
-    quoteToken: tokens.vether,
+    quoteToken: tokens.vusdt,
+    multiplier: '6x'
   },
+  {
+    pid: 3,
+    lpSymbol: 'VUSDT-VLX LP',
+    lpAddresses: {
+      106: '',
+      111: '0x2103800f23FFAFf4b67Ba5601A7941196b8F8da4',
+    },
+    token: tokens.vusdt,
+    quoteToken: tokens.wvlx,
+    multiplier: '3x'
+  },
+  // {
+  //   pid: 2,
+  //   lpSymbol: 'WAGYU-VUSDT LP',
+  //   lpAddresses: {
+  //     106: '0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16',
+  //     111: '',
+  //   },
+  //   token: tokens.wagyu,
+  //   quoteToken: tokens.vusdt,
+  // },
+  // {
+  //   pid: 3,
+  //   lpSymbol: 'WAGYU-VETHER LP',
+  //   lpAddresses: {
+  //     106: '0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16',
+  //     111: '',
+  //   },
+  //   token: tokens.wagyu,
+  //   quoteToken: tokens.vether,
+  // },
 ]
 
 export default farms

@@ -186,7 +186,6 @@ const Pools: React.FC = () => {
         latinise(pool.earningToken.symbol.toLowerCase()).includes(lowercaseQuery),
       )
     }
-
     return sortPools(chosenPools).slice(0, numberOfPoolsVisible)
   }
 

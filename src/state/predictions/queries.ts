@@ -3,7 +3,7 @@ export interface UserResponse {
   address: string
   block: string
   totalBets: string
-  totalBNB: string
+  totalVLX: string
   bets?: BetResponse[]
 }
 
@@ -96,5 +96,5 @@ export const getUserBaseFields = () => `
   address
   block
   totalBets
-  totalBNB
+  totalVLX
 `

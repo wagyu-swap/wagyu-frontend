@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useCountUp } from 'react-countup'
 import styled from 'styled-components'
-import { BnbUsdtPairTokenIcon, Box, Card, PocketWatchIcon, Text } from '@wagyu-swap-libs/uikit'
+import { VlxVusdtPairTokenIcon, Box, Card, PocketWatchIcon, Text } from '@wagyu-swap-libs/uikit'
 import { useGetLastOraclePrice } from 'state/hooks'
 import { useTranslation } from 'contexts/Localization'
 import { formatRoundTime } from '../helpers'
@@ -87,11 +87,11 @@ export const PricePairLabel: React.FC = () => {
   return (
     <Box pl="24px" position="relative" display="inline-block">
       <Token left={0}>
-        <BnbUsdtPairTokenIcon />
+        <VlxVusdtPairTokenIcon />
       </Token>
       <Label dir="left">
         <Title bold textTransform="uppercase">
-          BNBUSDT
+          VLXUSDT
         </Title>
         <Price fontSize="12px">{`$${countUp}`}</Price>
       </Label>

@@ -9,7 +9,7 @@ import { useBlock, useGetIntervalBlocks } from 'state/hooks'
 import { markPositionAsEntered } from 'state/predictions'
 import useToast from 'hooks/useToast'
 import CardFlip from '../CardFlip'
-import { formatBnb, getBnbAmount } from '../../helpers'
+import { formatVlx, getVlxAmount } from '../../helpers'
 import { RoundResultBox, PrizePoolRow } from '../RoundResult'
 import MultiplierArrow from './MultiplierArrow'
 import Card from './Card'
@@ -52,7 +52,7 @@ const OpenRoundCard: React.FC<OpenRoundCardProps> = ({
   const isBufferPhase = currentBlock >= round.startBlock + interval
   const positionDisplay = position === BetPosition.BULL ? t('Up').toUpperCase() : t('Down').toUpperCase()
   const { targetRef, tooltipVisible, tooltip } = useTooltip(
-    <div style={{ whiteSpace: 'nowrap' }}>{`${formatBnb(betAmount)} BNB`}</div>,
+    <div style={{ whiteSpace: 'nowrap' }}>{`${formatVlx(betAmount)} VLX`}</div>,
     { placement: 'top' },
   )
 
@@ -105,7 +105,7 @@ const OpenRoundCard: React.FC<OpenRoundCardProps> = ({
           hash,
           round,
           position,
-          amount: getBnbAmount(decimalValue).toNumber(),
+          amount: getVlxAmount(decimalValue).toNumber(),
           claimed: false,
         },
       }),

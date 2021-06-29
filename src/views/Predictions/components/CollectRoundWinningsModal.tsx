@@ -24,7 +24,7 @@ import { markBetAsCollected } from 'state/predictions'
 import { useTranslation } from 'contexts/Localization'
 import useToast from 'hooks/useToast'
 import { usePredictionsContract } from 'hooks/useContract'
-import { formatBnb } from '../helpers'
+import { formatVlx } from '../helpers'
 
 interface CollectRoundWinningsModalProps extends InjectedModalProps {
   payout: number
@@ -57,7 +57,7 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
   const { t } = useTranslation()
   const { toastSuccess, toastError } = useToast()
   const predictionsContract = usePredictionsContract()
-  const bnbBusdPrice = usePriceVlxVusdt()
+  const vlxVusdtPrice = usePriceVlxVusdt()
   const dispatch = useAppDispatch()
 
   const handleClick = () => {
@@ -112,9 +112,9 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
         <Flex alignItems="start" justifyContent="space-between" mb="24px">
           <Text>{t('Collecting')}</Text>
           <Box style={{ textAlign: 'right' }}>
-            <Text>{`${formatBnb(payout)} BNB`}</Text>
+            <Text>{`${formatVlx(payout)} VLX`}</Text>
             <Text fontSize="12px" color="textSubtle">
-              {`~$${formatBnb(bnbBusdPrice.times(payout).toNumber())}`}
+              {`~$${formatVlx(vlxVusdtPrice.times(payout).toNumber())}`}
             </Text>
           </Box>
         </Flex>

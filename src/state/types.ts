@@ -214,7 +214,7 @@ export interface PredictionUser {
   address: string
   block: number
   totalBets: number
-  totalBNB: number
+  totalVLX: number
 }
 
 export interface RoundData {

@@ -6,7 +6,7 @@ BigNumber.config({
   DECIMAL_PLACES: 80,
 })
 
-export const BSC_BLOCK_TIME = 3
+export const VELAS_BLOCK_TIME = 3
 
 // WAGYU_PER_BLOCK details
 // 40 WAGYU is minted per block
@@ -16,8 +16,8 @@ export const BSC_BLOCK_TIME = 3
 // WAGYU_PER_BLOCK in config/index.ts = 40 as we only change the amount sent to the burn pool which is effectively a farm.
 // WAGYU/Block in src/views/Home/components/WagyuStats.tsx = 20 (40 - Amount sent to burn pool)
 
-export const WAGYU_PER_BLOCK = new BigNumber(40)
-export const BLOCKS_PER_YEAR = new BigNumber((60 / BSC_BLOCK_TIME) * 60 * 24 * 365) // 10512000
+export const WAGYU_PER_BLOCK = new BigNumber(0.002)
+export const BLOCKS_PER_YEAR = new BigNumber((60 / VELAS_BLOCK_TIME) * 60 * 24 * 365) // 10512000
 export const WAGYU_PER_YEAR = WAGYU_PER_BLOCK.times(BLOCKS_PER_YEAR)
 export const BASE_URL = 'https://wagyuswap.finance'
 export const BASE_EXCHANGE_URL = 'https://exchange.wagyuswap.finance'

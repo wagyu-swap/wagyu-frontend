@@ -51,8 +51,8 @@ export const usePollFarmsData = (includeArchive = false) => {
 
 /**
  * Fetches the "core" farm data used globally
- * 251 = WAGYU-BNB LP
- * 252 = VUSDT-BNB LP
+ * 251 = WAGYU-VLX LP
+ * 252 = VUSDT-VLX LP
  */
 export const usePollCoreFarmData = () => {
   const dispatch = useAppDispatch()
@@ -326,12 +326,12 @@ export const useAchievements = () => {
 }
 
 export const usePriceVlxVusdt = (): BigNumber => {
-  const vlxVusdtFarm = useFarmFromPid(252)
+  const vlxVusdtFarm = useFarmFromPid(3)
   return new BigNumber(vlxVusdtFarm.quoteToken.vusdtPrice)
 }
 
 export const usePriceWagyuVusdt = (): BigNumber => {
-  const wagyuVusdtFarm = useFarmFromPid(251)
+  const wagyuVusdtFarm = useFarmFromPid(2)
   return new BigNumber(wagyuVusdtFarm.token.vusdtPrice)
 }
 

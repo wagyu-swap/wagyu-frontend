@@ -46,7 +46,7 @@ export const sousStake = async (sousChefContract, amount, decimals = 18, account
     })
 }
 
-export const sousStakeBnb = async (sousChefContract, amount, account) => {
+export const sousStakeVlx = async (sousChefContract, amount, account) => {
   return sousChefContract.methods
     .deposit()
     .send({
@@ -122,7 +122,7 @@ export const soushHarvest = async (sousChefContract, account) => {
     })
 }
 
-export const soushHarvestBnb = async (sousChefContract, account) => {
+export const soushHarvestVlx = async (sousChefContract, account) => {
   return sousChefContract.methods
     .deposit()
     .send({ from: account, gas: DEFAULT_GAS_LIMIT, value: BIG_ZERO })
@@ -132,7 +132,7 @@ export const soushHarvestBnb = async (sousChefContract, account) => {
 }
 
 const chainId = parseInt(process.env.REACT_APP_CHAIN_ID, 10)
-const wagyuVlxPid = 251
+const wagyuVlxPid = 1
 const wagyuVlxFarm = farms.find((farm) => farm.pid === wagyuVlxPid)
 
 const WAGYU_TOKEN = new Token(chainId, getWagyuAddress(), 18)

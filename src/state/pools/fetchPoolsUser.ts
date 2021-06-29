@@ -9,48 +9,48 @@ import { getWeb3NoAccount } from 'utils/web3'
 import BigNumber from 'bignumber.js'
 
 // Pool 0, Wagyu / Wagyu is a different kind of contract (master chef)
-// BNB pools use the native BNB token (wrapping ? unwrapping is done at the contract level)
-const nonBnbPools = poolsConfig.filter((p) => p.stakingToken.symbol !== 'BNB')
-const bnbPools = poolsConfig.filter((p) => p.stakingToken.symbol === 'BNB')
+// VLX pools use the native VLX token (wrapping ? unwrapping is done at the contract level)
+const nonVlxPools = poolsConfig.filter((p) => p.stakingToken.symbol !== 'VLX')
+const vlxPools = poolsConfig.filter((p) => p.stakingToken.symbol === 'VLX')
 const nonMasterPools = poolsConfig.filter((p) => p.sousId !== 0)
 const web3 = getWeb3NoAccount()
 const masterChefContract = new web3.eth.Contract(masterChefABI as unknown as AbiItem, getMasterChefAddress())
 
 export const fetchPoolsAllowance = async (account) => {
-  const calls = nonBnbPools.map((p) => ({
+  const calls = nonVlxPools.map((p) => ({
     address: getAddress(p.stakingToken.address),
     name: 'allowance',
     params: [account, getAddress(p.contractAddress)],
   }))
 
   const allowances = await multicall(erc20ABI, calls)
-  return nonBnbPools.reduce(
+  return nonVlxPools.reduce(
     (acc, pool, index) => ({ ...acc, [pool.sousId]: new BigNumber(allowances[index]).toJSON() }),
     {},
   )
 }
 
 export const fetchUserBalances = async (account) => {
-  // Non BNB pools
-  const calls = nonBnbPools.map((p) => ({
+  // Non VLX pools
+  const calls = nonVlxPools.map((p) => ({
     address: getAddress(p.stakingToken.address),
     name: 'balanceOf',
     params: [account],
   }))
   const tokenBalancesRaw = await multicall(erc20ABI, calls)
-  const tokenBalances = nonBnbPools.reduce(
+  const tokenBalances = nonVlxPools.reduce(
     (acc, pool, index) => ({ ...acc, [pool.sousId]: new BigNumber(tokenBalancesRaw[index]).toJSON() }),
     {},
   )
 
-  // BNB pools
-  const bnbBalance = await web3.eth.getBalance(account)
-  const bnbBalances = bnbPools.reduce(
-    (acc, pool) => ({ ...acc, [pool.sousId]: new BigNumber(bnbBalance).toJSON() }),
+  // VLX pools
+  const vlxBalance = await web3.eth.getBalance(account)
+  const vlxBalances = vlxPools.reduce(
+    (acc, pool) => ({ ...acc, [pool.sousId]: new BigNumber(vlxBalance).toJSON() }),
     {},
   )
 
-  return { ...tokenBalances, ...bnbBalances }
+  return { ...tokenBalances, ...vlxBalances }
 }
 
 export const fetchUserStakeBalances = async (account) => {

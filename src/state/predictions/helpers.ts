@@ -63,7 +63,7 @@ export const transformBetResponse = (betResponse: BetResponse): Bet => {
       address: betResponse.user.address,
       block: numberOrNull(betResponse.user.block),
       totalBets: numberOrNull(betResponse.user.totalBets),
-      totalBNB: numberOrNull(betResponse.user.totalBNB),
+      totalVLX: numberOrNull(betResponse.user.totalVLX),
     },
   } as Bet
 

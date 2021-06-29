@@ -82,8 +82,8 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, wagyuPrice, account 
 
   const [showExpandableSection, setShowExpandableSection] = useState(false)
 
-  // We assume the token name is coin pair + lp e.g. WAGYU-BNB LP, LINK-BNB LP,
-  // NAR-WAGYU LP. The images should be wagyu-vlx.svg, link-bnb.svg, nar-cake.svg
+  // We assume the token name is coin pair + lp e.g. WAGYU-VLX LP, LINK-VLX LP,
+  // NAR-WAGYU LP. The images should be wagyu-vlx.svg, link-vlx.svg, nar-cake.svg
   const farmImage = farm.lpSymbol.split(' ')[0].toLocaleLowerCase()
 
   const totalValueFormatted =
