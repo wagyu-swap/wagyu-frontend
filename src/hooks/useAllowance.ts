@@ -21,7 +21,7 @@ export const useLotteryAllowance = () => {
     }
 
     if (account) {
-      fetchAllowance()
+      fetchAllowance().then()
     }
   }, [account, wagyuContract, fastRefresh])
 
@@ -44,7 +44,7 @@ export const useIfoAllowance = (tokenContract: Contract, spenderAddress: string,
     }
 
     if (account) {
-      fetch()
+      fetch().then()
     }
   }, [account, spenderAddress, tokenContract, dependency])
 

@@ -80,7 +80,7 @@ const ProfileCreationProvider: React.FC = ({ children }) => {
     }
 
     if (account) {
-      fetchData()
+      fetchData().then()
     }
 
     return () => {

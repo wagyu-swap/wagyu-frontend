@@ -113,7 +113,7 @@ export const useCheckVaultApprovalStatus = () => {
       }
     }
 
-    checkApprovalStatus()
+    checkApprovalStatus().then()
   }, [account, wagyuContract, wagyuVaultContract, lastUpdated])
 
   return { isVaultApproved, setLastUpdated }

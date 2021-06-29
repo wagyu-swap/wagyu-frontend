@@ -50,7 +50,7 @@ export const useMaxNumber = () => {
 
   useEffect(() => {
     if (lotteryContract) {
-      fetchMax()
+      fetchMax().then()
     }
   }, [lotteryContract, fetchMax])
 

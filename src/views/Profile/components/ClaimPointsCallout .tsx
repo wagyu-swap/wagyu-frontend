@@ -25,7 +25,7 @@ const ClaimPointsCallout = () => {
     }
 
     if (account) {
-      fetchIfoClaims()
+      fetchIfoClaims().then()
     }
   }, [account, dispatch, setClaimableAchievement])
 

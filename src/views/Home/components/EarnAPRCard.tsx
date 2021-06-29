@@ -44,8 +44,7 @@ const EarnAPRCard = () => {
         setIsFetchingFarmData(false)
       }
     }
-
-    fetchFarmData()
+    fetchFarmData().then();
   }, [dispatch, setIsFetchingFarmData])
 
   const highestApr = useMemo(() => {

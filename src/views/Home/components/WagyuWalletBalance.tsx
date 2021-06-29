@@ -8,13 +8,13 @@ import { getBalanceNumber } from 'utils/formatBalance'
 import { usePriceWagyuVusdt } from 'state/hooks'
 import { BigNumber } from 'bignumber.js'
 import CardValue from './CardValue'
-import CardBusdValue from './CardBusdValue'
+import CardVusdtValue from './CardVusdtValue'
 
 const WagyuWalletBalance = () => {
   const { t } = useTranslation()
   const { balance: wagyuBalance } = useTokenBalance(getWagyuAddress())
   const wagyuPriceVusdt = usePriceWagyuVusdt()
-  const busdBalance = new BigNumber(getBalanceNumber(wagyuBalance)).multipliedBy(wagyuPriceVusdt).toNumber()
+  const vusdtBalance = new BigNumber(getBalanceNumber(wagyuBalance)).multipliedBy(wagyuPriceVusdt).toNumber()
   const { account } = useWeb3React()
 
   if (!account) {
@@ -28,7 +28,7 @@ const WagyuWalletBalance = () => {
   return (
     <>
       <CardValue value={getBalanceNumber(wagyuBalance)} decimals={4} fontSize="24px" lineHeight="36px" />
-      {wagyuPriceVusdt.gt(0) ? <CardBusdValue value={busdBalance} /> : <br />}
+      {wagyuPriceVusdt.gt(0) ? <CardVusdtValue value={vusdtBalance} /> : <br />}
     </>
   )
 }

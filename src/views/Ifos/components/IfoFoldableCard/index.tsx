@@ -137,7 +137,7 @@ const IfoFoldableCard: React.FC<IfoFoldableCardProps> = ({ ifo, publicIfoData, w
     }
 
     if (account) {
-      checkAllowance()
+      checkAllowance().then()
     }
   }, [account, raisingTokenContract, contract, setEnableStatus])
 

@@ -32,7 +32,7 @@ const Lottery: React.FC = () => {
     }
 
     if (lotteryContract) {
-      getInitialLotteryIndex()
+      getInitialLotteryIndex().then()
     }
   }, [lotteryContract])
 

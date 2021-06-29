@@ -27,7 +27,7 @@ const useTickets = (lotteryNumber = null) => {
     }
 
     if (account && lotteryContract && ticketsContract) {
-      fetchBalance()
+      fetchBalance().then()
     }
   }, [account, lotteryContract, ticketsContract, fastRefresh, lotteryNumber])
 
@@ -46,7 +46,7 @@ export const useTotalRewards = () => {
     }
 
     if (lotteryContract) {
-      fetchBalance()
+      fetchBalance().then()
     }
   }, [lotteryContract, fastRefresh])
 
@@ -70,7 +70,7 @@ export const useTotalClaim = () => {
 
   useEffect(() => {
     if (account && lotteryContract && ticketsContract) {
-      fetchBalance()
+      fetchBalance().then()
     }
   }, [account, fetchBalance, lotteryContract, ticketsContract, lastUpdated])
 
@@ -89,7 +89,7 @@ export const useWinningNumbers = () => {
     }
 
     if (lotteryContract) {
-      fetchBalance()
+      fetchBalance().then()
     }
   }, [fastRefresh, lotteryContract, setWinningNumbers])
 
@@ -108,7 +108,7 @@ export const useMatchingRewardLength = (numbers) => {
     }
 
     if (lotteryContract) {
-      fetchBalance()
+      fetchBalance().then()
     }
   }, [lotteryContract, numbers, fastRefresh])
 

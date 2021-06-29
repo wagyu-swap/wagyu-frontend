@@ -76,7 +76,7 @@ const useGetPublicIfoData = (ifo: Ifo): PublicIfoData => {
   }, [contract, currentBlock, releaseBlockNumber])
 
   useEffect(() => {
-    fetchIfoData()
+    fetchIfoData().then()
   }, [fetchIfoData])
 
   return { ...state, currencyPriceInUSD: lpTokenPriceInUsd, fetchIfoData }

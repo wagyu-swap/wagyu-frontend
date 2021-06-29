@@ -4,7 +4,7 @@ import { provider as ProviderType } from 'web3-core'
 import BigNumber from 'bignumber.js'
 import { Button, Flex, Text } from '@wagyu-swap-libs/uikit'
 import { getAddress } from 'utils/addressHelpers'
-import { getBep20Contract } from 'utils/contractHelpers'
+import { getVls20Contract } from 'utils/contractHelpers'
 import { useAppDispatch } from 'state'
 import { fetchFarmUserDataAsync } from 'state/farms'
 import { Farm } from 'state/types'
@@ -49,7 +49,7 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, account, addLiquidi
   const web3 = useWeb3()
   const dispatch = useAppDispatch()
 
-  const lpContract = getBep20Contract(lpAddress, web3)
+  const lpContract = getVls20Contract(lpAddress, web3)
 
   const { onApprove } = useApprove(lpContract)
 

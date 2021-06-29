@@ -34,7 +34,7 @@ const GlobalCheckClaimStatus: React.FC<GlobalCheckClaimStatusProps> = ({ exclude
 
     // Wait until we have a profile
     if (account && profile) {
-      fetchClaimStatus()
+      fetchClaimStatus().then()
     }
   }, [easterNftContract, account, profile, setIsClaimable])
 

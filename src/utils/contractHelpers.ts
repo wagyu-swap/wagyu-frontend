@@ -30,7 +30,7 @@ import profileABI from 'config/abi/wagyuProfile.json'
 import wagyuRabbitsAbi from 'config/abi/wagyuRabbits.json'
 import bunnyFactoryAbi from 'config/abi/bunnyFactory.json'
 import bunnySpecialAbi from 'config/abi/bunnySpecial.json'
-import bep20Abi from 'config/abi/erc20.json'
+import vls20Abi from 'config/abi/erc20.json'
 import erc721Abi from 'config/abi/erc721.json'
 import lpTokenAbi from 'config/abi/lpToken.json'
 import wagyuAbi from 'config/abi/wagyu.json'
@@ -62,8 +62,8 @@ const getContract = (abi: any, address: string, web3?: Web3, account?: string) =
   })
 }
 
-export const getBep20Contract = (address: string, web3?: Web3) => {
-  return getContract(bep20Abi, address, web3)
+export const getVls20Contract = (address: string, web3?: Web3) => {
+  return getContract(vls20Abi, address, web3)
 }
 export const getErc721Contract = (address: string, web3?: Web3) => {
   return getContract(erc721Abi, address, web3)

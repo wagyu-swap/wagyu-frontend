@@ -35,7 +35,7 @@ const useGetProfileCosts = () => {
       }
     }
 
-    fetchCosts()
+    fetchCosts().then()
   }, [setCosts, toastError, t])
 
   return costs

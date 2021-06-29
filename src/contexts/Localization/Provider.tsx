@@ -43,7 +43,7 @@ export const LanguageProvider: React.FC = ({ children }) => {
       }))
     }
 
-    fetchInitialLocales()
+    fetchInitialLocales().then()
   }, [setState])
 
   const setLanguage = async (language: Language) => {

@@ -27,7 +27,7 @@ export const useCanClaim = () => {
     }
 
     if (account) {
-      fetchClaimStatus()
+      fetchClaimStatus().then()
     }
   }, [account, refresh, setCanClaim])
 

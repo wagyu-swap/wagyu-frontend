@@ -173,7 +173,7 @@ const TradingCompetition = () => {
         canClaimNFT: false,
       })
     }
-    fetchCompetitionInfoContract()
+    fetchCompetitionInfoContract().then()
   }, [account, registrationSuccessful, claimSuccessful, tradingCompetitionContract])
 
   useEffect(() => {
@@ -184,7 +184,7 @@ const TradingCompetition = () => {
     }
     // If user has not registered, user trading information will not be displayed and should not be fetched
     if (account && userTradingInformation.hasRegistered) {
-      fetchUserTradingStats()
+      fetchUserTradingStats().then()
     }
   }, [account, userTradingInformation, profileApiUrl])
 
@@ -209,18 +209,18 @@ const TradingCompetition = () => {
       setTeam1LeaderboardInformation((prevState) => {
         return { ...prevState, leaderboardData: data }
       }),
-    )
+    ).then()
     fetchTeamsLeaderboardStats(2, (data) =>
       setTeam2LeaderboardInformation((prevState) => {
         return { ...prevState, leaderboardData: data }
       }),
-    )
+    ).then()
     fetchTeamsLeaderboardStats(3, (data) =>
       setTeam3LeaderboardInformation((prevState) => {
         return { ...prevState, leaderboardData: data }
       }),
-    )
-    fetchGlobalLeaderboardStats()
+    ).then()
+    fetchGlobalLeaderboardStats().then()
   }, [profileApiUrl])
 
   // Don't hide when loading. Hide if the account is connected && the user hasn't registered && the competition is live or finished

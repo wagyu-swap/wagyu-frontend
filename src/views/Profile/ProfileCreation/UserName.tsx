@@ -167,7 +167,7 @@ const UserName: React.FC = () => {
     }
 
     if (account) {
-      fetchUser()
+      fetchUser().then()
     }
   }, [account, setExistingUserState, setIsValid, setMessage, actions, toastError, t])
 

@@ -51,8 +51,8 @@ export const usePollFarmsData = (includeArchive = false) => {
 
 /**
  * Fetches the "core" farm data used globally
- * 251 = WAGYU-VLX LP
- * 252 = VUSDT-VLX LP
+ * 1 = WAGYU-VLX LP
+ * 3 = VUSDT-VLX LP
  */
 export const usePollCoreFarmData = () => {
   const dispatch = useAppDispatch()
@@ -60,7 +60,7 @@ export const usePollCoreFarmData = () => {
   const web3 = getWeb3NoAccount()
 
   useEffect(() => {
-    dispatch(fetchFarmsPublicDataAsync([251, 252]))
+    dispatch(fetchFarmsPublicDataAsync([1, 2, 3]))
   }, [dispatch, fastRefresh, web3])
 }
 
@@ -114,20 +114,20 @@ export const useFarmFromTokenSymbol = (tokenSymbol: string, preferredQuoteTokens
 }
 
 // Return the base token price for a farm, from a given pid
-export const useBusdPriceFromPid = (pid: number): BigNumber => {
+export const useVusdtPriceFromPid = (pid: number): BigNumber => {
   const farm = useFarmFromPid(pid)
   return farm && new BigNumber(farm.token.vusdtPrice)
 }
 
-export const useBusdPriceFromToken = (tokenSymbol: string): BigNumber => {
+export const useVusdtPriceFromToken = (tokenSymbol: string): BigNumber => {
   const tokenFarm = useFarmFromTokenSymbol(tokenSymbol)
-  const tokenPrice = useBusdPriceFromPid(tokenFarm?.pid)
+  const tokenPrice = useVusdtPriceFromPid(tokenFarm?.pid)
   return tokenPrice
 }
 
 export const useLpTokenPrice = (symbol: string) => {
   const farm = useFarmFromLpSymbol(symbol)
-  const farmTokenPriceInUsd = useBusdPriceFromPid(farm.pid)
+  const farmTokenPriceInUsd = useVusdtPriceFromPid(farm.pid)
   let lpTokenPrice = BIG_ZERO
 
   if (farm.lpTotalSupply && farm.lpTotalInQuoteToken) {
@@ -156,7 +156,7 @@ export const useFetchPublicPoolsData = () => {
       dispatch(fetchPoolsPublicDataAsync(blockNumber))
     }
 
-    fetchPoolsPublicData()
+    fetchPoolsPublicData().then()
     dispatch(fetchPoolsStakingLimitsAsync())
   }, [dispatch, slowRefresh, web3])
 }

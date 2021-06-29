@@ -7,7 +7,7 @@ import { BigNumber } from 'bignumber.js'
 import styled from 'styled-components'
 import { useTranslation } from 'contexts/Localization'
 import CardValue from './CardValue'
-import CardBusdValue from './CardBusdValue'
+import CardVusdtValue from './CardVusdtValue'
 
 const Block = styled.div`
   margin-bottom: 24px;
@@ -22,7 +22,7 @@ const WagyuWinnings: React.FC<WagyuWinningsProps> = ({ claimAmount }) => {
   const { account } = useWeb3React()
   const wagyuAmount = getBalanceNumber(claimAmount)
   const wagyuPriceVusdt = usePriceWagyuVusdt()
-  const claimAmountBusd = new BigNumber(wagyuAmount).multipliedBy(wagyuPriceVusdt).toNumber()
+  const claimAmountVusdt = new BigNumber(wagyuAmount).multipliedBy(wagyuPriceVusdt).toNumber()
 
   if (!account) {
     return (
@@ -35,7 +35,7 @@ const WagyuWinnings: React.FC<WagyuWinningsProps> = ({ claimAmount }) => {
   return (
     <Block>
       <CardValue value={wagyuAmount} lineHeight="1.5" />
-      {wagyuPriceVusdt.gt(0) && <CardBusdValue value={claimAmountBusd} decimals={2} />}
+      {wagyuPriceVusdt.gt(0) && <CardVusdtValue value={claimAmountVusdt} decimals={2} />}
     </Block>
   )
 }

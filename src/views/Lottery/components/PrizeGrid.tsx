@@ -4,7 +4,7 @@ import { useTranslation } from 'contexts/Localization'
 import { Heading, Text } from '@wagyu-swap-libs/uikit'
 import { BigNumber } from 'bignumber.js'
 import { usePriceWagyuVusdt } from 'state/hooks'
-import CardBusdValue from '../../Home/components/CardBusdValue'
+import CardVusdtValue from '../../Home/components/CardVusdtValue'
 
 export interface PrizeGridProps {
   lotteryPrizeAmount?: number
@@ -85,7 +85,7 @@ const PrizeGrid: React.FC<PrizeGridProps> = ({
       <GridItem>
         <RightAlignedHeading scale="md">
           {fourMatchesAmount.toLocaleString()}
-          {!pastDraw && wagyuVusdtPrice.gt(0) && <CardBusdValue value={getWagyuVusdtValue(fourMatchesAmount)} />}
+          {!pastDraw && wagyuVusdtPrice.gt(0) && <CardVusdtValue value={getWagyuVusdtValue(fourMatchesAmount)} />}
         </RightAlignedHeading>
       </GridItem>
       {/* 3 matches row */}
@@ -100,7 +100,7 @@ const PrizeGrid: React.FC<PrizeGridProps> = ({
       <GridItem>
         <RightAlignedText>
           {threeMatchesAmount.toLocaleString()}
-          {!pastDraw && wagyuVusdtPrice.gt(0) && <CardBusdValue value={getWagyuVusdtValue(threeMatchesAmount)} />}
+          {!pastDraw && wagyuVusdtPrice.gt(0) && <CardVusdtValue value={getWagyuVusdtValue(threeMatchesAmount)} />}
         </RightAlignedText>
       </GridItem>
       {/* 2 matches row */}
@@ -115,7 +115,7 @@ const PrizeGrid: React.FC<PrizeGridProps> = ({
       <GridItem>
         <RightAlignedText>
           {twoMatchesAmount.toLocaleString()}
-          {!pastDraw && wagyuVusdtPrice.gt(0) && <CardBusdValue value={getWagyuVusdtValue(twoMatchesAmount)} />}
+          {!pastDraw && wagyuVusdtPrice.gt(0) && <CardVusdtValue value={getWagyuVusdtValue(twoMatchesAmount)} />}
         </RightAlignedText>
       </GridItem>
       {/* Burn row */}

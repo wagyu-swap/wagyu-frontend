@@ -2,7 +2,7 @@ import React from 'react'
 import { Card, CardBody, Heading, Text } from '@wagyu-swap-libs/uikit'
 import styled from 'styled-components'
 import { getBalanceNumber } from 'utils/formatBalance'
-import { useTotalSupply, useBurnedBalance } from 'hooks/useTokenBalance'
+import { useTotalSupply, useBurnedBalance, useWagyuPerBlock } from 'hooks/useTokenBalance'
 import { useTranslation } from 'contexts/Localization'
 import { getWagyuAddress } from 'utils/addressHelpers'
 import CardValue from './CardValue'
@@ -25,6 +25,8 @@ const WagyuStats = () => {
   const totalSupply = useTotalSupply()
   const burnedBalance = getBalanceNumber(useBurnedBalance(getWagyuAddress()))
   const wagyuSupply = totalSupply ? getBalanceNumber(totalSupply) - burnedBalance : 0
+  const amountPerBlock = useWagyuPerBlock()
+  const wagyuPerBlock = amountPerBlock ? getBalanceNumber(amountPerBlock) : 0;
 
   return (
     <StyledWagyuStats>
@@ -42,7 +44,7 @@ const WagyuStats = () => {
         </Row>
         <Row>
           <Text fontSize="14px">{t('New Wagyu/block')}</Text>
-          <CardValue fontSize="14px" decimals={0} value={20} />
+          <CardValue fontSize="14px" decimals={3} value={wagyuPerBlock} />
         </Row>
       </CardBody>
     </StyledWagyuStats>

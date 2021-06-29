@@ -34,7 +34,7 @@ const useBlockCountdown = (blockNumber: number) => {
       }
     }
 
-    startCountdown()
+    startCountdown().then()
 
     return () => {
       clearInterval(timer.current)

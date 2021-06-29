@@ -26,7 +26,7 @@ export const useGetStats = () => {
       }
     }
 
-    fetchData()
+    fetchData().then()
   }, [setData])
 
   return data

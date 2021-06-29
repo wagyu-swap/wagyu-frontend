@@ -1,6 +1,6 @@
 import farms from 'config/constants/farms'
 import { Farm } from 'state/types'
-import { getBep20Contract, getLpContract } from 'utils/contractHelpers'
+import { getVls20Contract, getLpContract } from 'utils/contractHelpers'
 
 const farmsToTest: [number, Farm][] = farms.filter((farm) => farm.pid !== 0).map((farm) => [farm.pid, farm])
 
@@ -32,8 +32,8 @@ describe('Config farms', () => {
   })
 
   it.each(farmsToTest)('Farm %d has non 0 tokens amount', async (pid, farm) => {
-    const tokenContract = getBep20Contract(farm.token.address[56])
-    const quoteTokenContract = getBep20Contract(farm.quoteToken.address[56])
+    const tokenContract = getVls20Contract(farm.token.address[56])
+    const quoteTokenContract = getVls20Contract(farm.quoteToken.address[56])
 
     const tokenAmount = await tokenContract.methods.balanceOf(farm.lpAddresses[56]).call()
     const quoteTokenAmount = await quoteTokenContract.methods.balanceOf(farm.lpAddresses[56]).call()

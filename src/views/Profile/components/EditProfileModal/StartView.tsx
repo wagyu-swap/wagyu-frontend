@@ -63,7 +63,7 @@ const StartPage: React.FC<StartPageProps> = ({ goToApprove, goToChange, goToRemo
     }
 
     if (account) {
-      checkApprovalStatus()
+      checkApprovalStatus().then()
     }
   }, [account, cost, setNeedsApproval, wagyuContract])
 

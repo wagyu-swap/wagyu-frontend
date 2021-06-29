@@ -10,7 +10,7 @@ import ExpandableSectionButton from 'components/ExpandableSectionButton/Expandab
 import { BigNumber } from 'bignumber.js'
 import { usePriceWagyuVusdt } from 'state/hooks'
 import PrizeGrid from '../PrizeGrid'
-import CardBusdValue from '../../../Home/components/CardBusdValue'
+import CardVusdtValue from '../../../Home/components/CardVusdtValue'
 
 const CardHeading = styled.div`
   position: relative;
@@ -84,7 +84,7 @@ const TotalPrizesCard = () => {
                 {t('Total Pot:')}
               </Text>
               <Heading scale="lg">{lotteryPrizeWithCommaSeparators} WAGYU</Heading>
-              {wagyuPrice.gt(0) && <CardBusdValue value={lotteryPrizeAmountVusdt.toNumber()} />}
+              {wagyuPrice.gt(0) && <CardVusdtValue value={lotteryPrizeAmountVusdt.toNumber()} />}
             </PrizeCountWrapper>
           </Left>
           <Right>

@@ -100,7 +100,7 @@ const Predictions = () => {
 
     // Do not start initialization until the first block has been retrieved
     if (initialBlock > 0) {
-      fetchInitialData()
+      fetchInitialData().then()
     }
   }, [initialBlock, dispatch, account])
 

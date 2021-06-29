@@ -8,7 +8,7 @@ import { usePriceWagyuVusdt } from 'state/hooks'
 import styled from 'styled-components'
 import { DEFAULT_TOKEN_DECIMAL } from 'config'
 import CardValue from './CardValue'
-import CardBusdValue from './CardBusdValue'
+import CardVusdtValue from './CardVusdtValue'
 
 const Block = styled.div`
   margin-bottom: 24px;
@@ -26,7 +26,7 @@ const WagyuHarvestBalance = () => {
     return accum + earningNumber.div(DEFAULT_TOKEN_DECIMAL).toNumber()
   }, 0)
   const wagyuPriceUsd = usePriceWagyuVusdt()
-  const earningsBusd = new BigNumber(earningsSum).multipliedBy(wagyuPriceUsd).toNumber()
+  const earningsVusdt = new BigNumber(earningsSum).multipliedBy(wagyuPriceUsd).toNumber()
 
   if (!account) {
     return (
@@ -39,7 +39,7 @@ const WagyuHarvestBalance = () => {
   return (
     <Block>
       <CardValue value={earningsSum} lineHeight="1.5" />
-      {wagyuPriceUsd.gt(0) && <CardBusdValue value={earningsBusd} />}
+      {wagyuPriceUsd.gt(0) && <CardVusdtValue value={earningsVusdt} />}
     </Block>
   )
 }
