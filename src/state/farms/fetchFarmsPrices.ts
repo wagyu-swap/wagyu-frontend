@@ -72,7 +72,7 @@ const getFarmQuoteTokenPrice = (farm: Farm, quoteTokenFarm: Farm, vlxPriceVusdt:
 }
 
 const fetchFarmsPrices = async (farms) => {
-  const vlxVusdtFarm = farms.find((farm: Farm) => farm.pid === 3)
+  const vlxVusdtFarm = farms.find((farm: Farm) => farm.pid === 2)
   const vlxPriceVusdt = vlxVusdtFarm.tokenPriceVsQuote ? BIG_ONE.div(vlxVusdtFarm.tokenPriceVsQuote) : BIG_ZERO
 
   const farmsWithPrices = farms.map((farm) => {

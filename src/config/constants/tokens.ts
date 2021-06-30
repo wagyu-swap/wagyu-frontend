@@ -16,7 +16,16 @@ const tokens = {
     symbol: 'WAGYU',
     address: {
       106: '',
-      111: '0xe6873368B15b4fDFfB85b44C8FcDc0a525128EAc',
+      111: '0x6671266d953426D05E6906a514a1Fa2EA7960fE0',
+    },
+    decimals: 18,
+    projectLink: 'https://wagyuswap.finance/',
+  },
+  sauce: {
+    symbol: 'SAUCE',
+    address: {
+      106: '',
+      111: '0xd800d5A6C820237C2c51c88187b97e4c163A89B9',
     },
     decimals: 18,
     projectLink: 'https://wagyuswap.finance/',
@@ -39,15 +48,15 @@ const tokens = {
     decimals: 18,
     projectLink: 'https://wagyuswap.finance/',
   },
-  sauce: {
-    symbol: 'SAUCE',
+  vbnb: {
+    symbol: 'VBNB',
     address: {
       106: '',
-      111: '0x0b381Ed25738E08A0CA2E061E43C577945f4452f',
+      111: '0x124ab26AC22E88A0E3de160edBb47fD00Eec9a2D',
     },
     decimals: 18,
     projectLink: 'https://wagyuswap.finance/',
-  },
+  }
 }
 
 export default tokens

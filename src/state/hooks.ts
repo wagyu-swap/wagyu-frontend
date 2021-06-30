@@ -60,7 +60,7 @@ export const usePollCoreFarmData = () => {
   const web3 = getWeb3NoAccount()
 
   useEffect(() => {
-    dispatch(fetchFarmsPublicDataAsync([1, 2, 3, 4]))
+    dispatch(fetchFarmsPublicDataAsync([1, 2, 3]))
   }, [dispatch, fastRefresh, web3])
 }
 
@@ -326,13 +326,13 @@ export const useAchievements = () => {
 }
 
 export const usePriceVlxVusdt = (): BigNumber => {
-  const vlxVusdtFarm = useFarmFromPid(3)
+  const vlxVusdtFarm = useFarmFromPid(2)
   return new BigNumber(vlxVusdtFarm.quoteToken.vusdtPrice)
 }
 
 export const usePriceWagyuVusdt = (): BigNumber => {
-  const wagyuVusdtFarm = useFarmFromPid(2)
-  return new BigNumber(wagyuVusdtFarm.token.vusdtPrice)
+  const wagyuVlxFarm = useFarmFromPid(1)
+  return new BigNumber(wagyuVlxFarm.token.vusdtPrice)
 }
 
 // Block
