@@ -13,11 +13,11 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
     items: [
       {
         label: t('Exchange'),
-        href: 'https://exchange.wagyuswap.finance/#/swap',
+        href: 'https://exchange-wagyuswap.herokuapp.com/#/swap',
       },
       {
         label: t('Liquidity'),
-        href: 'https://exchange.wagyuswap.finance/#/pool',
+        href: 'https://exchange-wagyuswap.herokuapp.com/#/pool',
       },
     ],
   },
