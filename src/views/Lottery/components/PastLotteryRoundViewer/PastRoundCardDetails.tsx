@@ -44,8 +44,8 @@ const PastRoundCardDetails: React.FC<PastRoundCardDetailsProps> = ({ data }) => 
         <CardBody>
           <CardHeading>
             <Timestamp timeValue={lotteryDate} />
-            <Heading scale="md" mb="24px">
-              {t('Round #%num%', { num: lotteryNumber })}
+            <Heading size="md" mb="24px">
+              Round #{lotteryNumber}
             </Heading>
             <TopLotteryCardHeading
               valueToDisplay={`${lotteryNumbers[0]}, ${lotteryNumbers[1]}, ${lotteryNumbers[2]}, ${lotteryNumbers[3]}`}
@@ -53,7 +53,10 @@ const PastRoundCardDetails: React.FC<PastRoundCardDetailsProps> = ({ data }) => 
             >
               {t('Winning numbers')}
             </TopLotteryCardHeading>
-            <LotteryCardHeading valueToDisplay={`${poolSize.toLocaleString()} WAGYU`} Icon={WagyuRoundIcon}>
+            <LotteryCardHeading
+              valueToDisplay={t(`${poolSize.toLocaleString()} WAGYU`)}
+              Icon={WagyuRoundIcon}
+            >
               {t('Total prizes')}
             </LotteryCardHeading>
           </CardHeading>

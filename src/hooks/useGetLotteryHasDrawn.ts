@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useLottery } from 'hooks/useContract'
-import { getLotteryStatus } from 'utils/lotteryUtils'
+// import { getLotteryStatus } from 'utils/lotteryUtils'
 
 /**
  * Returns whether or not the current lottery has drawn numbers

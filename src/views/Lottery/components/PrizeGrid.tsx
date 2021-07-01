@@ -75,17 +75,17 @@ const PrizeGrid: React.FC<PrizeGridProps> = ({
       </GridItem>
       {/* 4 matches row */}
       <GridItem>
-        <Heading scale="md">4</Heading>
+        <Heading size="md">4</Heading>
       </GridItem>
       {pastDraw && (
         <PastDrawGridItem>
-          <RightAlignedHeading scale="md">{jackpotMatches}</RightAlignedHeading>
+          <RightAlignedHeading size="md">{jackpotMatches}</RightAlignedHeading>
         </PastDrawGridItem>
       )}
       <GridItem>
-        <RightAlignedHeading scale="md">
+        <RightAlignedHeading size="md">
           {fourMatchesAmount.toLocaleString()}
-          {!pastDraw && wagyuVusdtPrice.gt(0) && <CardVusdtValue value={getWagyuVusdtValue(fourMatchesAmount)} />}
+          {!pastDraw && !wagyuVusdtPrice.eq(0) && <CardVusdtValue value={getWagyuVusdtValue(fourMatchesAmount)} />}
         </RightAlignedHeading>
       </GridItem>
       {/* 3 matches row */}
@@ -100,7 +100,7 @@ const PrizeGrid: React.FC<PrizeGridProps> = ({
       <GridItem>
         <RightAlignedText>
           {threeMatchesAmount.toLocaleString()}
-          {!pastDraw && wagyuVusdtPrice.gt(0) && <CardVusdtValue value={getWagyuVusdtValue(threeMatchesAmount)} />}
+          {!pastDraw && !wagyuVusdtPrice.eq(0) && <CardVusdtValue value={getWagyuVusdtValue(threeMatchesAmount)} />}
         </RightAlignedText>
       </GridItem>
       {/* 2 matches row */}
@@ -115,12 +115,12 @@ const PrizeGrid: React.FC<PrizeGridProps> = ({
       <GridItem>
         <RightAlignedText>
           {twoMatchesAmount.toLocaleString()}
-          {!pastDraw && wagyuVusdtPrice.gt(0) && <CardVusdtValue value={getWagyuVusdtValue(twoMatchesAmount)} />}
+          {!pastDraw && !wagyuVusdtPrice.eq(0) && <CardVusdtValue value={getWagyuVusdtValue(twoMatchesAmount)} />}
         </RightAlignedText>
       </GridItem>
       {/* Burn row */}
       <GridItem marginBottom="0">
-        <Text>{t(pastDraw ? 'Burned' : 'To burn')}:</Text>
+        <Text>{t(`${pastDraw ? 'Burned' : 'To burn'}`)}:</Text>
       </GridItem>
       {pastDraw ? (
         <>

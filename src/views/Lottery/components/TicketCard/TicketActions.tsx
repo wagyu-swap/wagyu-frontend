@@ -26,12 +26,12 @@ const TicketCard: React.FC = () => {
   const { t } = useTranslation()
   const allowance = useLotteryAllowance()
   const lotteryHasDrawn = useGetLotteryHasDrawn()
-  const { balance: wagyuBalance } = useTokenBalance(getWagyuAddress())
+  const wagyuBalance = useTokenBalance(getWagyuAddress())
   const tickets = useTickets()
   const ticketsLength = tickets.length
   const [onPresentMyTickets] = useModal(<MyTicketsModal myTicketNumbers={tickets} from="buy" />)
   const [onPresentApprove] = useModal(<PurchaseWarningModal />)
-  const [onPresentBuy] = useModal(<BuyTicketModal max={wagyuBalance} />)
+  const [onPresentBuy] = useModal(<BuyTicketModal max={wagyuBalance.balance} />)
   const { handleApprove, requestedApproval } = useApproval(onPresentApprove)
 
   const renderLotteryTicketButtons = () => {
@@ -67,7 +67,11 @@ const TicketCard: React.FC = () => {
 
   return (
     <CardActions>
-      {lotteryHasDrawn ? <Button disabled> {t('On sale soon')}</Button> : renderLotteryTicketButtons()}
+      {lotteryHasDrawn ? (
+        <Button disabled> {t('On sale soon')}</Button>
+      ) : (
+        renderLotteryTicketButtons()
+      )}
     </CardActions>
   )
 }

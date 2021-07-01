@@ -5,7 +5,7 @@ import { useTranslation } from 'contexts/Localization'
 
 const Wrapper = styled.div`
   display: flex;
-  margin: 24px 0 24px;
+  margin: 36px 0 28px;
 `
 
 const LegendItem = styled.div`
@@ -18,7 +18,7 @@ const Circle = styled.div<{ isPoolSize?: boolean }>`
   width: 20px;
   height: 20px;
   border-radius: 10px;
-  background-color: ${({ isPoolSize, theme }) => (isPoolSize ? '#7A6EAA' : theme.colors.primary)};
+  background-color: ${({ isPoolSize, theme }) => theme.colors[isPoolSize ? 'textSubtle' : 'primary']};
   margin-right: 6px;
 `
 

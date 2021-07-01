@@ -75,17 +75,19 @@ const BuyTicketModal: React.FC<BuyTicketModalProps> = ({ max, onDismiss }) => {
         onSelectMax={handleSelectMax}
         onChange={handleChange}
         max={fullBalance}
-        symbol={t('Ticket').toUpperCase()}
+        symbol="TICKET"
         availableSymbol="WAGYU"
       />
       <div>
-        <Tips>{t('1 Ticket = %lotteryPrice% WAGYU', { lotteryPrice: LOTTERY_TICKET_PRICE })}</Tips>
+        <Tips>{t(`1 Ticket = ${LOTTERY_TICKET_PRICE} WAGYU`, { num: LOTTERY_TICKET_PRICE })}</Tips>
       </div>
       <div>
         <Announce>
-          {t('Ticket purchases are final. Your WAGYU cannot be returned to you after buying tickets.')}
+          {t(
+            'Ticket purchases are final. Your WAGYU cannot be returned to you after buying tickets.',
+          )}
         </Announce>
-        <Final>{t('You will spend: %num% WAGYU', { num: wagyuCosts(val) })}</Final>
+        <Final>{t(`You will spend: ${wagyuCosts(val)} WAGYU`)}</Final>
       </div>
       <ModalActions>
         <Button width="100%" variant="secondary" onClick={onDismiss}>

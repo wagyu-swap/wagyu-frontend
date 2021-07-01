@@ -6,10 +6,9 @@ import UnlockButton from 'components/UnlockButton'
 
 const StyledCardBody = styled(CardBody)`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  max-height: 196px;
 `
 
 const StyledHeading = styled(Heading)`
@@ -32,10 +31,8 @@ const UnlockWalletCard = () => {
         <IconWrapper>
           <Ticket />
         </IconWrapper>
-        <div>
-          <StyledHeading scale="md">{t('Unlock wallet to access lottery')}</StyledHeading>
-          <UnlockButton />
-        </div>
+        <StyledHeading size="md">{t('Unlock wallet to access lottery')}</StyledHeading>
+        <UnlockButton />
       </StyledCardBody>
     </Card>
   )

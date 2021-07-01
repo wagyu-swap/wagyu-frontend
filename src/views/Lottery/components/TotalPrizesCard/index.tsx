@@ -56,8 +56,7 @@ const TotalPrizesCard = () => {
   const { account } = useWeb3React()
   const [showFooter, setShowFooter] = useState(false)
   const lotteryPrizeAmount = +getBalanceNumber(useTotalRewards()).toFixed(0)
-  const wagyuPrice = usePriceWagyuVusdt()
-  const lotteryPrizeAmountVusdt = new BigNumber(lotteryPrizeAmount).multipliedBy(wagyuPrice)
+  const lotteryPrizeAmountBusd = new BigNumber(lotteryPrizeAmount).multipliedBy(usePriceWagyuVusdt()).toNumber()
   const lotteryPrizeWithCommaSeparators = lotteryPrizeAmount.toLocaleString()
   const { currentLotteryNumber } = useContext(PastLotteryDataContext)
 
@@ -69,7 +68,7 @@ const TotalPrizesCard = () => {
             {currentLotteryNumber === 0 && <Skeleton height={20} width={56} />}
             {currentLotteryNumber > 0 && (
               <Text fontSize="12px" style={{ fontWeight: 600 }}>
-                {t('Round #%num%', { num: currentLotteryNumber })}
+                {t(`Round #${currentLotteryNumber}`, { num: currentLotteryNumber })}
               </Text>
             )}
           </Flex>
@@ -83,8 +82,8 @@ const TotalPrizesCard = () => {
               <Text fontSize="14px" color="textSubtle">
                 {t('Total Pot:')}
               </Text>
-              <Heading scale="lg">{lotteryPrizeWithCommaSeparators} WAGYU</Heading>
-              {wagyuPrice.gt(0) && <CardVusdtValue value={lotteryPrizeAmountVusdt.toNumber()} />}
+              <Heading size="lg">{lotteryPrizeWithCommaSeparators} WAGYU</Heading>
+              {lotteryPrizeAmountBusd !== 0 && <CardVusdtValue value={lotteryPrizeAmountBusd} />}
             </PrizeCountWrapper>
           </Left>
           <Right>

@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { BaseLayout } from '@wagyu-swap-libs/uikit'
 import PastLotteryRoundViewer from './components/PastLotteryRoundViewer'
 import PastDrawsHistoryCard from './components/PastDrawsHistory/PastDrawsHistoryCard'
-import ClaimPrizesCard from './components/ClaimPrizesCard'
 
 const Cards = styled(BaseLayout)`
   align-items: start;
@@ -39,18 +38,15 @@ const BunnyImageWrapper = styled.div`
 
 const PastDrawsPage: React.FC = () => {
   return (
-    <>
-      <ClaimPrizesCard />
-      <Cards>
-        <PastLotteryRoundViewer />
-        <SecondCardColumnWrapper>
-          <PastDrawsHistoryCard />
-          <BunnyImageWrapper>
-            <img src="/images/wagyu-lottery-bunny.png" alt="lottery bunny" />
-          </BunnyImageWrapper>
-        </SecondCardColumnWrapper>
-      </Cards>
-    </>
+    <Cards>
+      <PastLotteryRoundViewer />
+      <SecondCardColumnWrapper>
+        <PastDrawsHistoryCard />
+        <BunnyImageWrapper>
+          <img src="/images/wagyu-lottery-bunny.png" alt="lottery bunny" />
+        </BunnyImageWrapper>
+      </SecondCardColumnWrapper>
+    </Cards>
   )
 }
 
