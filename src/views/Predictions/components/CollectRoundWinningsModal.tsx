@@ -17,7 +17,7 @@ import {
   ModalCloseButton,
 } from '@wagyu-swap-libs/uikit'
 import { useWeb3React } from '@web3-react/core'
-import { getBscScanTransactionUrl } from 'utils/bscscan'
+import { getVelasScanTransactionUrl } from 'utils/velasScan'
 import { useAppDispatch } from 'state'
 import { usePriceVlxVusdt } from 'state/hooks'
 import { markBetAsCollected } from 'state/predictions'
@@ -82,8 +82,8 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
               {t('Your prizes have been sent to your wallet')}
             </Text>
             {result.transactionHash && (
-              <LinkExternal href={getBscScanTransactionUrl(result.transactionHash)}>
-                {t('View on BscScan')}
+              <LinkExternal href={getVelasScanTransactionUrl(result.transactionHash)}>
+                {t('View on VelasScan')}
               </LinkExternal>
             )}
           </Box>,

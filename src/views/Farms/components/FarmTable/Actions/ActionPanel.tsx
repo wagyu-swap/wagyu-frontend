@@ -4,7 +4,7 @@ import { useTranslation } from 'contexts/Localization'
 import { LinkExternal, Text } from '@wagyu-swap-libs/uikit'
 import { FarmWithStakedValue } from 'views/Farms/components/FarmCard/FarmCard'
 import getLiquidityUrlPathParts from 'utils/getLiquidityUrlPathParts'
-import { getBscScanAddressUrl } from 'utils/bscscan'
+import { getVelasScanAddressUrl } from 'utils/velasScan'
 import { CommunityTag, CoreTag, DualTag } from 'components/Tags'
 
 import HarvestAction from './HarvestAction'
@@ -148,7 +148,7 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
     tokenAddress: token.address,
   })
   const lpAddress = farm.lpAddresses[process.env.REACT_APP_CHAIN_ID]
-  const bsc = getBscScanAddressUrl(lpAddress)
+  const bsc = getVelasScanAddressUrl(lpAddress)
   const info = `https://wagyuswap.info/pair/${lpAddress}`
 
   return (
@@ -156,13 +156,12 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
       <InfoContainer>
         {isActive && (
           <StakeContainer>
-            <StyledLinkExternal href={`https://exchange.wagyuswap.finance/#/add/${liquidityUrlPathParts}`}>
+            <StyledLinkExternal href={`https://exchange-wagyuswap.herokuapp.com/#/add/${liquidityUrlPathParts}`}>
               {t('Get %symbol%', { symbol: lpLabel })}
             </StyledLinkExternal>
           </StakeContainer>
         )}
         <StyledLinkExternal href={bsc}>{t('View Contract')}</StyledLinkExternal>
-        <StyledLinkExternal href={info}>{t('See Pair Info')}</StyledLinkExternal>
         <TagsContainer>
           {farm.isCommunity ? <CommunityTag /> : <CoreTag />}
           {dual ? <DualTag /> : null}

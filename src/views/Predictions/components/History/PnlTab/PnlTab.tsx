@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useWeb3React } from '@web3-react/core'
 import { Box, Flex, Heading, Text, Button, Link, OpenNewIcon } from '@wagyu-swap-libs/uikit'
 import { useTranslation } from 'contexts/Localization'
-import { getBscScanAddressUrl } from 'utils/bscscan'
+import { getVelasScanAddressUrl } from 'utils/velasScan'
 import { useGetCurrentEpoch, usePriceVlxVusdt } from 'state/hooks'
 import { Bet, BetPosition } from 'state/types'
 import { formatVlx, getMultiplier, getPayout } from 'views/Predictions/helpers'
@@ -184,7 +184,7 @@ const PnlTab: React.FC<PnlTabProps> = ({ hasBetHistory, bets }) => {
         <SummaryRow type="entered" summary={summary} vlxVusdtPrice={vlxVusdtPrice} />
 
         <Flex justifyContent="center" mt="24px">
-          <Link href={`${getBscScanAddressUrl(account)}#internaltx`} mb="16px" external>
+          <Link href={`${getVelasScanAddressUrl(account)}#internaltx`} mb="16px" external>
             <Button mt="8px" width="100%">
               {t('View Reclaimed & Won')}
               <OpenNewIcon color="white" ml="4px" />

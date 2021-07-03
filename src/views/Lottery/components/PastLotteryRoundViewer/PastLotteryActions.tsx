@@ -48,7 +48,7 @@ const TicketCard: React.FC<{ contractLink?: string; lotteryNumber?: number }> = 
       <Button disabled={ticketsLength === 0} onClick={onPresentMyTickets} width="100%">
         {t('View your tickets')}
       </Button>
-      <ExternalLinkWrap href={contractLink}>{t('View on BscScan')}</ExternalLinkWrap>
+      <ExternalLinkWrap href={contractLink}>{t('View on VelasScan')}</ExternalLinkWrap>
     </Wrapper>
   )
 }

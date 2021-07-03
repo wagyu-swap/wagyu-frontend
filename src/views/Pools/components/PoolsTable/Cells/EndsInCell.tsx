@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Flex, Link, Skeleton, Text, TimerIcon } from '@wagyu-swap-libs/uikit'
-import { getBscScanBlockCountdownUrl } from 'utils/bscscan'
+import { getVelasScanBlockCountdownUrl } from 'utils/velasScan'
 import { Pool } from 'state/types'
 import { useBlock } from 'state/hooks'
 import Balance from 'components/Balance'
@@ -36,7 +36,7 @@ const EndsInCell: React.FC<FinishCellProps> = ({ pool }) => {
         </Text>
       </Flex>
       <Flex flex="1">
-        <Link external href={getBscScanBlockCountdownUrl(endBlock)} onClick={(e) => e.stopPropagation()}>
+        <Link external href={getVelasScanBlockCountdownUrl(endBlock)} onClick={(e) => e.stopPropagation()}>
           <TimerIcon ml="4px" />
         </Link>
       </Flex>

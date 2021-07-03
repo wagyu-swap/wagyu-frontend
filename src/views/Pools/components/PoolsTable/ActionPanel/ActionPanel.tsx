@@ -14,7 +14,7 @@ import {
   useTooltip,
 } from '@wagyu-swap-libs/uikit'
 import { BASE_URL } from 'config'
-import { getBscScanBlockCountdownUrl } from 'utils/bscscan'
+import { getVelasScanBlockCountdownUrl } from 'utils/velasScan'
 import { useBlock, useWagyuVault } from 'state/hooks'
 import BigNumber from 'bignumber.js'
 import { Pool } from 'state/types'
@@ -171,7 +171,7 @@ const ActionPanel: React.FC<ActionPanelProps> = ({ account, pool, userDataLoaded
       <Flex mb="8px" justifyContent="space-between">
         <Text>{hasPoolStarted ? t('Ends in') : t('Starts in')}:</Text>
         <Flex>
-          <Link external href={getBscScanBlockCountdownUrl(endBlock)}>
+          <Link external href={getVelasScanBlockCountdownUrl(endBlock)}>
             <Balance fontSize="16px" value={blocksToDisplay} decimals={0} color="primary" />
             <Text ml="4px" color="primary" textTransform="lowercase">
               {t('Blocks')}

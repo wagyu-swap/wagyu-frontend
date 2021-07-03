@@ -1,10 +1,10 @@
 import { BASE_VELAS_SCAN_URL } from 'config'
 import {
-  getBscScanAddressUrl,
-  getBscScanTransactionUrl,
-  getBscScanBlockNumberUrl,
-  getBscScanBlockCountdownUrl,
-} from 'utils/bscscan'
+  getVelasScanAddressUrl,
+  getVelasScanTransactionUrl,
+  getVelasScanBlockNumberUrl,
+  getVelasScanBlockCountdownUrl,
+} from 'utils/velasScan'
 
 describe('getBscScanAddressUrl', () => {
   it.each([
@@ -21,7 +21,7 @@ describe('getBscScanAddressUrl', () => {
       `${BASE_VELAS_SCAN_URL}/address/0x3eba95f5493349bbe0cad33eaae05dc6a7e26b90`,
     ],
   ])('returns correct bscscan url given address %s', (address, expected) => {
-    expect(getBscScanAddressUrl(address)).toEqual(expected)
+    expect(getVelasScanAddressUrl(address)).toEqual(expected)
   })
 })
 
@@ -40,7 +40,7 @@ describe('getBscScanTransactionUrl', () => {
       `${BASE_VELAS_SCAN_URL}/tx/0x0d2b5d9f267cf2eaf39a6a5f8b31b72cff368e88b6445578ba082f7b2957646e`,
     ],
   ])('returns correct bscscan url given transaction %s', (tx, expected) => {
-    expect(getBscScanTransactionUrl(tx)).toEqual(expected)
+    expect(getVelasScanTransactionUrl(tx)).toEqual(expected)
   })
 })
 
@@ -49,7 +49,7 @@ describe('getBscScanBlockNumberUrl', () => {
     ['7737334', `${BASE_VELAS_SCAN_URL}/block/7737334`],
     [7737334, `${BASE_VELAS_SCAN_URL}/block/7737334`],
   ])('returns correct bscscan url given block number %s', (block, expected) => {
-    expect(getBscScanBlockNumberUrl(block)).toEqual(expected)
+    expect(getVelasScanBlockNumberUrl(block)).toEqual(expected)
   })
 })
 
@@ -58,6 +58,6 @@ describe('getBscScanBlockCountdownUrl', () => {
     ['7737334', `${BASE_VELAS_SCAN_URL}/block/countdown/7737334`],
     [7737334, `${BASE_VELAS_SCAN_URL}/block/countdown/7737334`],
   ])('returns correct bscscan url given block number %s', (block, expected) => {
-    expect(getBscScanBlockCountdownUrl(block)).toEqual(expected)
+    expect(getVelasScanBlockCountdownUrl(block)).toEqual(expected)
   })
 })
