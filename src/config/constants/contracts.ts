@@ -1,7 +1,7 @@
 export default {
   masterChef: {
     106: '',
-    111: '0x2Af250fe3669728dE617828b23f9347a0c598fFe',
+    111: '0x331ed46B7D69b4B0d52ccbb8B688C76cA86F6F5C',
   },
   sousChef: {
     106: '',
@@ -9,11 +9,11 @@ export default {
   },
   lottery: {
     106: '',
-    111: '0x99c2EcD51d52c036B00130d882Bc65f20Fdecf9f',
+    111: '0xCEB259D972a47749269477D059C0f6953534Cb9c',
   },
   lotteryNFT: {
     106: '',
-    111: '0x8175c10383511b3a1C68f9dB222dc14A19CC950e',
+    111: '0x0b96B358DeDafC39D12ef16560dc5022fAC554b4',
   },
   lotteryV2: {
     106: '',

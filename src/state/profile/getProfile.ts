@@ -54,7 +54,7 @@ const getProfile = async (address: string): Promise<GetProfileResponse> => {
         `profile_${address}`,
         {
           username,
-          avatar: `https://wagyuswap.finance/images/nfts/${nft?.images.sm}`,
+          avatar: `https://wagyuswap.herokuapp.com/images/nfts/${nft?.images.sm}`,
         },
         { domain: 'wagyuswap.finance', secure: true, expires: 30 },
       )

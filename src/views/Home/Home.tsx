@@ -98,7 +98,7 @@ const CTACards = styled(BaseLayout)`
     grid-gap: 32px;
 
     & > div {
-      grid-column: span 4;
+      grid-column: span 6;
     }
   }
 `
@@ -137,7 +137,6 @@ const Home: React.FC = () => {
           </Cards>
           <CTACards>
             <EarnAPRCard />
-            <EarnAssetCard />
             <WinCard />
           </CTACards>
           <Cards>

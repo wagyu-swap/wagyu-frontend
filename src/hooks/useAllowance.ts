@@ -15,13 +15,19 @@ export const useLotteryAllowance = () => {
   const { fastRefresh } = useRefresh()
 
   useEffect(() => {
+    let isSubscribed = true;
     const fetchAllowance = async () => {
       const res = await wagyuContract.methods.allowance(account, getLotteryAddress()).call()
-      setAllowance(new BigNumber(res))
+      if (isSubscribed) {
+        setAllowance(new BigNumber(res))
+      }
     }
 
     if (account) {
       fetchAllowance().then()
+    }
+    return() => {
+      isSubscribed = false
     }
   }, [account, wagyuContract, fastRefresh])
 

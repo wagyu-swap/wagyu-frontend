@@ -4083,10 +4083,10 @@
   resolved "https://registry.yarnpkg.com/@uniswap/v2-core/-/v2-core-1.0.1.tgz#af8f508bf183204779938969e2e54043e147d425"
   integrity sha512-MtybtkUPSyysqLY2U210NBDeCHX+ltHt3oADGdjqoThZaFRDKwM6k1Nb3F0A3hk5hwuQvytFWhrWHOEq6nVJ8Q==
 
-"@wagyu-swap-libs/sdk@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@wagyu-swap-libs/sdk/-/sdk-0.0.2.tgz#38ac76d1e7f9c21023e6c7864215d93ca05a536c"
-  integrity sha512-iPKDlFslUnX687a+ilvdDxwGWgKKPmp+a+czXZ2uWE40uXogxaTpanv2kIzWj7CBQz+A26F/taBtaXZFSqSYhA==
+"@wagyu-swap-libs/sdk@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@wagyu-swap-libs/sdk/-/sdk-0.0.6.tgz#76b01f4a97c47d81c3560d2ff32e0bdec3ffa73d"
+  integrity sha512-0YaMBJFhOUctn/xMFF0ei/c1IEDnIuEhkbQUmgzsDFn8KAfGc6VF2yD5VDUv0ttroVd3K9vy/VBHweP4Nxl7Yw==
   dependencies:
     "@pancakeswap-libs/pancake-swap-core" "^0.1.0"
     big.js "^5.2.2"

@@ -38,7 +38,7 @@ const TicketCard: React.FC = () => {
     if (!allowance.toNumber()) {
       return (
         <>
-          <Button width="100%" disabled>
+          <Button width="100%" style={{ marginRight: '10px' }} disabled>
             {t('View your tickets')}
           </Button>
           <Button width="100%" disabled={requestedApproval} onClick={handleApprove}>

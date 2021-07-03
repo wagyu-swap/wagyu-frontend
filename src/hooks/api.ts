@@ -17,18 +17,9 @@ export const useGetStats = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const response = await fetch('https://openapi.debank.com/v1/protocol?id=bsc_wagyuswap')
-        // const responseData: DeBankTvlResponse = await response.json()
-        // {"id": "bsc_pancakeswap", "chain": "bsc", "name": "PancakeSwap", "site_url": "https://pancakeswap.finance", "logo_url": "https://static.debank.com/image/project/logo_url/bsc_pancakeswap/a4e035cf4495755fddd5ebb6e5657f63.png", "has_supported_portfolio": true, "tvl": 7197010994.253736}
-        setData({
-          id: 'velas_wagyuswap',
-          chain: 'velas',
-          name: 'WagyuSwap',
-          site_url: 'https://wagyuswap.finance',
-          logo_url: '',
-          has_supported_portfolio: true,
-          tvl: 7197010994.253736
-        });
+        const response = await fetch('https://wagyu-api.vercel.app/api/tvl')
+        const responseData: DeBankTvlResponse = await response.json()
+        setData(responseData);
       } catch (error) {
         console.error('Unable to fetch data:', error)
       }

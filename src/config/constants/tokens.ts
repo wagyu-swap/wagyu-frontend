@@ -7,55 +7,55 @@ const tokens = {
     symbol: 'WVLX',
     address: {
       106: '',
-      111: '0xf70A6F553f201Ca0fdb373d6D9A485e488cde961',
+      111: '0x8153DCbdAF8740B6e101C99659613D39Dd697E34',
     },
     decimals: 18,
-    projectLink: 'https://wagyuswap.finance/',
+    projectLink: 'https://wagyuswap.herokuapp.com/',
   },
   wagyu: {
     symbol: 'WAGYU',
     address: {
       106: '',
-      111: '0x6671266d953426D05E6906a514a1Fa2EA7960fE0',
+      111: '0x297170abcFC7AceA729ce128E1326bE125a7F982',
     },
     decimals: 18,
-    projectLink: 'https://wagyuswap.finance/',
+    projectLink: 'https://wagyuswap.herokuapp.com/',
   },
   sauce: {
     symbol: 'SAUCE',
     address: {
       106: '',
-      111: '0xd800d5A6C820237C2c51c88187b97e4c163A89B9',
+      111: '0x9f1E48f5aa7a0356008A7860788616Defa1a91f9',
     },
     decimals: 18,
-    projectLink: 'https://wagyuswap.finance/',
+    projectLink: 'https://wagyuswap.herokuapp.com/',
   },
   vusdt: {
     symbol: 'VUSDT',
     address: {
       106: '',
-      111: '0xEE29a9bE710f08eeA29fa4554bD0f97f0DDa659F',
+      111: '0x9634eB81dDa37C30a2aD79b3000c20FDD98799aF',
     },
     decimals: 18,
-    projectLink: 'https://wagyuswap.finance/',
+    projectLink: 'https://wagyuswap.herokuapp.com/',
   },
   vether: {
     symbol: 'VETHER',
     address: {
       106: '',
-      111: '0x62D0C19C6bc72e0bD68a1e4a34ee0aeA19F3f963',
+      111: '0xc8100b0041e376C6E922f39A1c7270cE12f94F6f',
     },
     decimals: 18,
-    projectLink: 'https://wagyuswap.finance/',
+    projectLink: 'https://wagyuswap.herokuapp.com/',
   },
   vbnb: {
     symbol: 'VBNB',
     address: {
       106: '',
-      111: '0x124ab26AC22E88A0E3de160edBb47fD00Eec9a2D',
+      111: '0xCbe7530E3f9730F7D4A965206A00DC8347662447',
     },
     decimals: 18,
-    projectLink: 'https://wagyuswap.finance/',
+    projectLink: 'https://wagyuswap.herokuapp.com/',
   }
 }
 

@@ -10,7 +10,7 @@ const farms: FarmConfig[] = [
     lpSymbol: 'WAGYU',
     lpAddresses: {
       106: '',
-      111: '0x6671266d953426D05E6906a514a1Fa2EA7960fE0',
+      111: '0x297170abcFC7AceA729ce128E1326bE125a7F982',
     },
     token: tokens.sauce,
     quoteToken: tokens.wvlx,
@@ -20,7 +20,7 @@ const farms: FarmConfig[] = [
     lpSymbol: 'WAGYU-VLX LP',
     lpAddresses: {
       106: '',
-      111: '0x7D0fb97ef63Cfe1Af74a8055A427A99bbAadd94F',
+      111: '0xa6b272aaB652c6d9fE1f53CAD9913c3Aed714073',
     },
     token: tokens.wagyu,
     quoteToken: tokens.wvlx,
@@ -30,7 +30,7 @@ const farms: FarmConfig[] = [
     lpSymbol: 'VUSDT-VLX LP',
     lpAddresses: {
       106: '',
-      111: '0x2103800f23FFAFf4b67Ba5601A7941196b8F8da4',
+      111: '0x3683CA928f69F207C5a5243d8A331777bAA2c0aC',
     },
     token: tokens.vusdt,
     quoteToken: tokens.wvlx,
@@ -40,7 +40,7 @@ const farms: FarmConfig[] = [
     lpSymbol: 'VUSDT-WAGYU LP',
     lpAddresses: {
       106: '',
-      111: '0x075ae4D93Dcd27AA3db4CFa629D7A138deFf1df8',
+      111: '0x8899e8a675E5117acc38Dd4240Bd5968f5284d6C',
     },
     token: tokens.vusdt,
     quoteToken: tokens.wagyu,
@@ -50,7 +50,7 @@ const farms: FarmConfig[] = [
     lpSymbol: 'VETHER-WAGYU LP',
     lpAddresses: {
       106: '',
-      111: '0xaaa2F9546a1a58AB878Fee943f816f8baaf17cB3',
+      111: '0x67C46cA7a14c7aa6bBdC25c0341A2DD1F2eC8757',
     },
     token: tokens.vether,
     quoteToken: tokens.wagyu,
@@ -60,7 +60,7 @@ const farms: FarmConfig[] = [
     lpSymbol: 'VBNB-WAGYU LP',
     lpAddresses: {
       106: '',
-      111: '0x931be9Dd387F335279055568F255f8dBdAb0c31a',
+      111: '0xaBA00887aB1d9213169d1F44430E28cf12D61d68',
     },
     token: tokens.vbnb,
     quoteToken: tokens.wagyu,
