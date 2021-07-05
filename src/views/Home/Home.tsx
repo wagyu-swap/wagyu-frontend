@@ -34,7 +34,7 @@ const Hero = styled.div`
     padding-top: 0;
     padding-left: 24px;
     padding-right: 24px;
-    text-shadow: 0px 7px 5px black;
+    text-shadow: 0px 1px 0px black;
   }
   ${({ theme }) => theme.mediaQueries.xl} {
     display: flex;
@@ -47,7 +47,7 @@ const Hero = styled.div`
     padding-top: 0;
     padding-left: 24px;
     padding-right: 24px;
-    text-shadow: 0px 7px 5px black;
+    text-shadow: 0px 1px 0px black;
   }
 `
 
@@ -116,16 +116,17 @@ const StyledImage = styled(Image)`
 
 const Home: React.FC = () => {
   const { t } = useTranslation()
+  const bold = true;
 
   return (
     <>
       <Hero>
         <StyledImage src="/images/left-wagyu.svg" alt="Wagyu" width={160} height={120} />
         <div>
-          <Heading as="h1" scale="xl" mb="24px" color="secondary">
+          <Heading as="h1" scale="xl" mb="24px" color="invertedContrast">
             {t('WagyuSwap')}
           </Heading>
-          <Text>{t('The #1 AMM and yield farm on Velas Chain.')}</Text>
+          <Text bold={bold} color="invertedContrast">{t('The #1 AMM and yield farm on Velas Chain.')}</Text>
         </div>
         <StyledImage src="/images/right-wagyu.svg" alt="Wagyu" width={160} height={120} />
       </Hero>
