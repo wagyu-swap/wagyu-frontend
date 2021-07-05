@@ -148,7 +148,7 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
     tokenAddress: token.address,
   })
   const lpAddress = farm.lpAddresses[process.env.REACT_APP_CHAIN_ID]
-  const bsc = getVelasScanAddressUrl(lpAddress)
+  const velas = getVelasScanAddressUrl(lpAddress)
   const info = `https://wagyuswap.info/pair/${lpAddress}`
 
   return (
@@ -161,7 +161,7 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
             </StyledLinkExternal>
           </StakeContainer>
         )}
-        <StyledLinkExternal href={bsc}>{t('View Contract')}</StyledLinkExternal>
+        <StyledLinkExternal href={velas}>{t('View Contract')}</StyledLinkExternal>
         <TagsContainer>
           {farm.isCommunity ? <CommunityTag /> : <CoreTag />}
           {dual ? <DualTag /> : null}

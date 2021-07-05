@@ -142,7 +142,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, wagyuPrice, account 
       <ExpandingWrapper expanded={showExpandableSection}>
         <DetailsSection
           removed={removed}
-          bscScanAddress={getVelasScanAddressUrl(farm.lpAddresses[process.env.REACT_APP_CHAIN_ID])}
+          velasScanAddress={getVelasScanAddressUrl(farm.lpAddresses[process.env.REACT_APP_CHAIN_ID])}
           infoAddress={`https://wagyuswap.info/pair/${lpAddress}`}
           totalValueFormatted={totalValueFormatted}
           lpLabel={lpLabel}
