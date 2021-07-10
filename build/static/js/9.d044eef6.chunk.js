@@ -1,2 +1,0 @@
-(this["webpackJsonpwagyu-frontend"]=this["webpackJsonpwagyu-frontend"]||[]).push([[9],{1164:function(n,t,e){"use strict";e.r(t);var s=e(1156);t.default=s.Line}}]);
-//# sourceMappingURL=9.d044eef6.chunk.js.map

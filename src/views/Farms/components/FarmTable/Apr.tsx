@@ -36,8 +36,8 @@ const Container = styled.div`
 `
 
 const AprWrapper = styled.div`
-  min-width: 60px;
   text-align: left;
+  margin-right: 4px;
 `
 
 const Apr: React.FC<AprProps> = ({

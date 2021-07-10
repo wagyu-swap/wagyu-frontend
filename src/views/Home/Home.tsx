@@ -12,7 +12,7 @@ import EarnAssetCard from 'views/Home/components/EarnAssetCard'
 import WinCard from 'views/Home/components/WinCard'
 
 const Hero = styled.div`
-  background-image: url('/images/background.svg');
+  background-image: url('/images/background.png');
   background-position: center top;
   background-repeat: no-repeat;
   align-items: center;
@@ -27,7 +27,7 @@ const Hero = styled.div`
   ${({ theme }) => theme.mediaQueries.lg} {
     display: flex;
     flex-direction: row;    
-    background-image: url('/images/background.svg');
+    background-image: url('/images/background.png');
     background-position: center top;
     background-repeat: no-repeat;
     height: 165px;
@@ -39,7 +39,7 @@ const Hero = styled.div`
   ${({ theme }) => theme.mediaQueries.xl} {
     display: flex;
     flex-direction: row;    
-    background-image: url('/images/background.svg');
+    background-image: url('/images/background.png');
     background-position: center top;
     background-repeat: no-repeat;
     background-size: 100%;
