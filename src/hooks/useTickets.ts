@@ -129,13 +129,19 @@ export const useMatchingRewardLength = (numbers) => {
   const { fastRefresh } = useRefresh()
 
   useEffect(() => {
+    let isSubscribed = true;
     const fetchBalance = async () => {
       const matchedNumbers = await getMatchingRewardLength(lotteryContract, numbers)
-      setMatchingNumbers(matchedNumbers)
+      if (isSubscribed) {
+        setMatchingNumbers(matchedNumbers)
+      }
     }
 
     if (lotteryContract) {
       fetchBalance().then()
+    }
+    return() => {
+      isSubscribed = false
     }
   }, [lotteryContract, numbers, fastRefresh])
 

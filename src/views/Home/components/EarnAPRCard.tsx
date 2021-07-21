@@ -9,6 +9,7 @@ import { useAppDispatch } from 'state'
 import { useFarms, usePriceWagyuVusdt } from 'state/hooks'
 import { fetchFarmsPublicDataAsync, nonArchivedFarms } from 'state/farms'
 import { getFarmApr } from 'utils/apr'
+import { getLotteryAddress } from '../../../utils/addressHelpers'
 
 const StyledFarmStakingCard = styled(Card)`
   margin-left: auto;
@@ -37,14 +38,20 @@ const EarnAPRCard = () => {
 
   // Fetch farm data once to get the max APR
   useEffect(() => {
+    let isSubscribed = true;
     const fetchFarmData = async () => {
       try {
         await dispatch(fetchFarmsPublicDataAsync(nonArchivedFarms.map((nonArchivedFarm) => nonArchivedFarm.pid)))
       } finally {
-        setIsFetchingFarmData(false)
+        if (isSubscribed) {
+          setIsFetchingFarmData(false)
+        }
       }
     }
     fetchFarmData().then();
+    return() => {
+      isSubscribed = false
+    }
   }, [dispatch, setIsFetchingFarmData])
 
   const highestApr = useMemo(() => {
