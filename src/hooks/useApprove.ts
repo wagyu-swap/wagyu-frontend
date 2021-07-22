@@ -38,8 +38,11 @@ export const useSousApprove = (lpContract: Contract, sousId, earningTokenSymbol)
   const sousChefContract = useSousChef(sousId)
 
   const handleApprove = useCallback(async () => {
+    let isSubscribed = true;
     try {
-      setRequestedApproval(true)
+      if (isSubscribed) {
+        setRequestedApproval(true)
+      }
       const tx = await approve(lpContract, sousChefContract, account)
       dispatch(updateUserAllowance(sousId, account))
       if (tx) {
@@ -47,18 +50,25 @@ export const useSousApprove = (lpContract: Contract, sousId, earningTokenSymbol)
           t('Contract Enabled'),
           t('You can now stake in the %symbol% pool!', { symbol: earningTokenSymbol }),
         )
-        setRequestedApproval(false)
+        if (isSubscribed) {
+          setRequestedApproval(false)
+        }
       } else {
         // user rejected tx or didn't go thru
         toastError(
           `${t('Error')}`,
           `${t(`Please try again. Confirm the transaction and make sure you are paying enough gas!`)}`,
         )
-        setRequestedApproval(false)
+        if (isSubscribed) {
+          setRequestedApproval(false)
+        }
       }
     } catch (e) {
       console.error(e)
       toastError('Error', e?.message)
+    }
+    return() => {
+      isSubscribed = false
     }
   }, [account, dispatch, lpContract, sousChefContract, sousId, earningTokenSymbol, t, toastError, toastSuccess])
 
@@ -103,17 +113,25 @@ export const useCheckVaultApprovalStatus = () => {
   const wagyuVaultContract = useWagyuVaultContract()
   const { lastUpdated, setLastUpdated } = useLastUpdated()
   useEffect(() => {
+    let isSubscribed = true
     const checkApprovalStatus = async () => {
       try {
         const response = await wagyuContract.methods.allowance(account, wagyuVaultContract.options.address).call()
         const currentAllowance = new BigNumber(response)
-        setIsVaultApproved(currentAllowance.gt(0))
+        if (isSubscribed) {
+          setIsVaultApproved(currentAllowance.gt(0))
+        }
       } catch (error) {
-        setIsVaultApproved(false)
+        if (isSubscribed) {
+          setIsVaultApproved(false)
+        }
       }
     }
 
     checkApprovalStatus().then()
+    return() => {
+      isSubscribed = false
+    }
   }, [account, wagyuContract, wagyuVaultContract, lastUpdated])
 
   return { isVaultApproved, setLastUpdated }

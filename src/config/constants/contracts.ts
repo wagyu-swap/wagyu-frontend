@@ -3,10 +3,6 @@ export default {
     106: '',
     111: '0x331ed46B7D69b4B0d52ccbb8B688C76cA86F6F5C',
   },
-  sousChef: {
-    106: '',
-    111: '0xd3af5fe61dbaf8f73149bfcfa9fb653ff096029a',
-  },
   lottery: {
     106: '',
     111: '0xCEB259D972a47749269477D059C0f6953534Cb9c',
@@ -57,7 +53,7 @@ export default {
   },
   wagyuVault: {
     106: '',
-    111: '',
+    111: '0xd42ec763748C9B187a7f976C41907921D4897Ac8',
   },
   predictions: {
     106: '',

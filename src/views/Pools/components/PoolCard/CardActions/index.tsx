@@ -22,7 +22,7 @@ interface CardActionsProps {
 const CardActions: React.FC<CardActionsProps> = ({ pool, stakedBalance }) => {
   const { sousId, stakingToken, earningToken, harvest, poolCategory, userData, earningTokenPrice } = pool
   // Pools using native VLX behave differently than pools using a token
-  const isVlxPool = poolCategory === PoolCategory.BINANCE
+  const isVlxPool = poolCategory === PoolCategory.VELAS
   const { t } = useTranslation()
   const allowance = userData?.allowance ? new BigNumber(userData.allowance) : BIG_ZERO
   const stakingTokenBalance = userData?.stakingTokenBalance ? new BigNumber(userData.stakingTokenBalance) : BIG_ZERO

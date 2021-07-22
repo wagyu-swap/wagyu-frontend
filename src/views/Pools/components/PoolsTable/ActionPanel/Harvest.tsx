@@ -40,7 +40,7 @@ const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({
   const formattedBalance = formatNumber(earningTokenBalance, 3, 3)
   const earningsDollarValue = formatNumber(earningTokenDollarBalance)
   const isCompoundPool = sousId === 0
-  const isVlxPool = poolCategory === PoolCategory.BINANCE
+  const isVlxPool = poolCategory === PoolCategory.VELAS
 
   // Auto WAGYU vault calculations
   const {

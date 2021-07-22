@@ -44,7 +44,7 @@ const EarningsCell: React.FC<EarningsCellProps> = ({ pool, account, userDataLoad
   const fullBalance = getFullDisplayBalance(earnings, earningToken.decimals)
   const formattedBalance = formatNumber(earningTokenBalance, 3, 3)
   const earningsDollarValue = formatNumber(earningTokenDollarBalance)
-  const isVlxPool = poolCategory === PoolCategory.BINANCE
+  const isVlxPool = poolCategory === PoolCategory.VELAS
 
   // Auto WAGYU vault calculations
   const {
