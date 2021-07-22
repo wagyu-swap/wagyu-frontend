@@ -1,8 +1,8 @@
-name: Wagyuswap dev deployment - Test, Build & Deploy
+name: Wagyuswap deployment - Test, Build & Deploy
 
 on:
   push:
-    branches: [dev]
+    branches: [staging]
 
 jobs:
   build:
@@ -43,12 +43,12 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: us-east-1
-        AWS_BUCKET_NAME: wagyuswap.com
+        AWS_BUCKET_NAME: staging.wagyuswap.com
         SOURCE: ./build
         TARGET: ""
         WITH_DELETE: true
         WITH_CLOUD_FRONT_INVALIDATION: true
-        AWS_CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.AWS_CF_DISTRIBUTION_ID_DEV }}
+        AWS_CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.AWS_CF_DISTRIBUTION_ID_STAGING }}
         AWS_CLOUDFRONT_INVALIDATION_PATH: "/*"
 
     - name: Update deployment status
