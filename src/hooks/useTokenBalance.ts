@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import BigNumber from 'bignumber.js'
 import { useWeb3React } from '@web3-react/core'
-import { getBep20Contract, getCakeContract } from 'utils/contractHelpers'
+import { getMasterchefContract, getVls20Contract, getWagyuContract } from 'utils/contractHelpers'
 import { BIG_ZERO } from 'utils/bigNumber'
 import useWeb3 from './useWeb3'
 import useRefresh from './useRefresh'
@@ -30,7 +30,7 @@ const useTokenBalance = (tokenAddress: string) => {
 
   useEffect(() => {
     const fetchBalance = async () => {
-      const contract = getBep20Contract(tokenAddress, web3)
+      const contract = getVls20Contract(tokenAddress, web3)
       try {
         const res = await contract.methods.balanceOf(account).call()
         setBalanceState({ balance: new BigNumber(res), fetchStatus: SUCCESS })
@@ -44,7 +44,7 @@ const useTokenBalance = (tokenAddress: string) => {
     }
 
     if (account) {
-      fetchBalance()
+      fetchBalance().then()
     }
   }, [account, tokenAddress, web3, fastRefresh, SUCCESS, FAILED])
 
@@ -57,15 +57,32 @@ export const useTotalSupply = () => {
 
   useEffect(() => {
     async function fetchTotalSupply() {
-      const cakeContract = getCakeContract()
-      const supply = await cakeContract.methods.totalSupply().call()
+      const wagyuContract = getWagyuContract()
+      const supply = await wagyuContract.methods.totalSupply().call()
       setTotalSupply(new BigNumber(supply))
     }
 
-    fetchTotalSupply()
+    fetchTotalSupply().then()
   }, [slowRefresh])
 
   return totalSupply
+}
+
+export const useWagyuPerBlock = () => {
+  const { slowRefresh } = useRefresh()
+  const [wagyuPerBlock, setWagyuPerBlock] = useState<BigNumber>()
+
+  useEffect(() => {
+    async function fetchWagyuPerBlock() {
+      const masterChefContract = getMasterchefContract()
+      const amount= await masterChefContract.methods.wagyuPerBlock().call()
+      setWagyuPerBlock(new BigNumber(amount))
+    }
+
+    fetchWagyuPerBlock().then()
+  }, [slowRefresh])
+
+  return wagyuPerBlock
 }
 
 export const useBurnedBalance = (tokenAddress: string) => {
@@ -75,18 +92,18 @@ export const useBurnedBalance = (tokenAddress: string) => {
 
   useEffect(() => {
     const fetchBalance = async () => {
-      const contract = getBep20Contract(tokenAddress, web3)
+      const contract = getVls20Contract(tokenAddress, web3)
       const res = await contract.methods.balanceOf('0x000000000000000000000000000000000000dEaD').call()
       setBalance(new BigNumber(res))
     }
 
-    fetchBalance()
+    fetchBalance().then()
   }, [web3, tokenAddress, slowRefresh])
 
   return balance
 }
 
-export const useGetBnbBalance = () => {
+export const useGetVlxBalance = () => {
   const [balance, setBalance] = useState(BIG_ZERO)
   const { account } = useWeb3React()
   const { lastUpdated, setLastUpdated } = useLastUpdated()
@@ -99,7 +116,7 @@ export const useGetBnbBalance = () => {
     }
 
     if (account) {
-      fetchBalance()
+      fetchBalance().then()
     }
   }, [account, web3, lastUpdated, setBalance])
 

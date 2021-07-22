@@ -6,7 +6,7 @@ import { FarmWithStakedValue } from 'views/Farms/components/FarmCard/FarmCard'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { useAppDispatch } from 'state'
 import { fetchFarmUserDataAsync } from 'state/farms'
-import { usePriceCakeBusd } from 'state/hooks'
+import { usePriceWagyuVusdt } from 'state/hooks'
 import { useHarvest } from 'hooks/useHarvest'
 import { useTranslation } from 'contexts/Localization'
 import { useCountUp } from 'react-countup'
@@ -19,15 +19,15 @@ interface HarvestActionProps extends FarmWithStakedValue {
 
 const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({ pid, userData, userDataReady }) => {
   const earningsBigNumber = new BigNumber(userData.earnings)
-  const cakePrice = usePriceCakeBusd()
+  const wagyuPrice = usePriceWagyuVusdt()
   let earnings = 0
-  let earningsBusd = 0
+  let earningsVusdt = 0
   let displayBalance = userDataReady ? earnings.toLocaleString() : <Skeleton width={60} />
 
   // If user didn't connect wallet default balance will be 0
   if (!earningsBigNumber.isZero()) {
     earnings = getBalanceNumber(earningsBigNumber)
-    earningsBusd = new BigNumber(earnings).multipliedBy(cakePrice).toNumber()
+    earningsVusdt = new BigNumber(earnings).multipliedBy(wagyuPrice).toNumber()
     displayBalance = earnings.toLocaleString()
   }
 
@@ -38,7 +38,7 @@ const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({ pid, userD
   const { account } = useWeb3React()
   const { countUp, update } = useCountUp({
     start: 0,
-    end: earningsBusd,
+    end: earningsVusdt,
     duration: 1,
     separator: ',',
     decimals: 3,
@@ -46,13 +46,13 @@ const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({ pid, userD
   const updateValue = useRef(update)
 
   useEffect(() => {
-    updateValue.current(earningsBusd)
-  }, [earningsBusd, updateValue])
+    updateValue.current(earningsVusdt)
+  }, [earningsVusdt, updateValue])
 
   return (
     <ActionContainer>
       <ActionTitles>
-        <Title>CAKE </Title>
+        <Title>WAGYU </Title>
         <Subtle>{t('Earned').toUpperCase()}</Subtle>
       </ActionTitles>
       <ActionContent>

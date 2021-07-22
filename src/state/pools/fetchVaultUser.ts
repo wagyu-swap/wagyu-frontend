@@ -1,17 +1,17 @@
 import BigNumber from 'bignumber.js'
-import { getCakeVaultContract } from 'utils/contractHelpers'
+import { getWagyuVaultContract } from 'utils/contractHelpers'
 
-const cakeVaultContract = getCakeVaultContract()
+const wagyuVaultContract = getWagyuVaultContract()
 
 const fetchVaultUser = async (account: string) => {
   try {
-    const userContractResponse = await cakeVaultContract.methods.userInfo(account).call()
+    const userContractResponse = await wagyuVaultContract.methods.userInfo(account).call()
     return {
       isLoading: false,
       userShares: new BigNumber(userContractResponse.shares).toJSON(),
       lastDepositedTime: userContractResponse.lastDepositedTime as string,
       lastUserActionTime: userContractResponse.lastUserActionTime as string,
-      cakeAtLastUserAction: new BigNumber(userContractResponse.cakeAtLastUserAction).toJSON(),
+      wagyuAtLastUserAction: new BigNumber(userContractResponse.wagyuAtLastUserAction).toJSON(),
     }
   } catch (error) {
     return {
@@ -19,7 +19,7 @@ const fetchVaultUser = async (account: string) => {
       userShares: null,
       lastDepositedTime: null,
       lastUserActionTime: null,
-      cakeAtLastUserAction: null,
+      wagyuAtLastUserAction: null,
     }
   }
 }

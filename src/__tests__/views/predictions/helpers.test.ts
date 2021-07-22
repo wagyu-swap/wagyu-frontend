@@ -1,23 +1,23 @@
 import BigNumber from 'bignumber.js'
 import { BetPosition } from 'state/types'
 import {
-  formatBnb,
+  formatVlx,
   formatRoundTime,
   formatUsd,
-  getBnbAmount,
+  getVlxAmount,
   getMultiplier,
   getPayout,
   padTime,
 } from 'views/Predictions/helpers'
 
-describe('getBnbAmount', () => {
+describe('getVlxAmount', () => {
   it.each([
     [2000000000000000000, 2],
     [500000000000000000, 0.5],
     [1658594666560000000, 1.65859466656],
     [1123456789000000000, 1.123456789],
-  ])('format %i BNB correctly', (value, expected) => {
-    const bnValue = getBnbAmount(new BigNumber(value))
+  ])('format %i VLX correctly', (value, expected) => {
+    const bnValue = getVlxAmount(new BigNumber(value))
     expect(bnValue.eq(expected)).toEqual(true)
   })
 })
@@ -37,18 +37,18 @@ describe('formatUsd', () => {
   })
 })
 
-describe('formatBnb', () => {
+describe('formatVlx', () => {
   it.each([
     [20, '20.000'],
     [265.22, '265.220'],
     [689.889, '689.889'],
     [10.8829, '10.883'],
-  ])('format %i BNB correctly with 3 decimals', (value, expected) => {
-    expect(formatBnb(value)).toEqual(expected)
+  ])('format %i VLX correctly with 3 decimals', (value, expected) => {
+    expect(formatVlx(value)).toEqual(expected)
   })
 
-  it('returns 0 if BNB is undefined', () => {
-    expect(formatBnb(undefined)).toEqual('0')
+  it('returns 0 if VLX is undefined', () => {
+    expect(formatVlx(undefined)).toEqual('0')
   })
 })
 
@@ -96,7 +96,7 @@ describe('getPayout', () => {
       address: 'bet1address',
       block: 1000,
       totalBets: 0,
-      totalBNB: 0,
+      totalVLX: 0,
     },
     round: {
       id: 'round',
@@ -130,7 +130,7 @@ describe('getPayout', () => {
       address: 'bet1address',
       block: 1000,
       totalBets: 0,
-      totalBNB: 0,
+      totalVLX: 0,
     },
     round: {
       id: 'round',
@@ -164,7 +164,7 @@ describe('getPayout', () => {
       address: 'bet2address',
       block: 1000,
       totalBets: 0,
-      totalBNB: 0,
+      totalVLX: 0,
     },
     round: {
       id: 'round',
@@ -198,7 +198,7 @@ describe('getPayout', () => {
       address: 'bet2address',
       block: 1000,
       totalBets: 0,
-      totalBNB: 0,
+      totalVLX: 0,
     },
     round: {
       id: 'round',

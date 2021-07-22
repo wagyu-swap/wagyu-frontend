@@ -13,13 +13,13 @@ export interface MultiplierProps {
 
 const MultiplierWrapper = styled.div`
   color: ${({ theme }) => theme.colors.text};
-  width: 36px;
+  width: 32px;
   text-align: right;
   margin-right: 14px;
 
   ${({ theme }) => theme.mediaQueries.lg} {
     text-align: left;
-    margin-right: 0;
+    margin-right: 4px;
   }
 `
 
@@ -33,10 +33,10 @@ const Multiplier: React.FunctionComponent<MultiplierProps> = ({ multiplier }) =>
   const { t } = useTranslation()
   const tooltipContent = (
     <div>
-      {t('The multiplier represents the amount of CAKE rewards each farm gets.')}
+      {t('The multiplier represents the amount of WAGYU rewards each farm gets.')}
       <br />
       <br />
-      {t('For example, if a 1x farm was getting 1 CAKE per block, a 40x farm would be getting 40 CAKE per block.')}
+      {t('For example, if a 1x farm was getting 1 WAGYU per block, a 40x farm would be getting 40 WAGYU per block.')}
     </div>
   )
   const { targetRef, tooltip, tooltipVisible } = useTooltip(tooltipContent, {

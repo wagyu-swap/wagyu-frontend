@@ -8,9 +8,9 @@ import { useTotalRewards } from 'hooks/useTickets'
 import PastLotteryDataContext from 'contexts/PastLotteryDataContext'
 import ExpandableSectionButton from 'components/ExpandableSectionButton/ExpandableSectionButton'
 import { BigNumber } from 'bignumber.js'
-import { usePriceCakeBusd } from 'state/hooks'
+import { usePriceWagyuVusdt } from 'state/hooks'
 import PrizeGrid from '../PrizeGrid'
-import CardBusdValue from '../../../Home/components/CardBusdValue'
+import CardVusdtValue from '../../../Home/components/CardVusdtValue'
 
 const CardHeading = styled.div`
   position: relative;
@@ -56,8 +56,7 @@ const TotalPrizesCard = () => {
   const { account } = useWeb3React()
   const [showFooter, setShowFooter] = useState(false)
   const lotteryPrizeAmount = +getBalanceNumber(useTotalRewards()).toFixed(0)
-  const cakePrice = usePriceCakeBusd()
-  const lotteryPrizeAmountBusd = new BigNumber(lotteryPrizeAmount).multipliedBy(cakePrice)
+  const lotteryPrizeAmountBusd = new BigNumber(lotteryPrizeAmount).multipliedBy(usePriceWagyuVusdt()).toNumber()
   const lotteryPrizeWithCommaSeparators = lotteryPrizeAmount.toLocaleString()
   const { currentLotteryNumber } = useContext(PastLotteryDataContext)
 
@@ -69,7 +68,7 @@ const TotalPrizesCard = () => {
             {currentLotteryNumber === 0 && <Skeleton height={20} width={56} />}
             {currentLotteryNumber > 0 && (
               <Text fontSize="12px" style={{ fontWeight: 600 }}>
-                {t('Round #%num%', { num: currentLotteryNumber })}
+                {t(`Round #${currentLotteryNumber}`, { num: currentLotteryNumber })}
               </Text>
             )}
           </Flex>
@@ -83,8 +82,8 @@ const TotalPrizesCard = () => {
               <Text fontSize="14px" color="textSubtle">
                 {t('Total Pot:')}
               </Text>
-              <Heading scale="lg">{lotteryPrizeWithCommaSeparators} CAKE</Heading>
-              {cakePrice.gt(0) && <CardBusdValue value={lotteryPrizeAmountBusd.toNumber()} />}
+              <Heading size="lg">{lotteryPrizeWithCommaSeparators} WAGYU</Heading>
+              {lotteryPrizeAmountBusd !== 0 && <CardVusdtValue value={lotteryPrizeAmountBusd} />}
             </PrizeCountWrapper>
           </Left>
           <Right>

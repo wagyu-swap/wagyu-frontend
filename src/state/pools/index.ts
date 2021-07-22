@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import BigNumber from 'bignumber.js'
 import poolsConfig from 'config/constants/pools'
 import { BIG_ZERO } from 'utils/bigNumber'
-import { PoolsState, Pool, CakeVault, VaultFees, VaultUser, AppThunk } from 'state/types'
+import { PoolsState, Pool, WagyuVault, VaultFees, VaultUser, AppThunk } from 'state/types'
 import { getPoolApr } from 'utils/apr'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { getAddress } from 'utils/addressHelpers'
@@ -21,12 +21,12 @@ import { getTokenPricesFromFarm } from './helpers'
 const initialState: PoolsState = {
   data: [...poolsConfig],
   userDataLoaded: false,
-  cakeVault: {
+  wagyuVault: {
     totalShares: null,
     pricePerFullShare: null,
-    totalCakeInVault: null,
-    estimatedCakeBountyReward: null,
-    totalPendingCakeHarvest: null,
+    totalWagyuInVault: null,
+    estimatedWagyuBountyReward: null,
+    totalPendingWagyuHarvest: null,
     fees: {
       performanceFee: null,
       callFee: null,
@@ -36,7 +36,7 @@ const initialState: PoolsState = {
     userData: {
       isLoading: true,
       userShares: null,
-      cakeAtLastUserAction: null,
+      wagyuAtLastUserAction: null,
       lastDepositedTime: null,
       lastUserActionTime: null,
     },
@@ -151,18 +151,18 @@ export const updateUserPendingReward =
     dispatch(updatePoolsUserData({ sousId, field: 'pendingReward', value: pendingRewards[sousId] }))
   }
 
-export const fetchCakeVaultPublicData = createAsyncThunk<CakeVault>('cakeVault/fetchPublicData', async () => {
+export const fetchWagyuVaultPublicData = createAsyncThunk<WagyuVault>('wagyuVault/fetchPublicData', async () => {
   const publicVaultInfo = await fetchPublicVaultData()
   return publicVaultInfo
 })
 
-export const fetchCakeVaultFees = createAsyncThunk<VaultFees>('cakeVault/fetchFees', async () => {
+export const fetchWagyuVaultFees = createAsyncThunk<VaultFees>('wagyuVault/fetchFees', async () => {
   const vaultFees = await fetchVaultFees()
   return vaultFees
 })
 
-export const fetchCakeVaultUserData = createAsyncThunk<VaultUser, { account: string }>(
-  'cakeVault/fetchUser',
+export const fetchWagyuVaultUserData = createAsyncThunk<VaultUser, { account: string }>(
+  'wagyuVault/fetchUser',
   async ({ account }) => {
     const userData = await fetchVaultUser(account)
     return userData
@@ -199,19 +199,19 @@ export const PoolsSlice = createSlice({
   },
   extraReducers: (builder) => {
     // Vault public data that updates frequently
-    builder.addCase(fetchCakeVaultPublicData.fulfilled, (state, action: PayloadAction<CakeVault>) => {
-      state.cakeVault = { ...state.cakeVault, ...action.payload }
+    builder.addCase(fetchWagyuVaultPublicData.fulfilled, (state, action: PayloadAction<WagyuVault>) => {
+      state.wagyuVault = { ...state.wagyuVault, ...action.payload }
     })
     // Vault fees
-    builder.addCase(fetchCakeVaultFees.fulfilled, (state, action: PayloadAction<VaultFees>) => {
+    builder.addCase(fetchWagyuVaultFees.fulfilled, (state, action: PayloadAction<VaultFees>) => {
       const fees = action.payload
-      state.cakeVault = { ...state.cakeVault, fees }
+      state.wagyuVault = { ...state.wagyuVault, fees }
     })
     // Vault user data
-    builder.addCase(fetchCakeVaultUserData.fulfilled, (state, action: PayloadAction<VaultUser>) => {
+    builder.addCase(fetchWagyuVaultUserData.fulfilled, (state, action: PayloadAction<VaultUser>) => {
       const userData = action.payload
       userData.isLoading = false
-      state.cakeVault = { ...state.cakeVault, userData }
+      state.wagyuVault = { ...state.wagyuVault, userData }
     })
   },
 })

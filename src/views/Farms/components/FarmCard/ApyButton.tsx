@@ -6,17 +6,17 @@ import { useTranslation } from 'contexts/Localization'
 
 export interface ApyButtonProps {
   lpLabel?: string
-  cakePrice?: BigNumber
+  wagyuPrice?: BigNumber
   apr?: number
   addLiquidityUrl?: string
 }
 
-const ApyButton: React.FC<ApyButtonProps> = ({ lpLabel, cakePrice, apr, addLiquidityUrl }) => {
+const ApyButton: React.FC<ApyButtonProps> = ({ lpLabel, wagyuPrice, apr, addLiquidityUrl }) => {
   const { t } = useTranslation()
   const [onPresentApyModal] = useModal(
     <ApyCalculatorModal
       linkLabel={t('Get %symbol%', { symbol: lpLabel })}
-      tokenPrice={cakePrice.toNumber()}
+      tokenPrice={wagyuPrice.toNumber()}
       apr={apr}
       linkHref={addLiquidityUrl}
     />,

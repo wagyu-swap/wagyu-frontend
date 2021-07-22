@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
 import { Heading, Card, CardBody, Button, useModal } from '@wagyu-swap-libs/uikit'
 import { useWeb3React } from '@web3-react/core'
-import { getCakeAddress } from 'utils/addressHelpers'
+import { getWagyuAddress } from 'utils/addressHelpers'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { useTranslation } from 'contexts/Localization'
 import useGetLotteryHasDrawn from 'hooks/useGetLotteryHasDrawn'
@@ -14,11 +14,11 @@ import { useApproval } from 'hooks/useApproval'
 import PurchaseWarningModal from 'views/Lottery/components/TicketCard/PurchaseWarningModal'
 import BuyTicketModal from 'views/Lottery/components/TicketCard/BuyTicketModal'
 import UnlockButton from 'components/UnlockButton'
-import CakeWinnings from './CakeWinnings'
+import WagyuWinnings from './WagyuWinnings'
 import LotteryJackpot from './LotteryJackpot'
 
 const StyledLotteryCard = styled(Card)`
-  background-image: url('/images/ticket-bg.svg');
+  background-image: url('/images/wagyu-ticket-bg.svg');
   background-repeat: no-repeat;
   background-position: top right;
   min-height: 376px;
@@ -54,7 +54,7 @@ const LotteryCard = () => {
   const [onPresentApprove] = useModal(<PurchaseWarningModal />)
   const { claimAmount, setLastUpdated } = useTotalClaim()
   const { onMultiClaim } = useMultiClaimLottery()
-  const { balance: cakeBalance } = useTokenBalance(getCakeAddress())
+  const { balance: wagyuBalance } = useTokenBalance(getWagyuAddress())
   const { handleApprove, requestedApproval } = useApproval(onPresentApprove)
 
   const handleClaim = useCallback(async () => {
@@ -75,7 +75,7 @@ const LotteryCard = () => {
     if (!allowance.toNumber()) {
       return (
         <Button width="100%" disabled={requestedApproval} onClick={handleApprove}>
-          {t('Approve CAKE')}
+          {t('Approve WAGYU')}
         </Button>
       )
     }
@@ -89,7 +89,7 @@ const LotteryCard = () => {
     )
   }
 
-  const [onPresentBuy] = useModal(<BuyTicketModal max={cakeBalance} />)
+  const [onPresentBuy] = useModal(<BuyTicketModal max={wagyuBalance} />)
 
   return (
     <StyledLotteryCard>
@@ -97,10 +97,10 @@ const LotteryCard = () => {
         <Heading scale="xl" mb="24px">
           {t('Your Lottery Winnings')}
         </Heading>
-        <CardImage src="/images/ticket.svg" alt="cake logo" width={64} height={64} />
+        <CardImage src="/images/wagyu-ticket.svg" alt="wagyu logo" width={64} height={64} />
         <Block>
-          <Label>{t('CAKE to Collect')}:</Label>
-          <CakeWinnings claimAmount={claimAmount} />
+          <Label>{t('WAGYU to Collect')}:</Label>
+          <WagyuWinnings claimAmount={claimAmount} />
         </Block>
         <Block>
           <Label>{t('Total jackpot this round')}:</Label>

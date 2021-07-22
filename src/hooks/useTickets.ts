@@ -21,13 +21,18 @@ const useTickets = (lotteryNumber = null) => {
   const { fastRefresh } = useRefresh()
 
   useEffect(() => {
+    let isSubscribed = true;
     const fetchBalance = async () => {
       const res = await getTickets(lotteryContract, ticketsContract, account, lotteryNumber)
-      setTickets(res)
+      if (isSubscribed) {
+        setTickets(res)
+      }
     }
-
     if (account && lotteryContract && ticketsContract) {
-      fetchBalance()
+      fetchBalance().then()
+    }
+    return() => {
+      isSubscribed = false
     }
   }, [account, lotteryContract, ticketsContract, fastRefresh, lotteryNumber])
 
@@ -40,13 +45,20 @@ export const useTotalRewards = () => {
   const { fastRefresh } = useRefresh()
 
   useEffect(() => {
+    let isSubscribed = true;
     const fetchBalance = async () => {
       const res = await getTotalRewards(lotteryContract)
-      setRewards(new BigNumber(res))
+      if (isSubscribed) {
+        setRewards(new BigNumber(res))
+      }
     }
 
     if (lotteryContract) {
-      fetchBalance()
+      fetchBalance().then()
+    }
+
+    return() => {
+      isSubscribed = false;
     }
   }, [lotteryContract, fastRefresh])
 
@@ -61,18 +73,28 @@ export const useTotalClaim = () => {
   const lotteryContract = useLottery()
   const { lastUpdated, setLastUpdated } = useLastUpdated()
 
-  const fetchBalance = useCallback(async () => {
-    setClaimLoading(true)
-    const claim = await getTotalClaim(lotteryContract, ticketsContract, account)
-    setClaimAmount(claim)
-    setClaimLoading(false)
-  }, [account, lotteryContract, ticketsContract])
-
   useEffect(() => {
+    let isSubscribed = true;
+    const fetchBalance = async () => {
+      if (isSubscribed) {
+        setClaimLoading(true)
+      }
+      const claim = await getTotalClaim(lotteryContract, ticketsContract, account)
+      if (isSubscribed) {
+        setClaimAmount(claim)
+        setClaimLoading(false)
+      }
+      return() => {
+        isSubscribed = false;
+      }
+    };
     if (account && lotteryContract && ticketsContract) {
-      fetchBalance()
+      fetchBalance().then()
     }
-  }, [account, fetchBalance, lotteryContract, ticketsContract, lastUpdated])
+    return() => {
+      isSubscribed = false;
+    }
+  }, [account, lotteryContract, ticketsContract, lastUpdated])
 
   return { claimLoading, claimAmount, setLastUpdated }
 }
@@ -83,13 +105,18 @@ export const useWinningNumbers = () => {
   const { fastRefresh } = useRefresh()
 
   useEffect(() => {
+    let isSubscribed = true;
     const fetchBalance = async () => {
       const rewards = await getWinningNumbers(lotteryContract)
-      setWinningNumbers(rewards)
+      if (isSubscribed) {
+        setWinningNumbers(rewards)
+      }
     }
-
     if (lotteryContract) {
-      fetchBalance()
+      fetchBalance().then()
+    }
+    return() => {
+      isSubscribed = false
     }
   }, [fastRefresh, lotteryContract, setWinningNumbers])
 
@@ -102,13 +129,19 @@ export const useMatchingRewardLength = (numbers) => {
   const { fastRefresh } = useRefresh()
 
   useEffect(() => {
+    let isSubscribed = true;
     const fetchBalance = async () => {
       const matchedNumbers = await getMatchingRewardLength(lotteryContract, numbers)
-      setMatchingNumbers(matchedNumbers)
+      if (isSubscribed) {
+        setMatchingNumbers(matchedNumbers)
+      }
     }
 
     if (lotteryContract) {
-      fetchBalance()
+      fetchBalance().then()
+    }
+    return() => {
+      isSubscribed = false
     }
   }, [lotteryContract, numbers, fastRefresh])
 

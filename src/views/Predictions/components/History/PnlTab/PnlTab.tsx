@@ -3,10 +3,10 @@ import styled from 'styled-components'
 import { useWeb3React } from '@web3-react/core'
 import { Box, Flex, Heading, Text, Button, Link, OpenNewIcon } from '@wagyu-swap-libs/uikit'
 import { useTranslation } from 'contexts/Localization'
-import { getBscScanAddressUrl } from 'utils/bscscan'
-import { useGetCurrentEpoch, usePriceBnbBusd } from 'state/hooks'
+import { getVelasScanAddressUrl } from 'utils/velasScan'
+import { useGetCurrentEpoch, usePriceVlxVusdt } from 'state/hooks'
 import { Bet, BetPosition } from 'state/types'
-import { formatBnb, getMultiplier, getPayout } from 'views/Predictions/helpers'
+import { formatVlx, getMultiplier, getPayout } from 'views/Predictions/helpers'
 import { getRoundResult, Result } from 'state/predictions/helpers'
 import PnlChart from './PnlChart'
 import SummaryRow from './SummaryRow'
@@ -110,14 +110,14 @@ const PnlTab: React.FC<PnlTabProps> = ({ hasBetHistory, bets }) => {
   const { t } = useTranslation()
   const { account } = useWeb3React()
   const currentEpoch = useGetCurrentEpoch()
-  const bnbBusdPrice = usePriceBnbBusd()
+  const vlxVusdtPrice = usePriceVlxVusdt()
 
   const summary = getPnlSummary(bets, currentEpoch)
   const netResultAmount = summary.won.payout - summary.lost.amount
   const netResultIsPositive = netResultAmount > 0
   const avgPositionEntered = summary.entered.amount / summary.entered.rounds
-  const avgBnbWonPerRound = netResultAmount / summary.entered.rounds
-  const avgBnbWonIsPositive = avgBnbWonPerRound > 0
+  const avgVlxWonPerRound = netResultAmount / summary.entered.rounds
+  const avgVlxWonIsPositive = avgVlxWonPerRound > 0
 
   // Guard in case user has only lost rounds
   const hasBestRound = summary.won.bestRound.payout !== 0
@@ -134,10 +134,10 @@ const PnlTab: React.FC<PnlTabProps> = ({ hasBetHistory, bets }) => {
             {t('Net results')}
           </Text>
           <Text bold fontSize="24px" lineHeight="1" color={netResultIsPositive ? 'success' : 'failure'}>
-            {`${netResultIsPositive ? '+' : ''}${formatBnb(netResultAmount)} BNB`}
+            {`${netResultIsPositive ? '+' : ''}${formatVlx(netResultAmount)} VLX`}
           </Text>
           <Text small color="textSubtle">
-            {`~$${formatBnb(bnbBusdPrice.times(netResultAmount).toNumber())}`}
+            {`~$${formatVlx(vlxVusdtPrice.times(netResultAmount).toNumber())}`}
           </Text>
         </Flex>
       </Flex>
@@ -145,11 +145,11 @@ const PnlTab: React.FC<PnlTabProps> = ({ hasBetHistory, bets }) => {
         <Text mt="24px" bold color="textSubtle">
           {t('Average return / round')}
         </Text>
-        <Text bold color={avgBnbWonIsPositive ? 'success' : 'failure'}>
-          {`${avgBnbWonIsPositive ? '+' : ''}${formatBnb(avgBnbWonPerRound)} BNB`}
+        <Text bold color={avgVlxWonIsPositive ? 'success' : 'failure'}>
+          {`${avgVlxWonIsPositive ? '+' : ''}${formatVlx(avgVlxWonPerRound)} VLX`}
         </Text>
         <Text small color="textSubtle">
-          {`~$${formatBnb(bnbBusdPrice.times(avgBnbWonPerRound).toNumber())}`}
+          {`~$${formatVlx(vlxVusdtPrice.times(avgVlxWonPerRound).toNumber())}`}
         </Text>
 
         {hasBestRound && (
@@ -158,13 +158,13 @@ const PnlTab: React.FC<PnlTabProps> = ({ hasBetHistory, bets }) => {
               {t('Best round: #%roundId%', { roundId: summary.won.bestRound.id })}
             </Text>
             <Flex alignItems="flex-end">
-              <Text bold color="success">{`+${formatBnb(summary.won.bestRound.payout)} BNB`}</Text>
+              <Text bold color="success">{`+${formatVlx(summary.won.bestRound.payout)} VLX`}</Text>
               <Text ml="4px" small color="textSubtle">
                 ({summary.won.bestRound.multiplier.toFixed(2)}x)
               </Text>
             </Flex>
             <Text small color="textSubtle">
-              {`~$${formatBnb(bnbBusdPrice.times(summary.won.bestRound.payout).toNumber())}`}
+              {`~$${formatVlx(vlxVusdtPrice.times(summary.won.bestRound.payout).toNumber())}`}
             </Text>
           </>
         )}
@@ -172,19 +172,19 @@ const PnlTab: React.FC<PnlTabProps> = ({ hasBetHistory, bets }) => {
         <Text mt="16px" bold color="textSubtle">
           {t('Average position entered / round')}
         </Text>
-        <Text bold>{`${formatBnb(avgPositionEntered)} BNB`}</Text>
+        <Text bold>{`${formatVlx(avgPositionEntered)} VLX`}</Text>
         <Text small color="textSubtle">
-          {`~$${formatBnb(bnbBusdPrice.times(avgPositionEntered).toNumber())}`}
+          {`~$${formatVlx(vlxVusdtPrice.times(avgPositionEntered).toNumber())}`}
         </Text>
 
         <Divider />
 
-        <SummaryRow type="won" summary={summary} bnbBusdPrice={bnbBusdPrice} />
-        <SummaryRow type="lost" summary={summary} bnbBusdPrice={bnbBusdPrice} />
-        <SummaryRow type="entered" summary={summary} bnbBusdPrice={bnbBusdPrice} />
+        <SummaryRow type="won" summary={summary} vlxVusdtPrice={vlxVusdtPrice} />
+        <SummaryRow type="lost" summary={summary} vlxVusdtPrice={vlxVusdtPrice} />
+        <SummaryRow type="entered" summary={summary} vlxVusdtPrice={vlxVusdtPrice} />
 
         <Flex justifyContent="center" mt="24px">
-          <Link href={`${getBscScanAddressUrl(account)}#internaltx`} mb="16px" external>
+          <Link href={`${getVelasScanAddressUrl(account)}#internaltx`} mb="16px" external>
             <Button mt="8px" width="100%">
               {t('View Reclaimed & Won')}
               <OpenNewIcon color="white" ml="4px" />

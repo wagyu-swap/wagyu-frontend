@@ -18,7 +18,7 @@ const initialState: State = {
     tokenId: null,
   },
   userName: '',
-  minimumCakeRequired: new BigNumber(totalCost).multipliedBy(DEFAULT_TOKEN_DECIMAL),
+  minimumWagyuRequired: new BigNumber(totalCost).multipliedBy(DEFAULT_TOKEN_DECIMAL),
   allowance: new BigNumber(allowance).multipliedBy(DEFAULT_TOKEN_DECIMAL),
 }
 
@@ -80,7 +80,7 @@ const ProfileCreationProvider: React.FC = ({ children }) => {
     }
 
     if (account) {
-      fetchData()
+      fetchData().then()
     }
 
     return () => {

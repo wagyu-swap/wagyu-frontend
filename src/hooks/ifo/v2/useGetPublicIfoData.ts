@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react'
 import BigNumber from 'bignumber.js'
-import { BSC_BLOCK_TIME } from 'config'
+import { VELAS_BLOCK_TIME } from 'config'
 import { Ifo, IfoStatus } from 'config/constants/types'
 import { useBlock, useLpTokenPrice } from 'state/hooks'
 import { useIfoV2Contract } from 'hooks/useContract'
@@ -10,7 +10,7 @@ import { BIG_ZERO } from 'utils/bigNumber'
 import { PublicIfoData, PoolCharacteristics } from '../types'
 import { getStatus } from '../helpers'
 
-// https://github.com/pancakeswap/pancake-contracts/blob/master/projects/ifo/contracts/IFOV2.sol#L431
+// https://github.com/wagyuswap/wagyu-contracts/blob/master/projects/ifo/contracts/IFOV2.sol#L431
 // 1,000,000,000 / 100
 const TAX_PRECISION = 10000000000
 
@@ -88,8 +88,8 @@ const useGetPublicIfoData = (ifo: Ifo): PublicIfoData => {
 
     setState((prev) => ({
       ...prev,
-      secondsUntilEnd: blocksRemaining * BSC_BLOCK_TIME,
-      secondsUntilStart: (startBlockNum - currentBlock) * BSC_BLOCK_TIME,
+      secondsUntilEnd: blocksRemaining * VELAS_BLOCK_TIME,
+      secondsUntilStart: (startBlockNum - currentBlock) * VELAS_BLOCK_TIME,
       poolBasic: { ...poolBasicFormatted, taxRate: 0 },
       poolUnlimited: { ...poolUnlimitedFormatted, taxRate: taxRate / TAX_PRECISION },
       status,
@@ -102,7 +102,7 @@ const useGetPublicIfoData = (ifo: Ifo): PublicIfoData => {
   }, [contract, currentBlock, releaseBlockNumber])
 
   useEffect(() => {
-    fetchIfoData()
+    fetchIfoData().then()
   }, [fetchIfoData, fastRefresh])
 
   return { ...state, currencyPriceInUSD: lpTokenPriceInUsd, fetchIfoData }

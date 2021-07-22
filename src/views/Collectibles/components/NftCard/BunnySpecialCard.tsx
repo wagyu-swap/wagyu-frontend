@@ -22,7 +22,7 @@ const BunnySpecialCard: React.FC<NftCardProps> = ({ nft, ...props }) => {
     }
 
     if (account) {
-      fetchClaimStatus()
+      fetchClaimStatus().then()
     }
   }, [account, variationId, bunnySpecialContract, setIsClaimable])
 

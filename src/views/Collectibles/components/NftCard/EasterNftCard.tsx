@@ -37,7 +37,7 @@ const EasterNftCard: React.FC<NftCardProps> = ({ nft, ...props }) => {
     }
 
     if (account && team) {
-      fetchClaimStatus()
+      fetchClaimStatus().then()
     }
   }, [account, identifier, team, easterNftContract, setIsClaimable])
 

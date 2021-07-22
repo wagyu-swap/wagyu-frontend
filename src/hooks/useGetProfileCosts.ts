@@ -9,9 +9,9 @@ import useToast from './useToast'
 const useGetProfileCosts = () => {
   const { t } = useTranslation()
   const [costs, setCosts] = useState({
-    numberCakeToReactivate: BIG_ZERO,
-    numberCakeToRegister: BIG_ZERO,
-    numberCakeToUpdate: BIG_ZERO,
+    numberWagyuToReactivate: BIG_ZERO,
+    numberWagyuToRegister: BIG_ZERO,
+    numberWagyuToUpdate: BIG_ZERO,
   })
   const { toastError } = useToast()
 
@@ -19,23 +19,23 @@ const useGetProfileCosts = () => {
     const fetchCosts = async () => {
       try {
         const profileContract = getProfileContract()
-        const [numberCakeToReactivate, numberCakeToRegister, numberCakeToUpdate] = await makeBatchRequest([
-          profileContract.methods.numberCakeToReactivate().call,
-          profileContract.methods.numberCakeToRegister().call,
-          profileContract.methods.numberCakeToUpdate().call,
+        const [numberWagyuToReactivate, numberWagyuToRegister, numberWagyuToUpdate] = await makeBatchRequest([
+          profileContract.methods.numberWagyuToReactivate().call,
+          profileContract.methods.numberWagyuToRegister().call,
+          profileContract.methods.numberWagyuToUpdate().call,
         ])
 
         setCosts({
-          numberCakeToReactivate: new BigNumber(numberCakeToReactivate as string),
-          numberCakeToRegister: new BigNumber(numberCakeToRegister as string),
-          numberCakeToUpdate: new BigNumber(numberCakeToUpdate as string),
+          numberWagyuToReactivate: new BigNumber(numberWagyuToReactivate as string),
+          numberWagyuToRegister: new BigNumber(numberWagyuToRegister as string),
+          numberWagyuToUpdate: new BigNumber(numberWagyuToUpdate as string),
         })
       } catch (error) {
-        toastError(t('Error'), t('Could not retrieve CAKE costs for profile'))
+        toastError(t('Error'), t('Could not retrieve WAGYU costs for profile'))
       }
     }
 
-    fetchCosts()
+    fetchCosts().then()
   }, [setCosts, toastError, t])
 
   return costs

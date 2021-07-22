@@ -16,7 +16,7 @@ export interface State {
     nftAddress: string
   }
   userName: string
-  minimumCakeRequired: BigNumber
+  minimumWagyuRequired: BigNumber
   allowance: BigNumber
 }
 

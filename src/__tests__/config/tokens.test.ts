@@ -5,8 +5,8 @@ import tokens from 'config/constants/tokens'
 import { Token } from 'config/constants/types'
 import multicall from 'utils/multicall'
 
-// remove BNB because it's not a Bep20 token
-const tokensToTest = omitBy(tokens, (token) => token.symbol.toLowerCase() === 'bnb')
+// remove VLX because it's not a Bep20 token
+const tokensToTest = omitBy(tokens, (token) => token.symbol.toLowerCase() === 'vlx')
 
 describe('Config tokens', () => {
   it.each(map(tokensToTest, (token, key) => [key, token]))(

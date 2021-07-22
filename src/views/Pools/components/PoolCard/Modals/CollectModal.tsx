@@ -24,7 +24,7 @@ interface CollectModalProps {
   earningToken: Token
   earningsDollarValue: string
   sousId: number
-  isBnbPool: boolean
+  isVlxPool: boolean
   isCompoundPool?: boolean
   onDismiss?: () => void
 }
@@ -35,21 +35,21 @@ const CollectModal: React.FC<CollectModalProps> = ({
   earningToken,
   earningsDollarValue,
   sousId,
-  isBnbPool,
+  isVlxPool,
   isCompoundPool = false,
   onDismiss,
 }) => {
   const { t } = useTranslation()
   const { theme } = useTheme()
   const { toastSuccess, toastError } = useToast()
-  const { onReward } = useSousHarvest(sousId, isBnbPool)
-  const { onStake } = useSousStake(sousId, isBnbPool)
+  const { onReward } = useSousHarvest(sousId, isVlxPool)
+  const { onStake } = useSousStake(sousId, isVlxPool)
   const [pendingTx, setPendingTx] = useState(false)
   const [shouldCompound, setShouldCompound] = useState(isCompoundPool)
   const { targetRef, tooltip, tooltipVisible } = useTooltip(
     <>
-      <Text mb="12px">{t('Compound: collect and restake CAKE into pool.')}</Text>
-      <Text>{t('Harvest: collect CAKE and send to wallet')}</Text>
+      <Text mb="12px">{t('Compound: collect and restake WAGYU into pool.')}</Text>
+      <Text>{t('Harvest: collect WAGYU and send to wallet')}</Text>
     </>,
     { placement: 'bottom-end', tooltipOffset: [20, 10] },
   )

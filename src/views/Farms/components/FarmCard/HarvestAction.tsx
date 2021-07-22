@@ -7,8 +7,8 @@ import { fetchFarmUserDataAsync } from 'state/farms'
 import { useHarvest } from 'hooks/useHarvest'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { useWeb3React } from '@web3-react/core'
-import { usePriceCakeBusd } from 'state/hooks'
-import CardBusdValue from '../../../Home/components/CardBusdValue'
+import { usePriceWagyuVusdt } from 'state/hooks'
+import CardVusdtValue from '../../../Home/components/CardVusdtValue'
 
 interface FarmCardActionsProps {
   earnings?: BigNumber
@@ -20,17 +20,17 @@ const HarvestAction: React.FC<FarmCardActionsProps> = ({ earnings, pid }) => {
   const { t } = useTranslation()
   const [pendingTx, setPendingTx] = useState(false)
   const { onReward } = useHarvest(pid)
-  const cakePrice = usePriceCakeBusd()
+  const wagyuPrice = usePriceWagyuVusdt()
   const dispatch = useAppDispatch()
   const rawEarningsBalance = account ? getBalanceNumber(earnings) : 0
   const displayBalance = rawEarningsBalance.toLocaleString()
-  const earningsBusd = rawEarningsBalance ? new BigNumber(rawEarningsBalance).multipliedBy(cakePrice).toNumber() : 0
+  const earningsVusdt = rawEarningsBalance ? new BigNumber(rawEarningsBalance).multipliedBy(wagyuPrice).toNumber() : 0
 
   return (
     <Flex mb="8px" justifyContent="space-between" alignItems="center">
       <Heading color={rawEarningsBalance === 0 ? 'textDisabled' : 'text'}>
         {displayBalance}
-        {earningsBusd > 0 && <CardBusdValue value={earningsBusd} />}
+        {earningsVusdt > 0 && <CardVusdtValue value={earningsVusdt} />}
       </Heading>
       <Button
         disabled={rawEarningsBalance === 0 || pendingTx}

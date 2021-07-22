@@ -16,21 +16,32 @@ const useGetRecentLotteryRoundData = (): GetRecentLotteryRoundDataReturn => {
   const { mostRecentLotteryNumber } = useContext(PastLotteryDataContext)
 
   useEffect(() => {
+    let isSubscribed = true;
     const fetchRecentLotteryData = async () => {
       try {
-        setIsLoading(true)
-
+        if (isSubscribed) {
+          setIsLoading(true)
+        }
         const roundData = await getLotteryRoundData(mostRecentLotteryNumber)
-        setData(roundData)
+        if (isSubscribed) {
+          setData(roundData)
+        }
       } catch (err) {
-        setError(err)
+        if (isSubscribed) {
+          setError(err)
+        }
       } finally {
-        setIsLoading(false)
+        if (isSubscribed) {
+          setIsLoading(false)
+        }
       }
     }
 
     if (mostRecentLotteryNumber > 0) {
-      fetchRecentLotteryData()
+      fetchRecentLotteryData().then()
+    }
+    return() => {
+      isSubscribed = false
     }
   }, [mostRecentLotteryNumber, setData, setIsLoading, setError])
 

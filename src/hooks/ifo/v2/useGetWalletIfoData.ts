@@ -89,7 +89,7 @@ const useGetWalletIfoData = (ifo: Ifo): WalletIfoData => {
 
   useEffect(() => {
     if (account) {
-      fetchIfoData()
+      fetchIfoData().then()
     }
   }, [account, fetchIfoData, fastRefresh])
 

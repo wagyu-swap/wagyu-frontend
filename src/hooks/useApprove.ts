@@ -7,7 +7,7 @@ import { useAppDispatch } from 'state'
 import { updateUserAllowance } from 'state/actions'
 import { approve } from 'utils/callHelpers'
 import { useTranslation } from 'contexts/Localization'
-import { useMasterchef, useCake, useSousChef, useLottery, useCakeVaultContract } from './useContract'
+import { useMasterchef, useWagyu, useSousChef, useLottery, useWagyuVaultContract } from './useContract'
 import useToast from './useToast'
 import useLastUpdated from './useLastUpdated'
 
@@ -38,8 +38,11 @@ export const useSousApprove = (lpContract: Contract, sousId, earningTokenSymbol)
   const sousChefContract = useSousChef(sousId)
 
   const handleApprove = useCallback(async () => {
+    let isSubscribed = true;
     try {
-      setRequestedApproval(true)
+      if (isSubscribed) {
+        setRequestedApproval(true)
+      }
       const tx = await approve(lpContract, sousChefContract, account)
       dispatch(updateUserAllowance(sousId, account))
       if (tx) {
@@ -47,42 +50,49 @@ export const useSousApprove = (lpContract: Contract, sousId, earningTokenSymbol)
           t('Contract Enabled'),
           t('You can now stake in the %symbol% pool!', { symbol: earningTokenSymbol }),
         )
-        setRequestedApproval(false)
+        if (isSubscribed) {
+          setRequestedApproval(false)
+        }
       } else {
         // user rejected tx or didn't go thru
         toastError(
           `${t('Error')}`,
           `${t(`Please try again. Confirm the transaction and make sure you are paying enough gas!`)}`,
         )
-        setRequestedApproval(false)
+        if (isSubscribed) {
+          setRequestedApproval(false)
+        }
       }
     } catch (e) {
       console.error(e)
       toastError('Error', e?.message)
+    }
+    return() => {
+      isSubscribed = false
     }
   }, [account, dispatch, lpContract, sousChefContract, sousId, earningTokenSymbol, t, toastError, toastSuccess])
 
   return { handleApprove, requestedApproval }
 }
 
-// Approve CAKE auto pool
+// Approve WAGYU auto pool
 export const useVaultApprove = (setLastUpdated: () => void) => {
   const { account } = useWeb3React()
   const [requestedApproval, setRequestedApproval] = useState(false)
   const { t } = useTranslation()
   const { toastSuccess, toastError } = useToast()
-  const cakeVaultContract = useCakeVaultContract()
-  const cakeContract = useCake()
+  const wagyuVaultContract = useWagyuVaultContract()
+  const wagyuContract = useWagyu()
 
   const handleApprove = () => {
-    cakeContract.methods
-      .approve(cakeVaultContract.options.address, ethers.constants.MaxUint256)
+    wagyuContract.methods
+      .approve(wagyuVaultContract.options.address, ethers.constants.MaxUint256)
       .send({ from: account })
       .on('sending', () => {
         setRequestedApproval(true)
       })
       .on('receipt', () => {
-        toastSuccess(t('Contract Enabled'), t('You can now stake in the %symbol% vault!', { symbol: 'CAKE' }))
+        toastSuccess(t('Contract Enabled'), t('You can now stake in the %symbol% vault!', { symbol: 'WAGYU' }))
         setLastUpdated()
         setRequestedApproval(false)
       })
@@ -99,22 +109,30 @@ export const useVaultApprove = (setLastUpdated: () => void) => {
 export const useCheckVaultApprovalStatus = () => {
   const [isVaultApproved, setIsVaultApproved] = useState(false)
   const { account } = useWeb3React()
-  const cakeContract = useCake()
-  const cakeVaultContract = useCakeVaultContract()
+  const wagyuContract = useWagyu()
+  const wagyuVaultContract = useWagyuVaultContract()
   const { lastUpdated, setLastUpdated } = useLastUpdated()
   useEffect(() => {
+    let isSubscribed = true
     const checkApprovalStatus = async () => {
       try {
-        const response = await cakeContract.methods.allowance(account, cakeVaultContract.options.address).call()
+        const response = await wagyuContract.methods.allowance(account, wagyuVaultContract.options.address).call()
         const currentAllowance = new BigNumber(response)
-        setIsVaultApproved(currentAllowance.gt(0))
+        if (isSubscribed) {
+          setIsVaultApproved(currentAllowance.gt(0))
+        }
       } catch (error) {
-        setIsVaultApproved(false)
+        if (isSubscribed) {
+          setIsVaultApproved(false)
+        }
       }
     }
 
-    checkApprovalStatus()
-  }, [account, cakeContract, cakeVaultContract, lastUpdated])
+    checkApprovalStatus().then()
+    return() => {
+      isSubscribed = false
+    }
+  }, [account, wagyuContract, wagyuVaultContract, lastUpdated])
 
   return { isVaultApproved, setLastUpdated }
 }
@@ -122,17 +140,17 @@ export const useCheckVaultApprovalStatus = () => {
 // Approve the lottery
 export const useLotteryApprove = () => {
   const { account } = useWeb3React()
-  const cakeContract = useCake()
+  const wagyuContract = useWagyu()
   const lotteryContract = useLottery()
 
   const handleApprove = useCallback(async () => {
     try {
-      const tx = await approve(cakeContract, lotteryContract, account)
+      const tx = await approve(wagyuContract, lotteryContract, account)
       return tx
     } catch (e) {
       return false
     }
-  }, [account, cakeContract, lotteryContract])
+  }, [account, wagyuContract, lotteryContract])
 
   return { onApprove: handleApprove }
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { DefaultTheme } from 'styled-components'
 import { Box, Flex, FlexProps, Text } from '@wagyu-swap-libs/uikit'
-import { formatBnb, formatUsd } from 'views/Predictions/helpers'
+import { formatVlx, formatUsd } from 'views/Predictions/helpers'
 import { useTranslation } from 'contexts/Localization'
 import { BetPosition, Round } from 'state/types'
 
@@ -15,7 +15,7 @@ const getPrizePoolAmount = (totalAmount: PrizePoolRowProps['totalAmount']) => {
     return '0'
   }
 
-  return formatBnb(totalAmount)
+  return formatVlx(totalAmount)
 }
 
 const Row = ({ children, ...props }) => {
@@ -32,7 +32,7 @@ export const PrizePoolRow: React.FC<PrizePoolRowProps> = ({ totalAmount, ...prop
   return (
     <Row {...props}>
       <Text bold>{t('Prize Pool')}:</Text>
-      <Text bold>{`${getPrizePoolAmount(totalAmount)} BNB`}</Text>
+      <Text bold>{`${getPrizePoolAmount(totalAmount)} VLX`}</Text>
     </Row>
   )
 }
@@ -58,7 +58,7 @@ export const PayoutRow: React.FC<PayoutRowProps> = ({ positionLabel, multiplier,
           {t('%multiplier% Payout', { multiplier: formattedMultiplier })}
         </Text>
         <Text mx="4px">|</Text>
-        <Text fontSize="12px" lineHeight="18px">{`${formatBnb(amount)} BNB`}</Text>
+        <Text fontSize="12px" lineHeight="18px">{`${formatVlx(amount)} VLX`}</Text>
       </Flex>
     </Row>
   )

@@ -20,7 +20,7 @@ const useIsRefundable = (epoch: number) => {
     }
 
     if (account) {
-      fetchRefundableStatus()
+      fetchRefundableStatus().then()
     }
   }, [account, epoch, predictionsContract, setIsRefundable])
 

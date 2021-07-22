@@ -29,8 +29,8 @@ const FUTURE_ROUND_COUNT = 2 // the number of rounds in the future to show
 
 const Predictions = () => {
   const { isXl } = useMatchBreakpoints()
-  const [hasAcceptedRisk, setHasAcceptedRisk] = usePersistState(false, 'pancake_predictions_accepted_risk')
-  const [hasAcceptedChart, setHasAcceptedChart] = usePersistState(false, 'pancake_predictions_chart')
+  const [hasAcceptedRisk, setHasAcceptedRisk] = usePersistState(false, 'wagyu_predictions_accepted_risk')
+  const [hasAcceptedChart, setHasAcceptedChart] = usePersistState(false, 'wagyu_predictions_chart')
   const { account } = useWeb3React()
   const status = useGetPredictionsStatus()
   const isChartPaneOpen = useIsChartPaneOpen()
@@ -100,7 +100,7 @@ const Predictions = () => {
 
     // Do not start initialization until the first block has been retrieved
     if (initialBlock > 0) {
-      fetchInitialData()
+      fetchInitialData().then()
     }
   }, [initialBlock, dispatch, account])
 

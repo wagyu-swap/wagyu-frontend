@@ -17,16 +17,15 @@ export const useGetStats = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://openapi.debank.com/v1/protocol?id=bsc_pancakeswap')
+        const response = await fetch('https://wagyu-api.vercel.app/api/tvl')
         const responseData: DeBankTvlResponse = await response.json()
-
-        setData(responseData)
+        setData(responseData);
       } catch (error) {
         console.error('Unable to fetch data:', error)
       }
     }
 
-    fetchData()
+    fetchData().then()
   }, [setData])
 
   return data

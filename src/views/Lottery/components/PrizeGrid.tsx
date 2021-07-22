@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import { useTranslation } from 'contexts/Localization'
 import { Heading, Text } from '@wagyu-swap-libs/uikit'
 import { BigNumber } from 'bignumber.js'
-import { usePriceCakeBusd } from 'state/hooks'
-import CardBusdValue from '../../Home/components/CardBusdValue'
+import { usePriceWagyuVusdt } from 'state/hooks'
+import CardVusdtValue from '../../Home/components/CardVusdtValue'
 
 export interface PrizeGridProps {
   lotteryPrizeAmount?: number
@@ -43,15 +43,15 @@ const PrizeGrid: React.FC<PrizeGridProps> = ({
   twoTicketMatches,
   threeTicketMatches,
 }) => {
-  const fourMatchesAmount = +((lotteryPrizeAmount / 100) * 50).toFixed(0)
+  const fourMatchesAmount = +((lotteryPrizeAmount / 100) * 60).toFixed(0)
   const threeMatchesAmount = +((lotteryPrizeAmount / 100) * 20).toFixed(0)
   const twoMatchesAmount = +((lotteryPrizeAmount / 100) * 10).toFixed(0)
-  const burnAmount = +((lotteryPrizeAmount / 100) * 20).toFixed(0)
+  const burnAmount = +((lotteryPrizeAmount / 100) * 10).toFixed(0)
   const { t } = useTranslation()
-  const cakeBusdPrice = usePriceCakeBusd()
+  const wagyuVusdtPrice = usePriceWagyuVusdt()
 
-  const getCakeBusdValue = (amount: number) => {
-    return new BigNumber(amount).multipliedBy(cakeBusdPrice).toNumber()
+  const getWagyuVusdtValue = (amount: number) => {
+    return new BigNumber(amount).multipliedBy(wagyuVusdtPrice).toNumber()
   }
 
   return (
@@ -75,17 +75,17 @@ const PrizeGrid: React.FC<PrizeGridProps> = ({
       </GridItem>
       {/* 4 matches row */}
       <GridItem>
-        <Heading scale="md">4</Heading>
+        <Heading size="md">4</Heading>
       </GridItem>
       {pastDraw && (
         <PastDrawGridItem>
-          <RightAlignedHeading scale="md">{jackpotMatches}</RightAlignedHeading>
+          <RightAlignedHeading size="md">{jackpotMatches}</RightAlignedHeading>
         </PastDrawGridItem>
       )}
       <GridItem>
-        <RightAlignedHeading scale="md">
+        <RightAlignedHeading size="md">
           {fourMatchesAmount.toLocaleString()}
-          {!pastDraw && cakeBusdPrice.gt(0) && <CardBusdValue value={getCakeBusdValue(fourMatchesAmount)} />}
+          {!pastDraw && !wagyuVusdtPrice.eq(0) && <CardVusdtValue value={getWagyuVusdtValue(fourMatchesAmount)} />}
         </RightAlignedHeading>
       </GridItem>
       {/* 3 matches row */}
@@ -100,7 +100,7 @@ const PrizeGrid: React.FC<PrizeGridProps> = ({
       <GridItem>
         <RightAlignedText>
           {threeMatchesAmount.toLocaleString()}
-          {!pastDraw && cakeBusdPrice.gt(0) && <CardBusdValue value={getCakeBusdValue(threeMatchesAmount)} />}
+          {!pastDraw && !wagyuVusdtPrice.eq(0) && <CardVusdtValue value={getWagyuVusdtValue(threeMatchesAmount)} />}
         </RightAlignedText>
       </GridItem>
       {/* 2 matches row */}
@@ -115,12 +115,12 @@ const PrizeGrid: React.FC<PrizeGridProps> = ({
       <GridItem>
         <RightAlignedText>
           {twoMatchesAmount.toLocaleString()}
-          {!pastDraw && cakeBusdPrice.gt(0) && <CardBusdValue value={getCakeBusdValue(twoMatchesAmount)} />}
+          {!pastDraw && !wagyuVusdtPrice.eq(0) && <CardVusdtValue value={getWagyuVusdtValue(twoMatchesAmount)} />}
         </RightAlignedText>
       </GridItem>
       {/* Burn row */}
       <GridItem marginBottom="0">
-        <Text>{t(pastDraw ? 'Burned' : 'To burn')}:</Text>
+        <Text>{t(`${pastDraw ? 'Burned' : 'To burn'}`)}:</Text>
       </GridItem>
       {pastDraw ? (
         <>

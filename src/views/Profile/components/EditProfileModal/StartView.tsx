@@ -4,11 +4,11 @@ import BigNumber from 'bignumber.js'
 import { useWeb3React } from '@web3-react/core'
 import { Button, Flex, Text, InjectedModalProps } from '@wagyu-swap-libs/uikit'
 import { getFullDisplayBalance } from 'utils/formatBalance'
-import { getPancakeProfileAddress } from 'utils/addressHelpers'
-import { useCake } from 'hooks/useContract'
+import { getWagyuProfileAddress } from 'utils/addressHelpers'
+import { useWagyu } from 'hooks/useContract'
 import { useTranslation } from 'contexts/Localization'
 import useGetProfileCosts from 'hooks/useGetProfileCosts'
-import useHasCakeBalance from 'hooks/useHasCakeBalance'
+import useHasWagyuBalance from 'hooks/useHasWagyuBalance'
 import { useProfile } from 'state/hooks'
 import { UseEditProfileResponse } from './reducer'
 import ProfileAvatar from '../ProfileAvatar'
@@ -43,29 +43,29 @@ const AvatarWrapper = styled.div`
 const StartPage: React.FC<StartPageProps> = ({ goToApprove, goToChange, goToRemove, onDismiss }) => {
   const [needsApproval, setNeedsApproval] = useState(null)
   const { profile } = useProfile()
-  const { numberCakeToUpdate, numberCakeToReactivate } = useGetProfileCosts()
-  const minimumCakeRequired = profile.isActive ? numberCakeToUpdate : numberCakeToReactivate
-  const hasMinimumCakeRequired = useHasCakeBalance(minimumCakeRequired)
+  const { numberWagyuToUpdate, numberWagyuToReactivate } = useGetProfileCosts()
+  const minimumWagyuRequired = profile.isActive ? numberWagyuToUpdate : numberWagyuToReactivate
+  const hasMinimumWagyuRequired = useHasWagyuBalance(minimumWagyuRequired)
   const { t } = useTranslation()
   const { account } = useWeb3React()
-  const cakeContract = useCake()
-  const cost = profile.isActive ? numberCakeToUpdate : numberCakeToReactivate
+  const wagyuContract = useWagyu()
+  const cost = profile.isActive ? numberWagyuToUpdate : numberWagyuToReactivate
 
   /**
-   * Check if the wallet has the required CAKE allowance to change their profile pic or reactivate
+   * Check if the wallet has the required WAGYU allowance to change their profile pic or reactivate
    * If they don't, we send them to the approval screen first
    */
   useEffect(() => {
     const checkApprovalStatus = async () => {
-      const response = await cakeContract.methods.allowance(account, getPancakeProfileAddress()).call()
+      const response = await wagyuContract.methods.allowance(account, getWagyuProfileAddress()).call()
       const currentAllowance = new BigNumber(response)
       setNeedsApproval(currentAllowance.lt(cost))
     }
 
     if (account) {
-      checkApprovalStatus()
+      checkApprovalStatus().then()
     }
-  }, [account, cost, setNeedsApproval, cakeContract])
+  }, [account, cost, setNeedsApproval, wagyuContract])
 
   if (!profile) {
     return null
@@ -78,8 +78,8 @@ const StartPage: React.FC<StartPageProps> = ({ goToApprove, goToChange, goToRemo
       </AvatarWrapper>
       <Flex alignItems="center" style={{ height: '48px' }} justifyContent="center">
         <Text as="p" color="failure">
-          {!hasMinimumCakeRequired &&
-            t('%minimum% CAKE required to change profile pic', { minimum: getFullDisplayBalance(minimumCakeRequired) })}
+          {!hasMinimumWagyuRequired &&
+            t('%minimum% WAGYU required to change profile pic', { minimum: getFullDisplayBalance(minimumWagyuRequired) })}
         </Text>
       </Flex>
       {profile.isActive ? (
@@ -88,7 +88,7 @@ const StartPage: React.FC<StartPageProps> = ({ goToApprove, goToChange, goToRemo
             width="100%"
             mb="8px"
             onClick={needsApproval === true ? goToApprove : goToChange}
-            disabled={!hasMinimumCakeRequired || needsApproval === null}
+            disabled={!hasMinimumWagyuRequired || needsApproval === null}
           >
             {t('Change Profile Pic')}
           </Button>
@@ -101,7 +101,7 @@ const StartPage: React.FC<StartPageProps> = ({ goToApprove, goToChange, goToRemo
           width="100%"
           mb="8px"
           onClick={needsApproval === true ? goToApprove : goToChange}
-          disabled={!hasMinimumCakeRequired || needsApproval === null}
+          disabled={!hasMinimumWagyuRequired || needsApproval === null}
         >
           {t('Reactivate Profile')}
         </Button>

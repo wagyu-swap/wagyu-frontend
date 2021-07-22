@@ -69,14 +69,14 @@ const TicketCard: React.FC<CardProps> = ({ isSecondCard = false }) => {
               <Text fontSize="14px" color="textSubtle">
                 {t('Until ticket sale:')}
               </Text>
-              <Heading scale="lg">{timeUntilTicketSale}</Heading>
+              <Heading size="lg">{timeUntilTicketSale}</Heading>
             </TicketCountWrapper>
           ) : (
             <TicketCountWrapper>
               <Text fontSize="14px" color="textSubtle">
                 {t('Your tickets for this round')}
               </Text>
-              <Heading scale="lg">{ticketsLength}</Heading>
+              <Heading size="lg">{ticketsLength}</Heading>
             </TicketCountWrapper>
           )}
         </CardHeader>

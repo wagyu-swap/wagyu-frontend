@@ -7,9 +7,9 @@ import { PoolCategory } from 'config/constants/types'
 import { BIG_ZERO } from 'utils/bigNumber'
 import { formatNumber, getBalanceNumber, getFullDisplayBalance } from 'utils/formatBalance'
 import Balance from 'components/Balance'
-import { useCakeVault } from 'state/hooks'
+import { useWagyuVault } from 'state/hooks'
 import { useTranslation } from 'contexts/Localization'
-import { getCakeVaultEarnings } from 'views/Pools/helpers'
+import { getWagyuVaultEarnings } from 'views/Pools/helpers'
 import BaseCell, { CellContent } from './BaseCell'
 import CollectModal from '../../PoolCard/Modals/CollectModal'
 
@@ -34,26 +34,26 @@ const EarningsCell: React.FC<EarningsCellProps> = ({ pool, account, userDataLoad
   const { t } = useTranslation()
   const { isXs, isSm } = useMatchBreakpoints()
   const { sousId, earningToken, poolCategory, userData, earningTokenPrice, isAutoVault } = pool
-  const isManualCakePool = sousId === 0
+  const isManualWagyuPool = sousId === 0
 
   const earnings = userData?.pendingReward ? new BigNumber(userData.pendingReward) : BIG_ZERO
-  // These will be reassigned later if its Auto CAKE vault
+  // These will be reassigned later if its Auto WAGYU vault
   let earningTokenBalance = getBalanceNumber(earnings, earningToken.decimals)
   let earningTokenDollarBalance = getBalanceNumber(earnings.multipliedBy(earningTokenPrice), earningToken.decimals)
   let hasEarnings = account && earnings.gt(0)
   const fullBalance = getFullDisplayBalance(earnings, earningToken.decimals)
   const formattedBalance = formatNumber(earningTokenBalance, 3, 3)
   const earningsDollarValue = formatNumber(earningTokenDollarBalance)
-  const isBnbPool = poolCategory === PoolCategory.BINANCE
+  const isVlxPool = poolCategory === PoolCategory.VELAS
 
-  // Auto CAKE vault calculations
+  // Auto WAGYU vault calculations
   const {
-    userData: { cakeAtLastUserAction, userShares, lastUserActionTime },
+    userData: { wagyuAtLastUserAction, userShares, lastUserActionTime },
     pricePerFullShare,
-  } = useCakeVault()
-  const { hasAutoEarnings, autoCakeToDisplay, autoUsdToDisplay } = getCakeVaultEarnings(
+  } = useWagyuVault()
+  const { hasAutoEarnings, autoWagyuToDisplay, autoUsdToDisplay } = getWagyuVaultEarnings(
     account,
-    cakeAtLastUserAction,
+    wagyuAtLastUserAction,
     userShares,
     pricePerFullShare,
     earningTokenPrice,
@@ -63,14 +63,14 @@ const EarningsCell: React.FC<EarningsCellProps> = ({ pool, account, userDataLoad
   const dateTimeLastAction = new Date(lastActionInMs)
   const dateStringToDisplay = dateTimeLastAction.toLocaleString()
 
-  const labelText = isAutoVault ? t('Recent CAKE profit') : t('%asset% Earned', { asset: earningToken.symbol })
-  earningTokenBalance = isAutoVault ? autoCakeToDisplay : earningTokenBalance
+  const labelText = isAutoVault ? t('Recent WAGYU profit') : t('%asset% Earned', { asset: earningToken.symbol })
+  earningTokenBalance = isAutoVault ? autoWagyuToDisplay : earningTokenBalance
   hasEarnings = isAutoVault ? hasAutoEarnings : hasEarnings
   earningTokenDollarBalance = isAutoVault ? autoUsdToDisplay : earningTokenDollarBalance
 
   const { targetRef, tooltip, tooltipVisible } = useTooltip(
     <>
-      <Balance fontSize="16px" value={autoCakeToDisplay} decimals={3} bold unit=" CAKE" />
+      <Balance fontSize="16px" value={autoWagyuToDisplay} decimals={3} bold unit=" WAGYU" />
       <Balance fontSize="16px" value={autoUsdToDisplay} decimals={2} bold prefix="~$" />
       {t('Earned since your last action')}
       <Text>{dateStringToDisplay}</Text>
@@ -85,8 +85,8 @@ const EarningsCell: React.FC<EarningsCellProps> = ({ pool, account, userDataLoad
       earningToken={earningToken}
       earningsDollarValue={earningsDollarValue}
       sousId={sousId}
-      isBnbPool={isBnbPool}
-      isCompoundPool={isManualCakePool}
+      isVlxPool={isVlxPool}
+      isCompoundPool={isManualWagyuPool}
     />,
   )
 

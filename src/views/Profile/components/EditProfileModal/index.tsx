@@ -5,7 +5,7 @@ import useEditProfile, { Views } from './reducer'
 import StartView from './StartView'
 import PauseProfileView from './PauseProfileView'
 import ChangeProfilePicView from './ChangeProfilePicView'
-import ApproveCakeView from './ApproveCakeView'
+import ApproveWagyuView from './ApproveWagyuView'
 
 type EditProfileModalProps = InjectedModalProps
 
@@ -13,7 +13,7 @@ const viewTitle = {
   [Views.START]: 'Edit Profile',
   [Views.CHANGE]: 'Change Profile Pic',
   [Views.REMOVE]: 'Remove Profile Pic',
-  [Views.APPROVE]: 'Approve CAKE',
+  [Views.APPROVE]: 'Approve WAGYU',
 }
 
 const EditProfileModal: React.FC<EditProfileModalProps> = ({ onDismiss }) => {
@@ -32,7 +32,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({ onDismiss }) => {
         )}
         {currentView === Views.REMOVE && <PauseProfileView onDismiss={onDismiss} />}
         {currentView === Views.CHANGE && <ChangeProfilePicView onDismiss={onDismiss} />}
-        {currentView === Views.APPROVE && <ApproveCakeView goToChange={goToChange} onDismiss={onDismiss} />}
+        {currentView === Views.APPROVE && <ApproveWagyuView goToChange={goToChange} onDismiss={onDismiss} />}
       </div>
     </Modal>
   )

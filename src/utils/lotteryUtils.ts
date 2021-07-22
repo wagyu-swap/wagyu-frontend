@@ -157,7 +157,7 @@ export const getTotalClaim = async (lotteryContract, ticketsContract, account) =
 
     return claim
   } catch (err) {
-    console.error(err)
+    // console.error(err)
   }
   return BIG_ZERO
 }

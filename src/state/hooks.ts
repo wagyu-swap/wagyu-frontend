@@ -16,9 +16,9 @@ import {
   fetchFarmsPublicDataAsync,
   fetchPoolsPublicDataAsync,
   fetchPoolsUserDataAsync,
-  fetchCakeVaultPublicData,
-  fetchCakeVaultUserData,
-  fetchCakeVaultFees,
+  fetchWagyuVaultPublicData,
+  fetchWagyuVaultUserData,
+  fetchWagyuVaultFees,
   setBlock,
 } from './actions'
 import { State, Farm, Pool, ProfileState, TeamsState, AchievementState, FarmsState } from './types'
@@ -51,8 +51,8 @@ export const usePollFarmsData = (includeArchive = false) => {
 
 /**
  * Fetches the "core" farm data used globally
- * 251 = CAKE-BNB LP
- * 252 = BUSD-BNB LP
+ * 1 = WAGYU-VLX LP
+ * 3 = VUSDT-VLX LP
  */
 export const usePollCoreFarmData = () => {
   const dispatch = useAppDispatch()
@@ -60,7 +60,7 @@ export const usePollCoreFarmData = () => {
   const web3 = getWeb3NoAccount()
 
   useEffect(() => {
-    dispatch(fetchFarmsPublicDataAsync([251, 252]))
+    dispatch(fetchFarmsPublicDataAsync([1, 2, 3]))
   }, [dispatch, fastRefresh, web3])
 }
 
@@ -114,20 +114,20 @@ export const useFarmFromTokenSymbol = (tokenSymbol: string, preferredQuoteTokens
 }
 
 // Return the base token price for a farm, from a given pid
-export const useBusdPriceFromPid = (pid: number): BigNumber => {
+export const useVusdtPriceFromPid = (pid: number): BigNumber => {
   const farm = useFarmFromPid(pid)
-  return farm && new BigNumber(farm.token.busdPrice)
+  return farm && new BigNumber(farm.token.vusdtPrice)
 }
 
-export const useBusdPriceFromToken = (tokenSymbol: string): BigNumber => {
+export const useVusdtPriceFromToken = (tokenSymbol: string): BigNumber => {
   const tokenFarm = useFarmFromTokenSymbol(tokenSymbol)
-  const tokenPrice = useBusdPriceFromPid(tokenFarm?.pid)
+  const tokenPrice = useVusdtPriceFromPid(tokenFarm?.pid)
   return tokenPrice
 }
 
 export const useLpTokenPrice = (symbol: string) => {
   const farm = useFarmFromLpSymbol(symbol)
-  const farmTokenPriceInUsd = useBusdPriceFromPid(farm.pid)
+  const farmTokenPriceInUsd = useVusdtPriceFromPid(farm.pid)
   let lpTokenPrice = BIG_ZERO
 
   if (farm.lpTotalSupply && farm.lpTotalInQuoteToken) {
@@ -156,7 +156,7 @@ export const useFetchPublicPoolsData = () => {
       dispatch(fetchPoolsPublicDataAsync(blockNumber))
     }
 
-    fetchPoolsPublicData()
+    fetchPoolsPublicData().then()
     dispatch(fetchPoolsStakingLimitsAsync())
   }, [dispatch, slowRefresh, web3])
 }
@@ -182,48 +182,48 @@ export const usePoolFromPid = (sousId: number): Pool => {
   return transformPool(pool)
 }
 
-export const useFetchCakeVault = () => {
+export const useFetchWagyuVault = () => {
   const { account } = useWeb3React()
   const { fastRefresh } = useRefresh()
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(fetchCakeVaultPublicData())
+    dispatch(fetchWagyuVaultPublicData())
   }, [dispatch, fastRefresh])
 
   useEffect(() => {
-    dispatch(fetchCakeVaultUserData({ account }))
+    dispatch(fetchWagyuVaultUserData({ account }))
   }, [dispatch, fastRefresh, account])
 
   useEffect(() => {
-    dispatch(fetchCakeVaultFees())
+    dispatch(fetchWagyuVaultFees())
   }, [dispatch])
 }
 
-export const useCakeVault = () => {
+export const useWagyuVault = () => {
   const {
     totalShares: totalSharesAsString,
     pricePerFullShare: pricePerFullShareAsString,
-    totalCakeInVault: totalCakeInVaultAsString,
-    estimatedCakeBountyReward: estimatedCakeBountyRewardAsString,
-    totalPendingCakeHarvest: totalPendingCakeHarvestAsString,
+    totalWagyuInVault: totalWagyuInVaultAsString,
+    estimatedWagyuBountyReward: estimatedWagyuBountyRewardAsString,
+    totalPendingWagyuHarvest: totalPendingWagyuHarvestAsString,
     fees: { performanceFee, callFee, withdrawalFee, withdrawalFeePeriod },
     userData: {
       isLoading,
       userShares: userSharesAsString,
-      cakeAtLastUserAction: cakeAtLastUserActionAsString,
+      wagyuAtLastUserAction: wagyuAtLastUserActionAsString,
       lastDepositedTime,
       lastUserActionTime,
     },
-  } = useSelector((state: State) => state.pools.cakeVault)
+  } = useSelector((state: State) => state.pools.wagyuVault)
 
-  const estimatedCakeBountyReward = useMemo(() => {
-    return new BigNumber(estimatedCakeBountyRewardAsString)
-  }, [estimatedCakeBountyRewardAsString])
+  const estimatedWagyuBountyReward = useMemo(() => {
+    return new BigNumber(estimatedWagyuBountyRewardAsString)
+  }, [estimatedWagyuBountyRewardAsString])
 
-  const totalPendingCakeHarvest = useMemo(() => {
-    return new BigNumber(totalPendingCakeHarvestAsString)
-  }, [totalPendingCakeHarvestAsString])
+  const totalPendingWagyuHarvest = useMemo(() => {
+    return new BigNumber(totalPendingWagyuHarvestAsString)
+  }, [totalPendingWagyuHarvestAsString])
 
   const totalShares = useMemo(() => {
     return new BigNumber(totalSharesAsString)
@@ -233,24 +233,24 @@ export const useCakeVault = () => {
     return new BigNumber(pricePerFullShareAsString)
   }, [pricePerFullShareAsString])
 
-  const totalCakeInVault = useMemo(() => {
-    return new BigNumber(totalCakeInVaultAsString)
-  }, [totalCakeInVaultAsString])
+  const totalWagyuInVault = useMemo(() => {
+    return new BigNumber(totalWagyuInVaultAsString)
+  }, [totalWagyuInVaultAsString])
 
   const userShares = useMemo(() => {
     return new BigNumber(userSharesAsString)
   }, [userSharesAsString])
 
-  const cakeAtLastUserAction = useMemo(() => {
-    return new BigNumber(cakeAtLastUserActionAsString)
-  }, [cakeAtLastUserActionAsString])
+  const wagyuAtLastUserAction = useMemo(() => {
+    return new BigNumber(wagyuAtLastUserActionAsString)
+  }, [wagyuAtLastUserActionAsString])
 
   return {
     totalShares,
     pricePerFullShare,
-    totalCakeInVault,
-    estimatedCakeBountyReward,
-    totalPendingCakeHarvest,
+    totalWagyuInVault,
+    estimatedWagyuBountyReward,
+    totalPendingWagyuHarvest,
     fees: {
       performanceFee,
       callFee,
@@ -260,7 +260,7 @@ export const useCakeVault = () => {
     userData: {
       isLoading,
       userShares,
-      cakeAtLastUserAction,
+      wagyuAtLastUserAction,
       lastDepositedTime,
       lastUserActionTime,
     },
@@ -325,14 +325,14 @@ export const useAchievements = () => {
   return achievements
 }
 
-export const usePriceBnbBusd = (): BigNumber => {
-  const bnbBusdFarm = useFarmFromPid(252)
-  return new BigNumber(bnbBusdFarm.quoteToken.busdPrice)
+export const usePriceVlxVusdt = (): BigNumber => {
+  const vlxVusdtFarm = useFarmFromPid(2)
+  return new BigNumber(vlxVusdtFarm.quoteToken.vusdtPrice)
 }
 
-export const usePriceCakeBusd = (): BigNumber => {
-  const cakeBnbFarm = useFarmFromPid(251)
-  return new BigNumber(cakeBnbFarm.token.busdPrice)
+export const usePriceWagyuVusdt = (): BigNumber => {
+  const wagyuVlxFarm = useFarmFromPid(1)
+  return new BigNumber(wagyuVlxFarm.token.vusdtPrice)
 }
 
 // Block

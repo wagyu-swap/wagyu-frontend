@@ -1,7 +1,7 @@
 import pools from 'config/constants/pools'
 import { getSouschefContract, getSouschefV2Contract } from 'utils/contractHelpers'
 
-// Pool 0 is special (cake pool)
+// Pool 0 is special (wagyu pool)
 // Pool 78 is a broken pool, not used, and break the tests
 const idsToRemove = [0, 78]
 const poolsToTest = pools.filter((pool) => !idsToRemove.includes(pool.sousId))
@@ -18,7 +18,7 @@ describe('Config pools', () => {
       expect(duplicates).toHaveLength(1)
     },
   )
-  it.each(poolsToTest.filter((pool) => pool.earningToken.symbol !== 'BNB'))(
+  it.each(poolsToTest.filter((pool) => pool.earningToken.symbol !== 'VLX'))(
     'Pool %p has the correct earning token',
     async (pool) => {
       const contract = getSouschefContract(pool.sousId)
@@ -26,7 +26,7 @@ describe('Config pools', () => {
       expect(rewardTokenAddress.toLowerCase()).toBe(pool.earningToken.address[56].toLowerCase())
     },
   )
-  it.each(poolsToTest.filter((pool) => pool.stakingToken.symbol !== 'BNB'))(
+  it.each(poolsToTest.filter((pool) => pool.stakingToken.symbol !== 'VLX'))(
     'Pool %p has the correct staking token',
     async (pool) => {
       let stakingTokenAddress = null

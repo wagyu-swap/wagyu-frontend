@@ -1,10 +1,10 @@
 import BigNumber from 'bignumber.js'
 import { DEFAULT_GAS_LIMIT, DEFAULT_TOKEN_DECIMAL } from 'config'
 import { ethers } from 'ethers'
-import { Pair, TokenAmount, Token } from '@pancakeswap-libs/sdk'
+import { Pair, TokenAmount, Token } from '@wagyu-swap-libs/sdk'
 import { getLpContract, getMasterchefContract } from 'utils/contractHelpers'
 import farms from 'config/constants/farms'
-import { getAddress, getCakeAddress } from 'utils/addressHelpers'
+import { getAddress, getWagyuAddress } from 'utils/addressHelpers'
 import tokens from 'config/constants/tokens'
 import pools from 'config/constants/pools'
 import sousChefABI from 'config/abi/sousChef.json'
@@ -28,7 +28,6 @@ export const stake = async (masterChefContract, pid, amount, account) => {
         return tx.transactionHash
       })
   }
-
   return masterChefContract.methods
     .deposit(pid, new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString())
     .send({ from: account, gas: DEFAULT_GAS_LIMIT })
@@ -46,7 +45,7 @@ export const sousStake = async (sousChefContract, amount, decimals = 18, account
     })
 }
 
-export const sousStakeBnb = async (sousChefContract, amount, account) => {
+export const sousStakeVlx = async (sousChefContract, amount, account) => {
   return sousChefContract.methods
     .deposit()
     .send({
@@ -122,7 +121,7 @@ export const soushHarvest = async (sousChefContract, account) => {
     })
 }
 
-export const soushHarvestBnb = async (sousChefContract, account) => {
+export const soushHarvestVlx = async (sousChefContract, account) => {
   return sousChefContract.methods
     .deposit()
     .send({ from: account, gas: DEFAULT_GAS_LIMIT, value: BIG_ZERO })
@@ -132,53 +131,53 @@ export const soushHarvestBnb = async (sousChefContract, account) => {
 }
 
 const chainId = parseInt(process.env.REACT_APP_CHAIN_ID, 10)
-const cakeBnbPid = 251
-const cakeBnbFarm = farms.find((farm) => farm.pid === cakeBnbPid)
+const wagyuVlxPid = 1
+const wagyuVlxFarm = farms.find((farm) => farm.pid === wagyuVlxPid)
 
-const CAKE_TOKEN = new Token(chainId, getCakeAddress(), 18)
-const WBNB_TOKEN = new Token(chainId, tokens.wbnb.address[chainId], 18)
-const CAKE_BNB_TOKEN = new Token(chainId, getAddress(cakeBnbFarm.lpAddresses), 18)
+const WAGYU_TOKEN = new Token(chainId, getWagyuAddress(), 18)
+const WVLX_TOKEN = new Token(chainId, tokens.wvlx.address[chainId], 18)
+const WAGYU_VLX_TOKEN = new Token(chainId, getAddress(wagyuVlxFarm.lpAddresses), 18)
 
 /**
- * Returns the total CAKE staked in the CAKE-BNB LP
+ * Returns the total WAGYU staked in the WAGYU-VLX LP
  */
-export const getUserStakeInCakeBnbLp = async (account: string, block?: number) => {
+export const getUserStakeInWagyuVlxLp = async (account: string, block?: number) => {
   try {
     const masterContract = getMasterchefContract()
-    const cakeBnbContract = getLpContract(getAddress(cakeBnbFarm.lpAddresses))
-    const totalSupplyLP = await cakeBnbContract.methods.totalSupply().call(undefined, block)
-    const reservesLP = await cakeBnbContract.methods.getReserves().call(undefined, block)
-    const cakeBnbBalance = await masterContract.methods.userInfo(cakeBnbPid, account).call(undefined, block)
+    const wagyuVlxContract = getLpContract(getAddress(wagyuVlxFarm.lpAddresses))
+    const totalSupplyLP = await wagyuVlxContract.methods.totalSupply().call(undefined, block)
+    const reservesLP = await wagyuVlxContract.methods.getReserves().call(undefined, block)
+    const wagyuVlxBalance = await masterContract.methods.userInfo(wagyuVlxPid, account).call(undefined, block)
 
     const pair: Pair = new Pair(
-      new TokenAmount(CAKE_TOKEN, reservesLP._reserve0.toString()),
-      new TokenAmount(WBNB_TOKEN, reservesLP._reserve1.toString()),
+      new TokenAmount(WAGYU_TOKEN, reservesLP._reserve0.toString()),
+      new TokenAmount(WVLX_TOKEN, reservesLP._reserve1.toString()),
     )
-    const cakeLPBalance = pair.getLiquidityValue(
+    const wagyuLPBalance = pair.getLiquidityValue(
       pair.token0,
-      new TokenAmount(CAKE_BNB_TOKEN, totalSupplyLP.toString()),
-      new TokenAmount(CAKE_BNB_TOKEN, cakeBnbBalance.amount.toString()),
+      new TokenAmount(WAGYU_VLX_TOKEN, totalSupplyLP.toString()),
+      new TokenAmount(WAGYU_VLX_TOKEN, wagyuVlxBalance.amount.toString()),
       false,
     )
 
-    return cakeLPBalance.toSignificant(18)
+    return wagyuLPBalance.toSignificant(18)
   } catch (error) {
-    console.error(`CAKE-BNB LP error: ${error}`)
+    console.error(`WAGYU-VLX LP error: ${error}`)
     return 0
   }
 }
 
 /**
- * Gets the cake staked in the main pool
+ * Gets the wagyu staked in the main pool
  */
-export const getUserStakeInCakePool = async (account: string, block?: number) => {
+export const getUserStakeInWagyuPool = async (account: string, block?: number) => {
   try {
     const masterContract = getMasterchefContract()
     const response = await masterContract.methods.userInfo(0, account).call(undefined, block)
 
     return getBalanceAmount(new BigNumber(response.amount)).toNumber()
   } catch (error) {
-    console.error('Error getting stake in CAKE pool', error)
+    console.error('Error getting stake in WAGYU pool', error)
     return 0
   }
 }

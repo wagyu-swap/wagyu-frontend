@@ -16,7 +16,7 @@ const useGetLatestOraclePrice = () => {
       setPrice(getBalanceAmount(new BigNumber(response), 8))
     }
 
-    fetchPrice()
+    fetchPrice().then()
   }, [chainlinkOracleContract, lastUpdated, setPrice])
 
   return { price, lastUpdated, refresh }

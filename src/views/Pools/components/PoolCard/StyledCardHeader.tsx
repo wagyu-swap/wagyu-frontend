@@ -27,9 +27,9 @@ const StyledCardHeader: React.FC<{
 }) => {
   const { t } = useTranslation()
   const poolImageSrc = isAutoVault
-    ? `cake-cakevault.svg`
+    ? `wagyu-wagyuvault.svg`
     : `${earningTokenSymbol}-${stakingTokenSymbol}.svg`.toLocaleLowerCase()
-  const isCakePool = earningTokenSymbol === 'CAKE' && stakingTokenSymbol === 'CAKE'
+  const isWagyuPool = earningTokenSymbol === 'WAGYU' && stakingTokenSymbol === 'WAGYU'
   const background = isStaking ? 'bubblegum' : 'cardHeader'
 
   const getHeadingPrefix = () => {
@@ -37,8 +37,8 @@ const StyledCardHeader: React.FC<{
       // vault
       return t('Auto')
     }
-    if (isCakePool) {
-      // manual cake
+    if (isWagyuPool) {
+      // manual wagyu
       return t('Manual')
     }
     // all other pools
@@ -49,8 +49,8 @@ const StyledCardHeader: React.FC<{
     if (isAutoVault) {
       return t('Automatic restaking')
     }
-    if (isCakePool) {
-      return t('Earn CAKE, stake CAKE')
+    if (isWagyuPool) {
+      return t('Earn WAGYU, stake WAGYU')
     }
     return t('Stake %symbol%', { symbol: stakingTokenSymbol })
   }

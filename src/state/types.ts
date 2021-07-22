@@ -81,23 +81,23 @@ export interface VaultFees {
 export interface VaultUser {
   isLoading: boolean
   userShares: string
-  cakeAtLastUserAction: string
+  wagyuAtLastUserAction: string
   lastDepositedTime: string
   lastUserActionTime: string
 }
-export interface CakeVault {
+export interface WagyuVault {
   totalShares?: string
   pricePerFullShare?: string
-  totalCakeInVault?: string
-  estimatedCakeBountyReward?: string
-  totalPendingCakeHarvest?: string
+  totalWagyuInVault?: string
+  estimatedWagyuBountyReward?: string
+  totalPendingWagyuHarvest?: string
   fees?: VaultFees
   userData?: VaultUser
 }
 
 export interface PoolsState {
   data: Pool[]
-  cakeVault: CakeVault
+  wagyuVault: WagyuVault
   userDataLoaded: boolean
 }
 
@@ -214,7 +214,7 @@ export interface PredictionUser {
   address: string
   block: number
   totalBets: number
-  totalBNB: number
+  totalVLX: number
 }
 
 export interface RoundData {
