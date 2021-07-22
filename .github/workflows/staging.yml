@@ -1,4 +1,4 @@
-name: Wagyuswap deployment - Test, Build & Deploy
+name: Wagyuswap staging deployment - Test, Build & Deploy
 
 on:
   push:
