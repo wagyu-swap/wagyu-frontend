@@ -12,7 +12,7 @@ const useGetLotteryHasDrawn = () => {
   const lotteryContract = useLottery()
 
   useEffect(() => {
-    let isSubscribed = true;
+    let isSubscribed = true
     if (lotteryContract) {
       const fetchLotteryStatus = async () => {
         const state = await getLotteryStatus(lotteryContract)

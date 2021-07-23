@@ -94,7 +94,7 @@ const BountyCard = () => {
             <Flex flexDirection="column" mr="12px">
               <Heading>
                 {hasFetchedWagyuBounty ? (
-                  <Balance fontSize="20px" bold value={wagyuBountyToDisplay} decimals={3} />
+                  <Balance fontSize="20px" bold value={wagyuBountyToDisplay} decimals={5} />
                 ) : (
                   <Skeleton height={20} width={96} mb="2px" />
                 )}
@@ -104,7 +104,7 @@ const BountyCard = () => {
                   fontSize="12px"
                   color="textSubtle"
                   value={dollarBountyToDisplay}
-                  decimals={2}
+                  decimals={5}
                   unit=" USD"
                   prefix="~"
                 />

@@ -16,7 +16,7 @@ const useGetRecentLotteryRoundData = (): GetRecentLotteryRoundDataReturn => {
   const { mostRecentLotteryNumber } = useContext(PastLotteryDataContext)
 
   useEffect(() => {
-    let isSubscribed = true;
+    let isSubscribed = true
     const fetchRecentLotteryData = async () => {
       try {
         if (isSubscribed) {

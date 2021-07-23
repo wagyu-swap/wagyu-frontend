@@ -162,7 +162,7 @@ const BattleCta: React.FC<CompetitionProps> = ({
     }
     // Registered and competition is live
     if (hasRegistered && isCompetitionLive) {
-      window.location.href = 'https://exchange-wagyuswap.herokuapp.com/#/swap'
+      window.location.href = 'https://dp1n7z0335ni0.cloudfront.net/#/swap'
     }
     // Registered and competition has finished
     if (hasRegistered && hasCompetitionEnded) {

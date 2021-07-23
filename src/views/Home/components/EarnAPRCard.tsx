@@ -38,7 +38,7 @@ const EarnAPRCard = () => {
 
   // Fetch farm data once to get the max APR
   useEffect(() => {
-    let isSubscribed = true;
+    let isSubscribed = true
     const fetchFarmData = async () => {
       try {
         await dispatch(fetchFarmsPublicDataAsync(nonArchivedFarms.map((nonArchivedFarm) => nonArchivedFarm.pid)))

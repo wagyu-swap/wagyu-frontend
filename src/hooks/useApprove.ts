@@ -38,7 +38,7 @@ export const useSousApprove = (lpContract: Contract, sousId, earningTokenSymbol)
   const sousChefContract = useSousChef(sousId)
 
   const handleApprove = useCallback(async () => {
-    let isSubscribed = true;
+    let isSubscribed = true
     try {
       if (isSubscribed) {
         setRequestedApproval(true)
@@ -51,7 +51,9 @@ export const useSousApprove = (lpContract: Contract, sousId, earningTokenSymbol)
           t('You can now stake in the %symbol% pool!', { symbol: earningTokenSymbol }),
         )
         if (isSubscribed) {
-          setRequestedApproval(false)
+          if (isSubscribed) {
+            setRequestedApproval(false)
+          }
         }
       } else {
         // user rejected tx or didn't go thru
@@ -60,7 +62,9 @@ export const useSousApprove = (lpContract: Contract, sousId, earningTokenSymbol)
           `${t(`Please try again. Confirm the transaction and make sure you are paying enough gas!`)}`,
         )
         if (isSubscribed) {
-          setRequestedApproval(false)
+          if (isSubscribed) {
+            setRequestedApproval(false)
+          }
         }
       }
     } catch (e) {
