@@ -30,7 +30,7 @@ const Lottery: React.FC = () => {
 
   useEffect(() => {
     let isSubscribed = true
-    fetch(`https://wagyu-api.vercel.app/api/lotteryHistory`)
+    fetch(`https://wagyu-swap-api.vercel.app/api/lotteryHistory`)
       .then((response) => response.json())
       .then((data) => setHistoryData(data))
       .catch(() => {
