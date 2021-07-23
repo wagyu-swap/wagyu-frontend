@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import BigNumber from 'bignumber.js'
 import poolsConfig from 'config/constants/pools'
 import { BIG_ZERO } from 'utils/bigNumber'
-import { PoolsState, Pool, WagyuVault, VaultFees, VaultUser, AppThunk } from 'state/types'
+import { AppThunk, Pool, PoolsState, VaultFees, VaultUser, WagyuVault } from 'state/types'
 import { getPoolApr } from 'utils/apr'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { getAddress } from 'utils/addressHelpers'
@@ -11,12 +11,14 @@ import { fetchPoolsBlockLimits, fetchPoolsStakingLimits, fetchPoolsTotalStaking 
 import {
   fetchPoolsAllowance,
   fetchUserBalances,
-  fetchUserStakeBalances,
   fetchUserPendingRewards,
+  fetchUserStakeBalances,
 } from './fetchPoolsUser'
 import { fetchPublicVaultData, fetchVaultFees } from './fetchVaultPublic'
 import fetchVaultUser from './fetchVaultUser'
 import { getTokenPricesFromFarm } from './helpers'
+import { PoolCategory } from '../../config/constants/types'
+import tokens from '../../config/constants/tokens'
 
 const initialState: PoolsState = {
   data: [...poolsConfig],
@@ -55,12 +57,17 @@ export const fetchPoolsPublicDataAsync = (currentBlock: number) => async (dispat
     const totalStaking = totalStakings.find((entry) => entry.sousId === pool.sousId)
     const isPoolEndBlockExceeded = currentBlock > 0 && blockLimit ? currentBlock > Number(blockLimit.endBlock) : false
     const isPoolFinished = pool.isFinished || isPoolEndBlockExceeded
-
-    const stakingTokenAddress = pool.stakingToken.address ? getAddress(pool.stakingToken.address).toLowerCase() : null
+    const stakingTokenAddress = pool.stakingToken.address ? getAddress(pool.stakingToken.address).toLowerCase() : getAddress(tokens.wvlx.address).toLowerCase()
     const stakingTokenPrice = stakingTokenAddress ? prices[stakingTokenAddress] : 0
 
     const earningTokenAddress = pool.earningToken.address ? getAddress(pool.earningToken.address).toLowerCase() : null
     const earningTokenPrice = earningTokenAddress ? prices[earningTokenAddress] : 0
+    if (pool.tokenPerBlock === '10') {
+      console.log('stakingTokenPrice: ', stakingTokenPrice);
+      console.log('earningTokenPrice: ', earningTokenPrice);
+      console.log(getBalanceNumber(new BigNumber(totalStaking.totalStaked), pool.stakingToken.decimals))
+      console.log(parseFloat(pool.tokenPerBlock))
+    }
     const apr = !isPoolFinished
       ? getPoolApr(
           stakingTokenPrice,

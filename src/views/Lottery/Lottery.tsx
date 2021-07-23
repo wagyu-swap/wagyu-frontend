@@ -29,12 +29,18 @@ const Lottery: React.FC = () => {
   const [mostRecentLotteryNumber, setMostRecentLotteryNumber] = useState(1)
 
   useEffect(() => {
+    let isSubscribed = true
     fetch(`https://wagyu-api.vercel.app/api/lotteryHistory`)
       .then((response) => response.json())
       .then((data) => setHistoryData(data))
       .catch(() => {
-        setHistoryError(true)
+        if (isSubscribed) {
+          setHistoryError(true)
+        }
       })
+    return() => {
+      isSubscribed = false
+    }
   }, [])
 
   useEffect(() => {

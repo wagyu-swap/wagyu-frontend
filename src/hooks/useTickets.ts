@@ -21,7 +21,7 @@ const useTickets = (lotteryNumber = null) => {
   const { fastRefresh } = useRefresh()
 
   useEffect(() => {
-    let isSubscribed = true;
+    let isSubscribed = true
     const fetchBalance = async () => {
       const res = await getTickets(lotteryContract, ticketsContract, account, lotteryNumber)
       if (isSubscribed) {
@@ -45,7 +45,7 @@ export const useTotalRewards = () => {
   const { fastRefresh } = useRefresh()
 
   useEffect(() => {
-    let isSubscribed = true;
+    let isSubscribed = true
     const fetchBalance = async () => {
       const res = await getTotalRewards(lotteryContract)
       if (isSubscribed) {
@@ -74,7 +74,7 @@ export const useTotalClaim = () => {
   const { lastUpdated, setLastUpdated } = useLastUpdated()
 
   useEffect(() => {
-    let isSubscribed = true;
+    let isSubscribed = true
     const fetchBalance = async () => {
       if (isSubscribed) {
         setClaimLoading(true)
@@ -105,7 +105,7 @@ export const useWinningNumbers = () => {
   const { fastRefresh } = useRefresh()
 
   useEffect(() => {
-    let isSubscribed = true;
+    let isSubscribed = true
     const fetchBalance = async () => {
       const rewards = await getWinningNumbers(lotteryContract)
       if (isSubscribed) {
@@ -129,7 +129,7 @@ export const useMatchingRewardLength = (numbers) => {
   const { fastRefresh } = useRefresh()
 
   useEffect(() => {
-    let isSubscribed = true;
+    let isSubscribed = true
     const fetchBalance = async () => {
       const matchedNumbers = await getMatchingRewardLength(lotteryContract, numbers)
       if (isSubscribed) {

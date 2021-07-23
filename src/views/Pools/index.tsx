@@ -24,6 +24,7 @@ import HelpButton from './components/HelpButton'
 import PoolsTable from './components/PoolsTable/PoolsTable'
 import { ViewMode } from './components/ToggleView/ToggleView'
 import { getAprData, getWagyuVaultEarnings } from './helpers'
+import { PoolCategory } from '../../config/constants/types'
 
 const CardLayout = styled(FlexLayout)`
   justify-content: center;
@@ -73,7 +74,7 @@ const Pools: React.FC = () => {
 
   const pools = useMemo(() => {
     const wagyuPool = poolsWithoutAutoVault.find((pool) => pool.sousId === 0)
-    const wagyuAutoVault = { ...wagyuPool, isAutoVault: true }
+    const wagyuAutoVault = { ...wagyuPool, isAutoVault: true, poolCategory: PoolCategory.AUTO }
     return [wagyuAutoVault, ...poolsWithoutAutoVault]
   }, [poolsWithoutAutoVault])
 

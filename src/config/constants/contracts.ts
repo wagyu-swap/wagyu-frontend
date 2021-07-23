@@ -53,7 +53,7 @@ export default {
   },
   wagyuVault: {
     106: '',
-    111: '0xd42ec763748C9B187a7f976C41907921D4897Ac8',
+    111: '0x34b1370C8Fc76C15eb646ca9503C739d2489158C',
   },
   predictions: {
     106: '',

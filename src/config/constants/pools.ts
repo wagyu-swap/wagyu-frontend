@@ -8,11 +8,11 @@ const pools: PoolConfig[] = [
     earningToken: tokens.wagyu,
     contractAddress: {
       106: '',
-      111: '0xd42ec763748C9B187a7f976C41907921D4897Ac8',
+      111: '0x331ed46B7D69b4B0d52ccbb8B688C76cA86F6F5C',
     },
     poolCategory: PoolCategory.CORE,
     harvest: true,
-    tokenPerBlock: '10',
+    tokenPerBlock: '0.05',
     sortOrder: 1,
     isFinished: false,
   },
@@ -22,7 +22,7 @@ const pools: PoolConfig[] = [
     earningToken: tokens.wagyu,
     contractAddress: {
       106: '',
-      111: '0x24b5442716055D6e01B07c02b87a6b2179bdBD02',
+      111: '0x1Fff48525E10dc82a47351e1AF03E276A32C0341',
     },
     poolCategory: PoolCategory.CORE,
     harvest: true,
@@ -36,12 +36,12 @@ const pools: PoolConfig[] = [
     earningToken: tokens.wagyu,
     contractAddress: {
       106: '',
-      111: '0xB01A761d4Fc2399D310174071401ea9B323CaD44',
+      111: '0x973FF63C33f536F13Ef0e2519d4f59CFdccE1ee5',
     },
     poolCategory: PoolCategory.CORE,
     harvest: true,
     sortOrder: 999,
-    tokenPerBlock: '19',
+    tokenPerBlock: '0.03',
     isFinished: false,
   },
   {
@@ -50,12 +50,12 @@ const pools: PoolConfig[] = [
     earningToken: tokens.wagyu,
     contractAddress: {
       106: '',
-      111: '0x8c1d209984ED65c38f6c72C2eF2A72f68C0503Ee',
+      111: '0x79803775754188A2C14AA5eD3849aBa0a235648e',
     },
     poolCategory: PoolCategory.CORE,
     harvest: true,
     sortOrder: 999,
-    tokenPerBlock: '2.9',
+    tokenPerBlock: '0.02',
     isFinished: false,
   },
   {
