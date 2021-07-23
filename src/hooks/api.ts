@@ -17,7 +17,7 @@ export const useGetStats = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://wagyu-api.vercel.app/api/tvl')
+        const response = await fetch('https://wagyu-swap-api.vercel.app/api/tvl')
         const responseData: DeBankTvlResponse = await response.json()
         setData(responseData);
       } catch (error) {
