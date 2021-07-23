@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.17.2]
+        node-version: [14.17.0]
 
     steps:
     - name: Start deployment
@@ -37,19 +37,20 @@ jobs:
     - name: Build
       run: yarn build
 
-    - name: Upload to S3 and invalidate cloudfront
-      uses: raulanatol/aws-s3-docker-action@v1.0.1
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: us-east-1
-        AWS_BUCKET_NAME: staging.wagyuswap.com
-        SOURCE: ./build
-        TARGET: ""
-        WITH_DELETE: true
-        WITH_CLOUD_FRONT_INVALIDATION: true
-        AWS_CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.AWS_CF_DISTRIBUTION_ID_STAGING_WAGYUSWAP }}
-        AWS_CLOUDFRONT_INVALIDATION_PATH: "/*"
+    - name: Executing remote ssh commands using password(Git Pull, Build)
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.REMOTE_HOST_STAGING }}
+        username: ${{ secrets.REMOTE_USER_STAGING }}
+        password: ${{ secrets.REMOTE_PASSWORD_STAGING }}
+        port: ${{ secrets.REMOTE_PORT }}
+        script: |
+          cd /root/projects/wagyu-frontend
+          git reset --hard origin/staging
+          git pull
+          yarn
+          rm -rf build
+          yarn build
 
     - name: Update deployment status
       uses: bobheadxi/deployments@master
