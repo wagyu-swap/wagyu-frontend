@@ -1,3 +1,4 @@
+import { ChainId, IS_MAINNET, Token } from '@wagyu-swap-libs/sdk'
 import BigNumber from 'bignumber.js/bignumber'
 import { BIG_TEN } from 'utils/bigNumber'
 
@@ -6,6 +7,7 @@ BigNumber.config({
   DECIMAL_PLACES: 80,
 })
 
+export const WAGYU = new Token(IS_MAINNET ? ChainId.MAINNET : ChainId.VELASTESTNET, IS_MAINNET ? '' : '0x297170abcFC7AceA729ce128E1326bE125a7F982', 18, 'WAGYU', 'WagyuSwap Token')
 export const VELAS_BLOCK_TIME = 3
 
 // WAGYU_PER_BLOCK details

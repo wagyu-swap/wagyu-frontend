@@ -5,14 +5,18 @@ import { languageList } from 'config/localization/languages'
 import { useTranslation } from 'contexts/Localization'
 import useTheme from 'hooks/useTheme'
 import useAuth from 'hooks/useAuth'
-import { usePriceWagyuVusdt, useProfile } from 'state/hooks'
-import config from './config'
+import useGetPriceData from 'hooks/useGetPriceData'
+import { useProfile } from 'state/hooks'
+import { WAGYU } from 'config'
+import link from './config'
 
 const Menu = (props) => {
   const { account } = useWeb3React()
   const { login, logout } = useAuth()
   const { isDark, toggleTheme } = useTheme()
-  const wagyuPriceUsd = usePriceWagyuVusdt()
+  // const wagyuPriceUsd = usePriceWagyuVusdt()
+  const priceData = useGetPriceData()
+  const wagyuPriceUsd = priceData ? Number(priceData.data[WAGYU.address]?.price || 0) : undefined
   const { profile } = useProfile()
   const { currentLanguage, setLanguage, t } = useTranslation()
 
@@ -26,8 +30,8 @@ const Menu = (props) => {
       currentLang={currentLanguage.code}
       langs={languageList}
       setLang={setLanguage}
-      wagyuPriceUsd={wagyuPriceUsd.toNumber()}
-      links={config(t)}
+      wagyuPriceUsd={wagyuPriceUsd}
+      links={link(t)}
       profile={{
         username: profile?.username,
         image: profile?.nft ? `/images/nfts/${profile.nft?.images.sm}` : undefined,
