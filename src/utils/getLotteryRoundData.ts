@@ -23,7 +23,7 @@ export type DataResponse = {
  */
 const getLotteryRoundData = async (lotteryNumber: number): Promise<DataResponse> => {
   try {
-    const response = await fetch(`https://wagyu-swap-api.vercel.app/api/singleLottery?lotteryNumber=${lotteryNumber}`)
+    const response = await fetch(`https://staging.api.wagyuswap.app/api/singleLottery?lotteryNumber=${lotteryNumber}`)
     const data = await response.json()
 
     return data

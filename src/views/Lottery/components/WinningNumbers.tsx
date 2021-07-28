@@ -55,7 +55,7 @@ const WinningNumbers: React.FC = () => {
               </CenteredTextWithPadding>
             </RowNoPadding>
           </Column>
-          <Link href="https://wagyu-swap-api.vercel.app/api/lottery?page=0&pageSize=25" target="_blank">
+          <Link href="https://staging.api.wagyuswap.app/api/lottery?page=0&pageSize=25" target="_blank">
             {t('Export recent winning numbers')}
           </Link>
         </StyledCardContentInner>
