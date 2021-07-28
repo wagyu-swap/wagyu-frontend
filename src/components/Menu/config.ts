@@ -13,11 +13,11 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
     items: [
       {
         label: t('Exchange'),
-        href: 'https://dp1n7z0335ni0.cloudfront.net/#/swap',
+        href: 'https://staging.exchange.wagyuswap.app/#/swap',
       },
       {
         label: t('Liquidity'),
-        href: 'https://dp1n7z0335ni0.cloudfront.net/#/pool',
+        href: 'https://staging.exchange.wagyuswap.app/#/pool',
       },
     ],
   },
