@@ -4,8 +4,9 @@ import { useTranslation } from 'contexts/Localization'
 import { Helmet } from 'react-helmet-async'
 import { useLocation } from 'react-router'
 import { DEFAULT_META, getCustomMeta } from 'config/constants/meta'
-import { usePriceWagyuVusdt } from 'state/hooks'
 import Container from './Container'
+import useGetPriceData from '../../hooks/useGetPriceData'
+import { WAGYU } from '../../config'
 
 const StyledPage = styled(Container)`
   min-height: calc(100vh - 64px);
@@ -26,13 +27,9 @@ const StyledPage = styled(Container)`
 const PageMeta = () => {
   const { t } = useTranslation()
   const { pathname } = useLocation()
-  const wagyuPriceUsd = usePriceWagyuVusdt()
-  const wagyuPriceUsdDisplay = wagyuPriceUsd.gt(0)
-    ? `$${wagyuPriceUsd.toNumber().toLocaleString(undefined, {
-        minimumFractionDigits: 3,
-        maximumFractionDigits: 3,
-      })}`
-    : ''
+  // const wagyuPriceUsd = usePriceWagyuVusdt()
+  const wagyuPriceUsd = useGetPriceData()
+  const wagyuPriceUsdDisplay = wagyuPriceUsd ? Number(wagyuPriceUsd.data[WAGYU.address]?.price || 0).toFixed(3) : undefined
 
   const pageMeta = getCustomMeta(pathname, t) || {}
   const { title, description, image } = { ...DEFAULT_META, ...pageMeta }
