@@ -51,9 +51,7 @@ export const useSousApprove = (lpContract: Contract, sousId, earningTokenSymbol)
           t('You can now stake in the %symbol% pool!', { symbol: earningTokenSymbol }),
         )
         if (isSubscribed) {
-          if (isSubscribed) {
             setRequestedApproval(false)
-          }
         }
       } else {
         // user rejected tx or didn't go thru
